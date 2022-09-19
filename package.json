@@ -1,0 +1,30 @@
+{
+  "name": "feiorder",
+  "version": "1.0.0",
+  "description": "Sistema Web para ordenar comida desde la FEI",
+  "main": "index.js",
+  "scripts": {
+    "test": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gustavo825/FEIOrder.git"
+  },
+  "author": "Mariana Yazmin Vargas Segura y Gustavo Flores Romero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gustavo825/FEIOrder/issues"
+  },
+  "homepage": "https://github.com/Gustavo825/FEIOrder#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongodb": "^4.10.0",
+    "mongoose": "^6.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
