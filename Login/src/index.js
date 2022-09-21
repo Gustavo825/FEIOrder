@@ -1,6 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose')
+const history = require('connect-history-api-fallback');
+const path = __dirname + '/app/views';
 
 const app = express();
 mongoose.connect('mongodb+srv://admin:1234@feiorder.1xhfttc.mongodb.net/?retryWrites=true&w=majority')
@@ -11,8 +13,10 @@ app.set('port',3012 )
 //Middlewares
 app.use(morgan('dev'))
 app.use(express.json())
+app.use(history());
+app.use(express.static(path));
 //Routes
-// app.use('/login',require('./routes/login'))
+app.use('/login',require('./routes/login'));
 //Static files
 app.use(express.static(__dirname + '/public'))
 
