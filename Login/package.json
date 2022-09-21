@@ -16,7 +16,8 @@
     "mongoose": "^6.6.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
-    "telnet": "^0.0.1"
+    "telnet": "^0.0.1",
+    "vue-router": "^3.6.5"
   },
   "devDependencies": {
     "babel-loader": "^8.2.5",

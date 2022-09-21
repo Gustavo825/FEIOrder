@@ -12,7 +12,7 @@ app.set('port',3012 )
 app.use(morgan('dev'))
 app.use(express.json())
 //Routes
-app.use('/login',require('./routes/login'))
+// app.use('/login',require('./routes/login'))
 //Static files
 app.use(express.static(__dirname + '/public'))
 
