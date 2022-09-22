@@ -17,6 +17,10 @@ const router = new VueRouter( {
             path: '/login',
             component: Login
         },
+        {
+            path: '/register',
+            component: Login
+        },
     ]
 }); 
 
