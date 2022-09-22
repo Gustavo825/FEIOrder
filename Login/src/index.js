@@ -9,7 +9,7 @@ mongoose.connect('mongodb+srv://admin:1234@feiorder.1xhfttc.mongodb.net/?retryWr
 .then(db => console.log('ok'))
 .catch(err => console.error(err))
 //Settings
-app.set('port',3018 )
+app.set('port',3021 )
 //Middlewares
 app.use(morgan('dev'))
 app.use(express.json())
