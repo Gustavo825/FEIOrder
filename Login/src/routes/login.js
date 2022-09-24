@@ -4,7 +4,6 @@ const router = express.Router();
 
 const User = require('../models/User')
 
-// Hash Contraseña
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -50,14 +49,12 @@ router.get('/',async (req,res) =>{
         });
       }
   
-      // Evaluamos la contraseña correcta
       if( !bcrypt.compareSync(body.pass, usuarioDB.pass) ){
         return res.status(400).json({
           mensaje: 'Usuario o contraseña! inválidos',
         });
       }
   
-      // Pasó las validaciones
       return res.json({
         usuarioDB,
         token: 'fkajsdkf'

@@ -9,7 +9,6 @@ export default {
     login(user) {
      axios.post('/login', user)
     .then(res => {
-      console.log(res.data);
       this.$router.push('/');
     })
     .catch(e => {
