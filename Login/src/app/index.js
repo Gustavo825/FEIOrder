@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import Home from './views/Home.vue';
 import Login from './views/Login.vue';
+import Register from './views/Register.vue';
 import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
@@ -19,7 +20,7 @@ const router = new VueRouter( {
         },
         {
             path: '/register',
-            component: Login
+            component: Register
         },
     ]
 }); 
