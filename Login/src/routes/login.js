@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 router.post('/newUser', async (req, res) => {
-
     const body = {
       nombre: req.body.nombre,
       email: req.body.email,
@@ -16,7 +15,6 @@ router.post('/newUser', async (req, res) => {
   
     body.pass = bcrypt.hashSync(req.body.pass, saltRounds);
     try {
-
         const userDB = await User.create(body);
         return res.json(userDB);
         
@@ -37,7 +35,6 @@ router.get('/',async (req,res) =>{
   router.post('/', async(req, res) => {
 
     let body = req.body;
-  
     try {
       // Buscamos email en DB
       const usuarioDB = await User.findOne({email: body.email});

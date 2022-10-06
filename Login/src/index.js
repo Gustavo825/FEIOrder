@@ -3,11 +3,14 @@ const morgan = require('morgan');
 const mongoose = require('mongoose')
 const history = require('connect-history-api-fallback');
 const path = __dirname + '/app/views';
+require('dotenv').config({path: './.env'});
+
 
 const app = express();
-mongoose.connect('mongodb+srv://admin:1234@feiorder.1xhfttc.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.DB_STRING)
 .then(db => console.log('ok'))
 .catch(err => console.error(err))
+
 //Settings
 app.set('port',3021 )
 //Middlewares
