@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+
+.navbar-logo {
+    margin-left:4rem;
+    scale: 4;
+    max-height: 45px;
+}
+
+.username-button {
+    margin-right: 3rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.navbar.navbar-dark.bg-dark{
+    background-color: #A6A7BF!important;
+ }

@@ -14,6 +14,8 @@
     "@vue/compiler-sfc": "^3.2.39",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
+    "bootstrap": "^5.2.2",
+    "bootstrap-vue": "^2.22.0",
     "connect-history-api-fallback": "^2.0.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",

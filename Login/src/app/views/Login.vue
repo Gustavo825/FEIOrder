@@ -26,15 +26,16 @@ export default {
 
 <template>
     <div class="login">
-        <form @submit.prevent="login(user)" class="form">    
-            <img :src="'https://drive.google.com/uc?export=view&id=1rHjff5gOHdTPG0yoE0NsqVTtPXPH8BaG'">
+        <b-form @submit.prevent="login(user)" class="form">    
+          
+            <img :src="'https://drive.google.com/uc?export=view&id=14E8IU8fF260oyWVV4CdeDIAGgZFocSoC'">
             <label class="form-label" for="#email">Correo:</label>
             <input v-model="user.email" class="form-input" type="email" id="email" required placeholder="Correo">
             <label class="form-label" for="#password">Contraseña:</label>
             <input v-model="user.pass" class="form-input" type="password" id="password" placeholder="Contraseña">
             <input class="form-submit" type="submit" value="Iniciar Sesión">
             <input class="registerButton" type="button" v-on:click="clickRegisterButton()" value="Registrarse">
-        </form>
+        </b-form>
     </div>
 
 </template>

@@ -45,7 +45,7 @@ export default {
       <label class="form-label" for="#passwordConfirmation">Confirmar contraseña:</label>
       <input v-model="passwordConfirmation" class="form-input" type="password" id="passwordConfirmation"
         required placeholder="Confirmar contraseña">
-      <input class="form-submit" type="submit" value="Registrarse">
+      <input class="form-submit-register" type="submit" value="Registrarse">
       <input class="cancel" v-on:click="clickCancel()" type="button" value="Cancelar">
 
     </form>
