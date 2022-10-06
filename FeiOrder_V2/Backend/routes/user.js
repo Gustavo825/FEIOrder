@@ -12,6 +12,7 @@ const saltRounds = 10;
 router.post("/new-user", async (req, res) => {
   const body = {
     name: req.body.name,
+    username: req.body.username,
     email: req.body.email,
     role: req.body.role,
   };

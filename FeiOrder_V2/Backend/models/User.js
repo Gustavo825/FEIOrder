@@ -13,6 +13,11 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: { type: String, required: [true, "El nombre es necesario"] },
   email: { type: String, unique: true, required: [true, "Email es necesario"] },
+  username: {
+    type: String,
+    unique: true,
+    required: [true, "Username es necesario"],
+  },
   pass: { type: String, required: [true, "Pass es necesario"] },
   date: { type: Date, default: Date.now },
   role: { type: String, default: "USER", enum: roles },
