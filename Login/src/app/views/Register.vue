@@ -1,44 +1,64 @@
 <script>
-    export default {
-      data: () => ({
-        email: "",
-        password: ""
-      }),
-      methods: {
-        registrar(user) {
-         this.axios.post('/newUser', {email:this.email,pass:this.password})
-        .then(res => {
-          console.log(res.data);
-          this.$router.push({name: 'home'});
-        })
-        .catch(e => {
-          console.log(e.response);
-          this.mensaje = e.response.data.mensaje
-        })
-        }
+import axios from 'axios';
+
+export default {
+  data: () => ({
+    user: {},
+    passwordConfirmation: "",
+  }),
+  methods: {
+    registrar(user) {
+      if (user.pass != this.passwordConfirmation) {
+          alert("Las contraseñas no coinciden")
+      } else {
+        axios.post('/register', user)
+          .then(res => {
+            console.log(res.data);
+            this.$router.push('/login');
+          })
+          .catch(e => {
+            console.log(e.response);
+            this.mensaje = e.response.data.mensaje
+            alert(this.mensaje)
+          })
       }
-    };
-    </script>
+    },
+    clickCancel() {
+      this.$router.push('/login');
+    }
+  }
+};
+</script>
     
-    <template>
-        <div class="login">
-            <form @submit.prevent="registrar" class="form">    
-                <label class="form-label" for="#email">Correo:</label>
-                <input v-model="email" class="form-input" type="email" id="email" required placeholder="Correo">
-                <label class="form-label" for="#password">Contraseña:</label>
-                <input v-model="password" class="form-input" type="password" id="password" placeholder="Contraseña">
-                <input class="form-submit" type="submit" value="Registrarse">
-            </form>
-        </div>
+<template>
+  <div class="register">
+    <form @submit.prevent="registrar(user)" class="form-register">
+      <label class="title-register" >Registro</label>
+      <label class="form-label" for="#email">Correo:</label>
+      <input v-model="user.email" class="form-input" type="email" id="email" required placeholder="Correo">
+      <label class="form-label" for="#name">Nombre:</label>
+      <input v-model="user.name" class="form-input" type="text" id="name" required placeholder="Nombre">
+      <label class="form-label" for="#username">Usuario:</label>
+      <input v-model="user.username" class="form-input" type="username" id="username" required placeholder="Usuario">
+      <label class="form-label" for="#password">Contraseña:</label>
+      <input v-model="user.pass" class="form-input" type="password" id="password" required placeholder="Contraseña">
+      <label class="form-label" for="#passwordConfirmation">Confirmar contraseña:</label>
+      <input v-model="passwordConfirmation" class="form-input" type="password" id="passwordConfirmation"
+        required placeholder="Confirmar contraseña">
+      <input class="form-submit" type="submit" value="Registrarse">
+      <input class="cancel" v-on:click="clickCancel()" type="button" value="Cancelar">
+
+    </form>
+  </div>
+
+</template>
     
-    </template>
     
     
     
-    
-    <style>
-    @import '../styles/loginStyle.css';
-    </style>
+<style>
+@import '../styles/registerStyle.css';
+</style>
     
     
     

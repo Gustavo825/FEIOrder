@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
-.login {
+.register {
+  background: white;
   margin-top: -5rem;
 }
 
-.title {
+.title-register {
   text-align: center;
+  scale: 1.5;
   font-family: 'Open Sans', sans-serif;
   color: white;
+  margin-bottom: 1rem;
 }
 
-.form {
+.form-register {
   scale: 0.8;
   margin: 3rem auto;
   display: flex;
@@ -56,15 +59,17 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-.registerButton {
+
+.cancel {
   scale: 0.9;
   background: #1ab188;
   border: none;
   color: white;
-  margin-top: 1rem;
+  margin-top: 2rem;
   padding: 1rem 0;
   cursor: pointer;
   transition: background 0.4s;
   border-radius: 20px;
   font-family: 'Open Sans', sans-serif;
 }
+

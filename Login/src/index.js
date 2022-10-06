@@ -20,6 +20,7 @@ app.use(history());
 app.use(express.static(path));
 //Routes
 app.use('/login',require('./routes/login'));
+app.use('/register',require('./routes/register'));
 //Static files
 app.use(express.static(__dirname + '/public'))
 

@@ -13,8 +13,12 @@ export default {
     })
     .catch(e => {
       console.log(e.response);
-      this.mensaje = e.response.data.mensaje
+      this.mensaje = e.response.data.mensaje;
+      alert(this.mensaje);
     })
+    },
+    clickRegisterButton() {
+      this.$router.push('/register');
     }
   }
 };
@@ -28,7 +32,8 @@ export default {
             <input v-model="user.email" class="form-input" type="email" id="email" required placeholder="Correo">
             <label class="form-label" for="#password">Contraseña:</label>
             <input v-model="user.pass" class="form-input" type="password" id="password" placeholder="Contraseña">
-            <input class="form-submit" type="submit" value="Login">
+            <input class="form-submit" type="submit" value="Iniciar Sesión">
+            <input class="registerButton" type="button" v-on:click="clickRegisterButton()" value="Registrarse">
         </form>
     </div>
 
