@@ -1,10 +1,10 @@
 <template>
   <div class="doc-container register">
     <div class="row items-start">
-      <q-img class="img-background" src="../assets/register.jpeg"></q-img>
+        <q-img class="img-background" src="../assets/register.jpeg"></q-img>
       <div class="col">
         <q-form class="form-register" @submit.prevent="handleSubmit" ref="form">
-          <q-img
+          <q-img class="logo"
             :src="'https://drive.google.com/uc?export=view&id=14E8IU8fF260oyWVV4CdeDIAGgZFocSoC'"
           />
           <label class="form-label">Correo:</label>
