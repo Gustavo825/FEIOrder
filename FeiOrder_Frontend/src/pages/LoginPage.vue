@@ -1,10 +1,8 @@
 <template>
-  <q-page padding class="login">
+  <q-page class="login" padding>
     <div>
       <q-form class="form" @submit.prevent="handleSubmit" ref="form">
-        <q-img
-          :src="'https://drive.google.com/uc?export=view&id=14E8IU8fF260oyWVV4CdeDIAGgZFocSoC'"
-        />
+        <q-img src="../assets/FEIOrder.png" />
         <label class="form-label">Correo:</label>
         <q-input
           dark

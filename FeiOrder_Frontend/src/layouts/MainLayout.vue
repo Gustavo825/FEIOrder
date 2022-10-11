@@ -10,10 +10,7 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-        <q-img
-          class="navbar-logo"
-          :src="'https://drive.google.com/uc?export=view&id=14E8IU8fF260oyWVV4CdeDIAGgZFocSoC'"
-        />
+        <q-img class="navbar-logo" src="../assets/FEIOrder.png" />
         <q-toolbar-title> </q-toolbar-title>
 
         <q-btn flat to="/">Inicio</q-btn>
