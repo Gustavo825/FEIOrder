@@ -5,7 +5,7 @@
         <q-img
           :src="'https://drive.google.com/uc?export=view&id=14E8IU8fF260oyWVV4CdeDIAGgZFocSoC'"
         />
-        <label class="form-label">Contraseña:</label>
+        <label class="form-label">Correo:</label>
         <q-input
           dark
           outlined
@@ -20,7 +20,7 @@
               'Formato Email incorrecto',
           ]"
         ></q-input>
-        <label class="form-label">Correo:</label>
+        <label class="form-label">Contraseña:</label>
         <q-input
           class="form-input"
           v-model="password"
@@ -47,41 +47,34 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "../stores/use-store";
-import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
-
-const $q = useQuasar();
+import { useNotify } from "../composables/notifyHook";
 const router = useRouter();
 const userStore = useUserStore();
 
 const email = ref("");
 const password = ref("");
 const form = ref(null);
-
+const { showNotify } = useNotify();
 const handleSubmit = async () => {
   try {
     if (await form.value.validate()) {
       await userStore.access(email.value, password.value);
       email.value = "";
       password.value = "";
+      showNotify("Bienvenido", "green");
       router.push("/");
     }
   } catch (error) {
     if (error.error) {
-      alertError(error.error);
+      showNotify(error.error);
     }
     if (error.errors) {
-      alertError(error.errors[0].msg);
+      $q.notify(error.errors[0].msg);
     }
   }
 };
 
-const alertError = (message = "Error de servidor") => {
-  $q.dialog({
-    title: "Error",
-    message: message,
-  });
-};
 const clickRegisterButton = () => {
   router.push("/Register");
 };
