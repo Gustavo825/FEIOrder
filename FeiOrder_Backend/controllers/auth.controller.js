@@ -3,6 +3,7 @@ import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
 
 export const register = async (req, res) => {
   const { email, password, username, name, image} = req.body;
+  console.log(name + " " + username)
   try {
     let user = await User.findOne({ email });
     if (user) throw { code: 11000 };

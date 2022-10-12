@@ -5,7 +5,6 @@ const dishSchema = new mongoose.Schema({
     required: true,
     trim: true,
     unique: true,
-    lowercase: true,
     index: { unique: true },
   },
   cost: {

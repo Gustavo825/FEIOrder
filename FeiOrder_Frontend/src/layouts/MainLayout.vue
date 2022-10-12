@@ -21,7 +21,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer dark v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer dark v-model="leftDrawerOpen" show-if-above="false" bordered>
       <q-list>
         <q-item-label header> FeiOrder</q-item-label>
 
