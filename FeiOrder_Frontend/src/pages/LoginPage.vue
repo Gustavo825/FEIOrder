@@ -2,7 +2,7 @@
   <div class="doc-container login">
     <div class="row items-start">
       <div class="col col-display">
-        <q-img class="img-background" src="../assets/register.jpeg"></q-img>
+        <q-img class="img-background" src="../assets/loginUserBackground.png"></q-img>
       </div>
       <div class="col">
         <q-scroll-area class="scroll-login">

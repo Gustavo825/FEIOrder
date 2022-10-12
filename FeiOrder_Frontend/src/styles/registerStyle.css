@@ -12,13 +12,12 @@
 
 .register {
   background:  rgba(19, 35, 47, 0.9);
-  margin-top: -8rem;
+  margin-top: -4rem;
   overflow: hidden;
 }
 
 .title-register {
   text-align: center;
-  scale: 1.5;
   font-family: 'Open Sans', sans-serif;
   color: white;
   margin-bottom: 1rem;
@@ -101,7 +100,7 @@
 }
 
 .logo {
-  object-fit: fill;
-  max-width: 750px;
-  min-height: 300px;
+  width: auto;
+  height: 100px;
+  
 }

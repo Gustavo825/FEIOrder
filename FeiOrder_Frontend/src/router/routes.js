@@ -19,6 +19,10 @@ const routes = [
         path: "/Register",
         component: () => import("pages/RegisterPage.vue"),
       },
+      {
+        path: "/RegisterDish",
+        component: () => import("pages/RegisterDishPage.vue"),
+      },
     ],
   },
   {

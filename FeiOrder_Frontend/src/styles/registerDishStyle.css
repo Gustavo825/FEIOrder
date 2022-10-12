@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+@media only screen and (max-width: 1080px) {
+    .col-display {
+        display: none;
+    }
+
+  }
+
+.scroll-register-dish {
+  height: 120vh;
+}
+
+.register {
+  background:  rgba(19, 35, 47, 0.9);
+  margin-top: -4rem;
+  overflow: hidden;
+}
+
+.title-register {
+  text-align: center;
+  scale: 1.5;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.form-register-dish {
+  scale: 0.85;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 1250px;
+  max-width: 100%;
+  border-radius: 5px;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.input-image {
+  margin-top: 15px;
+  padding: 15px 15px 15px 15px;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 20px;
+  min-height: max-content;
+}
+
+.image-from-input {
+  object-fit:scale-down;
+  max-width: 100px;
+  min-height: 100px;
+
+}
+
+.form-label-dish {
+  margin-top: 2rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.form-input {
+  padding: 10px 15px;
+  background: none;
+  background-image: none;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.form-submit-register {
+  scale: 1;
+  background: #1ab188;
+  border: none;
+  color: white;
+  margin-top: 3rem;
+  padding: 1rem 0;
+  cursor: pointer;
+  transition: background 0.4s;
+  border-radius: 20px;
+  font-family: 'Open Sans', sans-serif;
+  min-height: max-content;
+  
+}
+
+
+.cancel {
+  scale: 0.8;
+  background: #1ab188;
+  border: none;
+  color: white;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  cursor: pointer;
+  transition: background 0.4s;
+  border-radius: 20px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.img-background{
+  max-width: 800px;
+  height: 120vh;
+}
+
+.logo {
+    width: auto;
+    height: 100px;
+    
+}
