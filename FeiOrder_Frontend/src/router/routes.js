@@ -22,6 +22,11 @@ const routes = [
       {
         path: "/RegisterDish",
         component: () => import("pages/RegisterDishPage.vue"),
+        path: "/UpdateUser",
+        component: () => import("pages/UpdateProfilePage.vue"),
+        meta: {
+          auth: true,
+        },
       },
     ],
   },

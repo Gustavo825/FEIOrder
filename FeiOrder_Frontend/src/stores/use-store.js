@@ -1,10 +1,26 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import {
+  getDownloadURL,
+  ref as storageRef,
+  uploadBytes,
+} from "firebase/storage";
 import { api } from "src/boot/axios";
+import { storage } from "../firebaseConfig";
 export const useUserStore = defineStore("user", () => {
   let token = ref("");
   let user = ref(null);
   const expiresIn = ref("");
+  const updateImage = async (imageFile) => {
+    try {
+      const storageRefVar = storageRef(storage, `${user.value.id}/imgProfile`); //`${user.currentUser}`
+      await uploadBytes(storageRefVar, imageFile.value);
+      user.value.image = await getDownloadURL(storageRefVar);
+    } catch (error) {
+      console.log(error);
+      return error.code;
+    }
+  };
   const access = async (email, password) => {
     try {
       const res = await api.post("/auth/login", {
@@ -26,7 +42,14 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-  const register = async (email, username, name, password, repassword, image) => {
+  const register = async (
+    email,
+    name,
+    username,
+    password,
+    repassword,
+    image
+  ) => {
     try {
       const res = await api.post("/auth/register", {
         email,
@@ -34,7 +57,6 @@ export const useUserStore = defineStore("user", () => {
         password,
         repassword,
         name,
-        image,
       });
       console.log(res);
       token.value = res.data.token;
@@ -82,11 +104,14 @@ export const useUserStore = defineStore("user", () => {
         headers: { Authorization: "Bearer " + token.value },
       });
       user.value = res.data;
-      console.log(res.data);
+      const storageRefVar = storageRef(storage, `${user.value.id}/imgProfile`); //`${user.currentUser}`
+      user.value.image = await getDownloadURL(storageRefVar);
+      console.log(user);
     } catch (error) {}
   };
   const resetStore = () => {
     token.value = null;
+    user.value = null;
     expiresIn.value = null;
   };
   return {
@@ -98,6 +123,7 @@ export const useUserStore = defineStore("user", () => {
     logout,
     register,
     getInfoUser,
+    updateImage,
   };
 });
 

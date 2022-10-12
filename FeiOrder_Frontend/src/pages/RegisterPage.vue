@@ -2,47 +2,88 @@
   <div class="doc-container register">
     <div class="row items-start">
       <div class="col col-display">
-        <q-img class="img-background" src="../assets/registerUserBackground.png"></q-img>
+        <q-img
+          class="img-background"
+          src="../assets/registerUserBackground.png"
+        ></q-img>
       </div>
       <div class="col">
         <q-scroll-area class="scroll-register">
-        <q-form class="form-register" @submit.prevent="handleSubmit" ref="form">
-          <q-img class="logo" src="../assets/registerUserTitle.png" />
-          <label class="form-label">Correo:</label>
-          <q-input class="form-input" dark outlined v-model="email" type="text" label="Ingrese correo electrónico"
-            :rules="[
-              (val) => (val && val.length > 0) || 'Por favor escriba algo',
-              (val) =>
-                /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val) ||
-                'Formato Email incorrecto',
-            ]"></q-input>
-          <label class="form-label">Username:</label>
-          <q-input class="form-input" dark outlined v-model="username" type="text" label="Ingrese un username">
-          </q-input>
-          <label class="form-label">Nombre:</label>
-          <q-input class="form-input" dark outlined v-model="name" type="text" label="Ingrese un nombre"></q-input>
-          <label class="form-label">Contraseña:</label>
-          <q-input class="form-input" dark outlined v-model="password" type="password" label="Ingrese contraseña"
-            :rules="[
-              (val) =>
-                (val && val.length > 5) || 'Contraseña mayor a 6 carácteres',
-            ]"></q-input>
-          <label class="form-label">Confirma tu contraseña:</label>
+          <q-form
+            class="form-register"
+            @submit.prevent="handleSubmit"
+            ref="form"
+          >
+            <q-img class="logo" src="../assets/registerUserTitle.png" />
+            <label class="form-label">Correo:</label>
+            <q-input
+              class="form-input"
+              dark
+              outlined
+              v-model="email"
+              type="text"
+              label="Ingrese correo electrónico"
+              :rules="[
+                (val) => (val && val.length > 0) || 'Por favor escriba algo',
+                (val) =>
+                  /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val) ||
+                  'Formato Email incorrecto',
+              ]"
+            ></q-input>
+            <label class="form-label">Username:</label>
+            <q-input
+              class="form-input"
+              dark
+              outlined
+              v-model="username"
+              type="text"
+              label="Ingrese un username"
+            >
+            </q-input>
+            <label class="form-label">Nombre:</label>
+            <q-input
+              class="form-input"
+              dark
+              outlined
+              v-model="name"
+              type="text"
+              label="Ingrese un nombre"
+            ></q-input>
+            <label class="form-label">Contraseña:</label>
+            <q-input
+              class="form-input"
+              dark
+              outlined
+              v-model="password"
+              type="password"
+              label="Ingrese contraseña"
+              :rules="[
+                (val) =>
+                  (val && val.length > 5) || 'Contraseña mayor a 6 carácteres',
+              ]"
+            ></q-input>
+            <label class="form-label">Confirma tu contraseña:</label>
 
-          <q-input class="form-input" dark outlined v-model="repassword" type="password" label="Ingrese contraseña"
-            :rules="[
-              (val) =>
-                (val && val === password) || 'No coinciden las contraseñas',
-            ]"></q-input>
-          <q-img class="image-from-input" :src="imageURL"></q-img>
-          <q-file outlined class="input-image" label-color="white" accept=".jpg, image/*" v-model="image" label="Ingrese su foto de perfil"
-            @update:model-value="selectedImage()">
-            <template v-slot:prepend>
-              <q-icon name="cloud_upload" color="white" @click.stop.prevent />
-            </template>
-          </q-file>
-          <q-btn class="form-submit-register" label="Registrarse" type="submit" color="primary"></q-btn>
-        </q-form>
+            <q-input
+              class="form-input"
+              dark
+              outlined
+              v-model="repassword"
+              type="password"
+              label="Ingrese contraseña"
+              :rules="[
+                (val) =>
+                  (val && val === password) || 'No coinciden las contraseñas',
+              ]"
+            ></q-input>
+
+            <q-btn
+              class="form-submit-register"
+              label="Registrarse"
+              type="submit"
+              color="primary"
+            ></q-btn>
+          </q-form>
         </q-scroll-area>
       </div>
     </div>
@@ -64,11 +105,10 @@ const password = ref("");
 const username = ref("");
 const repassword = ref("");
 const name = ref("");
-const imageURL = ref("")
+const imageURL = ref("");
 const image = ref(null);
 const form = ref(null);
 const handleSubmit = async () => {
-
   try {
     if (await form.value.validate()) {
       await userStore.register(
@@ -97,10 +137,7 @@ const handleSubmit = async () => {
     }
   }
 };
-const selectedImage = () => {
-  imageURL.value = URL.createObjectURL(image.value)
-  console.log(imageURL)
-};
+
 const alertError = (message = "Error de servidor") => {
   $q.dialog({
     title: "Error",

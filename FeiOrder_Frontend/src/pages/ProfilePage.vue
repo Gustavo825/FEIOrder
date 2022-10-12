@@ -3,17 +3,21 @@
     <q-page padding>
       <q-card dark bordered class="card">
         <q-img src="../assets/defaultBanner.jpg" />
-
         <q-card-section>
           <q-avatar
             size="120px"
             font-size="52px"
             fab
             color="primary"
-            icon="person"
             class="absolute"
             style="top: 0; right: 12px; transform: translate(-170%, -50%)"
-          />
+          >
+            <img
+              v-if="userStore.user && userStore.user.image"
+              :src="userStore.user.image"
+            />
+            <q-icon v-else name="person" />
+          </q-avatar>
         </q-card-section>
 
         <q-card-section v-if="userStore.user" class="q-pt-none">
@@ -28,9 +32,11 @@
 
         <q-separator />
 
-        <q-card-actions>
+        <q-card-actions align="right">
           <q-icon name="edit" />
-          <q-btn flat color="primary"> Editar </q-btn>
+          <q-btn @click="clickUpdateButton()" flat color="primary">
+            Editar
+          </q-btn>
         </q-card-actions>
       </q-card>
     </q-page>
@@ -42,6 +48,8 @@
 <script setup>
 import { onMounted } from "vue";
 import { useUserStore } from "../stores/use-store";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const userStore = useUserStore();
 const getInfo = async () => {
   if (userStore.user == null) {
@@ -60,4 +68,7 @@ const getInfo = async () => {
 onMounted(() => {
   getInfo();
 });
+const clickUpdateButton = () => {
+  router.push("/UpdateUser");
+};
 </script>
