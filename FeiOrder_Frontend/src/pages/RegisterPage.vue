@@ -1,10 +1,12 @@
 <template>
   <div class="doc-container register">
     <div class="row items-start">
-        <q-img class="img-background" src="../assets/register.jpeg"></q-img>
+    <div class="col col-display">
+      <q-img class="img-background" src="../assets/register.jpeg"></q-img>
+    </div>
       <div class="col">
         <q-form class="form-register" @submit.prevent="handleSubmit" ref="form">
-          <q-img src="../assets/FEIOrder.png" />
+          <q-img class="logo" src="../assets/FEIOrder.png" />
           <label class="form-label">Correo:</label>
           <q-input
             class="form-input"

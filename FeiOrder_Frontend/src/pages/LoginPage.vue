@@ -1,45 +1,33 @@
 <template>
-  <q-page class="login" padding>
-    <div>
-      <q-form class="form" @submit.prevent="handleSubmit" ref="form">
-        <q-img src="../assets/FEIOrder.png" />
-        <label class="form-label">Correo:</label>
-        <q-input
-          dark
-          outlined
-          class="form-input"
-          v-model="email"
-          type="text"
-          label="Ingrese correo electrónico"
-          :rules="[
-            (val) => (val && val.length > 0) || 'Por favor escriba algo',
-            (val) =>
-              /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val) ||
-              'Formato Email incorrecto',
-          ]"
-        ></q-input>
-        <label class="form-label">Contraseña:</label>
-        <q-input
-          class="form-input"
-          v-model="password"
-          type="password"
-          dark
-          outlined
-          label="Ingrese contraseña"
-          :rules="[
-            (val) =>
-              (val && val.length > 5) || 'Contraseña mayor a 6 carácteres',
-          ]"
-        ></q-input>
-        <q-btn class="form-submit" label="Ingresar" type="submit"></q-btn>
-        <q-btn
-          v-on:click="clickRegisterButton()"
-          class="registerButton"
-          label="Registrarse"
-        ></q-btn>
-      </q-form>
+  <div class="doc-container login">
+    <div class="row items-start">
+      <div class="col col-display">
+        <q-img class="img-background" src="../assets/register.jpeg"></q-img>
+      </div>
+      <div class="col">
+        <q-form class="form" @submit.prevent="handleSubmit" ref="form">
+          <q-img class="login-logo" src="../assets/FEIOrder.png" />
+          <label class="form-label">Correo:</label>
+          <q-input dark outlined class="form-input" v-model="email" type="text" label="Ingrese correo electrónico"
+            :rules="[
+              (val) => (val && val.length > 0) || 'Por favor escriba algo',
+              (val) =>
+                /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val) ||
+                'Formato Email incorrecto',
+            ]"></q-input>
+          <label class="form-label">Contraseña:</label>
+          <q-input class="form-input" v-model="password" type="password" dark outlined label="Ingrese contraseña"
+            :rules="[
+              (val) =>
+                (val && val.length > 5) || 'Contraseña mayor a 6 carácteres',
+            ]"></q-input>
+          <q-btn class="form-submit" label="Ingresar" type="submit" color="primary"></q-btn>
+          <q-btn v-on:click="clickRegisterButton()" class="registerButton" label="Registrarse" type="submit"
+            color="primary"></q-btn>
+        </q-form>
+      </div>
     </div>
-  </q-page>
+  </div>
 </template>
 
 <script setup>

@@ -1,9 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
+@media only screen and (max-width: 1080px) {
+  .col-display {
+      display: none;
+  }
+}
+
+.img-background{
+  max-width: 800px;
+}
+
 .login {
-  margin-top: 0rem;
-  text-align:justify-center;
-  background-color: cadetblue;
+  margin-top: -10rem;
+  background:  rgba(19, 35, 47, 0.9);
 }
 
 .title {
@@ -14,18 +23,13 @@
 
 .form {
   scale: 0.8;
-  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 45%;
-  min-width: 300px;
-  max-width: 500px;
-  max-height: 800px;
-  background: rgba(19, 35, 47, 0.9);
+  max-height: 1000px;
+  max-width: 100%;
   border-radius: 5px;
-  padding: 40px;
-  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+  padding: 70px;
   border-radius: 20px;
 }
 
@@ -45,7 +49,6 @@
 }
 
 .form-submit {
-
   scale: 0.9;
   background: #1ab188;
   border: none;
@@ -56,18 +59,25 @@
   transition: background 0.4s;
   border-radius: 20px;
   font-family: 'Open Sans', sans-serif;
+  min-height: max-content;
 }
 
 .registerButton {
-  scale: 0.7;
+  scale: 0.9;
   background: #1ab188;
   border: none;
   color: white;
-  margin-top: 1rem;
+  margin-top: 2rem;
   padding: 1rem 0;
   cursor: pointer;
   transition: background 0.4s;
   border-radius: 20px;
   font-family: 'Open Sans', sans-serif;
+  min-height: max-content;
+
 }
 
+.login-logo {
+  object-fit: fill;
+  
+}
