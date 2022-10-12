@@ -26,7 +26,7 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-  const register = async (email, username, name, password, repassword) => {
+  const register = async (email, username, name, password, repassword, image) => {
     try {
       const res = await api.post("/auth/register", {
         email,
@@ -34,6 +34,7 @@ export const useUserStore = defineStore("user", () => {
         password,
         repassword,
         name,
+        image,
       });
       console.log(res);
       token.value = res.data.token;

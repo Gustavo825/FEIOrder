@@ -6,8 +6,13 @@
   }
 }
 
+.scroll-login {
+  height: 120vh;
+}
+
 .img-background{
   max-width: 800px;
+  height: 120vh;
 }
 
 .login {

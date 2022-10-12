@@ -5,6 +5,7 @@
         <q-img class="img-background" src="../assets/register.jpeg"></q-img>
       </div>
       <div class="col">
+        <q-scroll-area class="scroll-login">
         <q-form class="form" @submit.prevent="handleSubmit" ref="form">
           <q-img class="login-logo" src="../assets/FEIOrder.png" />
           <label class="form-label">Correo:</label>
@@ -25,6 +26,8 @@
           <q-btn v-on:click="clickRegisterButton()" class="registerButton" label="Registrarse" type="submit"
             color="primary"></q-btn>
         </q-form>
+      </q-scroll-area>
+
       </div>
     </div>
   </div>

@@ -1,81 +1,49 @@
 <template>
   <div class="doc-container register">
     <div class="row items-start">
-    <div class="col col-display">
-      <q-img class="img-background" src="../assets/register.jpeg"></q-img>
-    </div>
+      <div class="col col-display">
+        <q-img class="img-background" src="../assets/register.jpeg"></q-img>
+      </div>
       <div class="col">
+        <q-scroll-area class="scroll-register">
         <q-form class="form-register" @submit.prevent="handleSubmit" ref="form">
           <q-img class="logo" src="../assets/FEIOrder.png" />
           <label class="form-label">Correo:</label>
-          <q-input
-            class="form-input"
-            dark
-            outlined
-            v-model="email"
-            type="text"
-            label="Ingrese correo electrónico"
+          <q-input class="form-input" dark outlined v-model="email" type="text" label="Ingrese correo electrónico"
             :rules="[
               (val) => (val && val.length > 0) || 'Por favor escriba algo',
               (val) =>
                 /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val) ||
                 'Formato Email incorrecto',
-            ]"
-          ></q-input>
+            ]"></q-input>
           <label class="form-label">Username:</label>
-          <q-input
-            class="form-input"
-            dark
-            outlined
-            v-model="username"
-            type="text"
-            label="Ingrese un username"
-          ></q-input>
+          <q-input class="form-input" dark outlined v-model="username" type="text" label="Ingrese un username">
+          </q-input>
           <label class="form-label">Nombre:</label>
-          <q-input
-            class="form-input"
-            dark
-            outlined
-            v-model="name"
-            type="text"
-            label="Ingrese un nombre"
-          ></q-input>
+          <q-input class="form-input" dark outlined v-model="name" type="text" label="Ingrese un nombre"></q-input>
           <label class="form-label">Contraseña:</label>
-
-          <q-input
-            class="form-input"
-            dark
-            outlined
-            v-model="password"
-            type="password"
-            label="Ingrese contraseña"
+          <q-input class="form-input" dark outlined v-model="password" type="password" label="Ingrese contraseña"
             :rules="[
               (val) =>
                 (val && val.length > 5) || 'Contraseña mayor a 6 carácteres',
-            ]"
-          ></q-input>
+            ]"></q-input>
           <label class="form-label">Confirma tu contraseña:</label>
 
-          <q-input
-            class="form-input"
-            dark
-            outlined
-            v-model="repassword"
-            type="password"
-            label="Ingrese contraseña"
+          <q-input class="form-input" dark outlined v-model="repassword" type="password" label="Ingrese contraseña"
             :rules="[
               (val) =>
                 (val && val === password) || 'No coinciden las contraseñas',
-            ]"
-          ></q-input>
-
-          <q-btn
-            class="form-submit-register"
-            label="Registrarse"
-            type="submit"
-            color="primary"
-          ></q-btn>
+            ]"></q-input>
+          <q-img class="image-from-input" :src="imageURL"></q-img>
+          <q-file outlined class="input-image" label-color="white" accept=".jpg, image/*" v-model="image" label="Ingrese su foto de perfil"
+            @update:model-value="selectedImage()">
+            <template v-slot:prepend>
+              <q-icon name="cloud_upload" color="white" @click.stop.prevent />
+            </template>
+          </q-file>
+          <q-btn class="form-submit-register" label="Registrarse" type="submit" color="primary"></q-btn>
         </q-form>
+        </q-scroll-area>
       </div>
     </div>
   </div>
@@ -96,9 +64,11 @@ const password = ref("");
 const username = ref("");
 const repassword = ref("");
 const name = ref("");
+const imageURL = ref("")
+const image = ref(null);
 const form = ref(null);
-
 const handleSubmit = async () => {
+
   try {
     if (await form.value.validate()) {
       await userStore.register(
@@ -106,7 +76,8 @@ const handleSubmit = async () => {
         name.value,
         username.value,
         password.value,
-        repassword.value
+        repassword.value,
+        imageURL.value
       );
       email.value = "";
       password.value = "";
@@ -125,6 +96,10 @@ const handleSubmit = async () => {
       alertError(error.errors[0].msg);
     }
   }
+};
+const selectedImage = () => {
+  imageURL.value = URL.createObjectURL(image.value)
+  console.log(imageURL)
 };
 const alertError = (message = "Error de servidor") => {
   $q.dialog({

@@ -2,12 +2,12 @@ import { User } from "../models/User.js";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
 
 export const register = async (req, res) => {
-  const { email, password, username, name } = req.body;
+  const { email, password, username, name, image} = req.body;
   try {
     let user = await User.findOne({ email });
     if (user) throw { code: 11000 };
 
-    user = new User({ email, password, username, name });
+    user = new User({ email, password, username, name, image});
     await user.save();
 
     const { token, expiresIn } = generateToken(user.id);
@@ -51,6 +51,7 @@ export const infoUser = async (req, res) => {
       email: user.email,
       name: user.name,
       username: user.username,
+      image: user.image,
     });
   } catch (error) {
     return res.status(500).json({ error: "error de server" });
