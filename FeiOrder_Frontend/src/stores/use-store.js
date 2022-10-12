@@ -104,6 +104,26 @@ export const useUserStore = defineStore("user", () => {
 export const useDishStore = defineStore("dish", () => {
   let dishes = ref(null);
 
+  const register = async (title, cost, description, timeToCook) => {
+    try {
+      const res = await api.post("/dish/createDish",{
+        title,
+        cost,
+        description,
+        timeToCook,
+      });
+      console.log(res);
+      return res.data;
+    } catch (error) {
+      console.log(error)
+      if (error.response) {
+        throw error.response.data;
+      } else {
+      }
+      throw { error: "Error de servidor" };
+    }
+  };
+
   const getDishes = async () => {
     try {
       const res = await api.get("/dish");
@@ -115,5 +135,6 @@ export const useDishStore = defineStore("dish", () => {
   return {
     dishes,
     getDishes,
+    register,
   };
 });

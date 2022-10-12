@@ -11,6 +11,6 @@ import { tokenHeaderValidator } from "../middlewares/validatorManager.js";
 const router = Router();
 
 router.get("/", getDishes);
-router.post("/createDish", tokenHeaderValidator, requireToken, createDish);
+router.post("/createDish", createDish);
 
 export default router;
