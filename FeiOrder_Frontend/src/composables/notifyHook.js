@@ -6,6 +6,7 @@ export const useNotify = () => {
       message,
       color,
       icon: icon && null,
+      timeout: 400,
     });
   };
   return { showNotify };
