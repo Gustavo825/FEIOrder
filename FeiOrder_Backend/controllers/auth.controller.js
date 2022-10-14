@@ -53,6 +53,7 @@ export const infoUser = async (req, res) => {
       name: user.name,
       username: user.username,
       image: user.image,
+      id: req.uid,
     });
   } catch (error) {
     return res.status(500).json({ error: "error de server" });

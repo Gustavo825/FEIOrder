@@ -17,8 +17,13 @@
 .card{
   background-color: bg-grey-5 ;
   box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-
   margin-top: 4rem;
   min-width: 550px;
   min-height: 550px;
+  border-radius: 20px;
+
+}
+
+.user-information {
+  margin-top: 10vh;
 }

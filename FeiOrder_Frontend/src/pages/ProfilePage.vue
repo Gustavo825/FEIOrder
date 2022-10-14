@@ -20,7 +20,7 @@
           </q-avatar>
         </q-card-section>
 
-        <q-card-section v-if="userStore.user" class="q-pt-none">
+        <q-card-section align="center" v-if="userStore.user" class="q-pt-none user-information">
           <div class="text-subtitle2">{{ userStore.user.username }}</div>
           <div class="text-caption text-grey">
             {{ userStore.user.email }}

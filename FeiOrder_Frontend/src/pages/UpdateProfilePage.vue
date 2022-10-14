@@ -27,7 +27,7 @@
           <q-form class="col" @submit.prevent="handleSubmit()">
             <label class="form-label">Username:</label>
             <q-input
-              class="form-input"
+              class="form-input input-update"
               dark
               outlined
               v-model="username"
@@ -38,7 +38,7 @@
             <label class="form-label">Nombre:</label>
 
             <q-input
-              class="form-input"
+              class="form-input input-update"
               dark
               outlined
               v-model="name"
@@ -62,7 +62,7 @@
             <q-img class="image-from-input" :src="imageURL"></q-img>
 
             <q-btn
-              class="form-submit-register"
+              class="form-submit-update"
               label="Editar"
               type="submit"
               color="primary"
@@ -113,6 +113,5 @@ const selectedImage = () => {
 };
 </script>
 <style scoped>
-@import "../styles/profileStyle.css";
-@import "../styles/homeStyle.css";
+@import "../styles/updateProfileStyle.css"
 </style>

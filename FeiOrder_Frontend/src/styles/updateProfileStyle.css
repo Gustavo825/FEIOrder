@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+
+.input-image {
+    margin-top: 15px;
+    padding: 15px 15px 15px 15px;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 20px;
+    min-height: max-content;
+}
+
+.image-from-input {
+    object-fit: scale-down;
+    max-width: 100px;
+    min-height: 100px;
+
+}
+
+.form-submit-update {
+    scale: 1;
+    background: #1ab188;
+    border: none;
+    color: white;
+    margin-top: 3rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    transition: background 0.4s;
+    border-radius: 20px;
+    font-family: 'Open Sans', sans-serif;
+    min-height: max-content;
+    min-width: 20vh;
+    
+  }
+
+.input-update {
+    border-radius: 50px;
+}
+
+.navbar-logo {
+    margin-left: 4rem;
+    scale: 4;
+    max-height: 30px;
+    max-width: 30px;
+}
+
+.home {
+    display: flex;
+    margin-top: -3rem;
+    justify-content: center;
+    background-color: cadetblue;
+}
+
+.card {
+    background-color: bg-grey-5;
+    box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 4rem;
+    min-width: 550px;
+    min-height: 550px;
+    border-radius: 20px;
+
+}
+
+.user-information {
+    margin-top: 10vh;
+}

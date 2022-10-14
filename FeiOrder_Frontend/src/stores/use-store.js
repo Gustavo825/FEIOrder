@@ -27,7 +27,7 @@ export const useUserStore = defineStore("user", () => {
         email,
         password,
       });
-      console.log(res);
+      console.log(res + "aaa");
       token.value = res.data.token;
       expiresIn.value = res.data.expiresIn;
       sessionStorage.setItem("user", "true");
