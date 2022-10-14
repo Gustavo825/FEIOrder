@@ -1,30 +1,18 @@
 <template>
   <q-layout class="index padding">
     <q-page v-if="dishStore.dishes != null">
-      <p v-if="dishStore.dishes != null">
-        <!-- {{ dishStore.dishes.dishes[1] }} -->
-      </p>
-      <h3 class="title">Los favoritos:</h3>
+      <h3 class="title">Populares:</h3>
       <q-scroll-area style="height: 260px; min-width: 900px">
         <div class="row no-wrap">
-          <div v-for="dish in dishStore.dishes.dishes" :key="dish.title">
-            <q-card class="my-card">
-              <q-img class="image" :src="dish.image">
-                <div class="absolute-bottom">
-                  <div class="text-h6">
-                    {{ dish.title }}
-                  </div>
-                  <div class="text-subtitle2">Costo: ${{ dish.cost }}</div>
-                </div>
-              </q-img>
-
-              <q-card-actions align="right">
-                <q-btn flat round color="red" icon="favorite" />
-                <q-btn flat round color="teal" icon="bookmark" />
-                <q-btn flat round color="primary" icon="share" />
-              </q-card-actions>
-            </q-card>
-          </div>
+          <cardIndex
+            v-for="dish in dishStore.dishes.dishes"
+            :key="dish._id"
+            :id="dish._id"
+            :image="dish.image"
+            :title="dish.title"
+            :cost="dish.cost"
+          >
+          </cardIndex>
         </div>
       </q-scroll-area>
     </q-page>
@@ -34,7 +22,7 @@
 <script setup>
 import { api } from "../boot/axios.js";
 import { ref } from "vue";
-import carousel from "../components/carouselIndex.vue";
+import cardIndex from "../components/cardIndex.vue";
 import { useDishStore } from "../stores/use-store.js";
 const dishStore = useDishStore();
 dishStore.getDishes();
@@ -49,17 +37,8 @@ const slide = ref(1);
   background-color: cadetblue;
 }
 .title {
-  font-family: "Open Sans", sans-serif;
-  color: white;
+  font-family: "Open Sans";
+  color: rgb(25, 24, 24);
   margin-bottom: 1rem;
-}
-.my-card {
-  width: 300px;
-  height: 250px;
-  margin-right: 2rem;
-}
-.image {
-  height: 200px;
-  min-width: 300px;
 }
 </style>

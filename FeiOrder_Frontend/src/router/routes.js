@@ -30,6 +30,11 @@ const routes = [
           auth: true,
         },
       },
+      {
+        path: "/dish/:name",
+        name: "dish",
+        component: () => import("pages/DishPage.vue"),
+      },
     ],
   },
   {

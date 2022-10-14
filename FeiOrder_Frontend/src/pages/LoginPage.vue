@@ -2,7 +2,10 @@
   <div class="doc-container login">
     <div class="row items-start">
       <div class="col col-display">
-        <q-img class="img-background" src="../assets/loginUserBackground.png"></q-img>
+        <q-img
+          class="img-background"
+          src="../assets/loginUserBackground.png"
+        ></q-img>
       </div>
       <div class="col">
         <q-scroll-area class="scroll-login">
@@ -59,15 +62,16 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "../stores/use-store";
-import { useNotify } from "../composables/notifyHook";
 import { useRouter } from "vue-router";
+import { useNotify } from "../composables/notifyHook";
+const { showNotify } = useNotify();
 const router = useRouter();
 const userStore = useUserStore();
 
 const email = ref("");
 const password = ref("");
 const form = ref(null);
-const { showNotify } = useNotify();
+
 const handleSubmit = async () => {
   try {
     if (await form.value.validate()) {
