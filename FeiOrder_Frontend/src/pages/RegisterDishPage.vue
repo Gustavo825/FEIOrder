@@ -1,46 +1,106 @@
 <template>
-    <div class="doc-container register">
-        <div class="row items-start">
-            <div class="col col-display">
-                <q-img class="img-background" src="../assets/registerDish.png"></q-img>
-            </div>
-            <div class="col">
-                <q-scroll-area class="scroll-register-dish">
-                    <q-form class="form-register-dish" @submit.prevent="handleSubmit" ref="form">
-                        <q-img class="logo" src="../assets/registerDishTitle.png" />
-                        <label class="form-label-dish">Título del platillo:</label>
-                        <q-input class="form-input" dark outlined v-model="title" type="text"
-                            label="Ingrese el título del platillo" :rules="[
-                            (val) => (val && val.length > 0) || 'Por favor escriba algo']"></q-input>
-                        <label class="form-label-dish">Costo del platillo:</label>
-                        <q-input class="form-input" dark outlined v-model="cost" type="text"
-                            label="Ingrese el costo del platillo" :rules="[
-                               (val) =>
-                              /^\d{0,8}(\.\d{1,4})?$/.test(val) ||
-                                'Ingrese un costo válido', ,
-                            (val) => (val && val.length > 0) || 'Por favor, ingrese valores numéricos']">
-                        </q-input>
-                        <label class="form-label-dish">Descripción del platillo:</label>
-                        <q-input class="form-input" dark outlined v-model="description" type="text"
-                            label="Ingrese la descripción del platillo" :rules="[
-                            (val) => (val && val.length > 0) || 'Por favor escriba algo']"></q-input>
-                        <label class="form-label-dish">Tiempo de preparación aproximado:</label>
-                        <q-input class="form-input" dark outlined v-model="timeToCook" type="text"
-                            label="Ingrese el tiempo de preparación del platillo Horas:Minutos" :rules="[
-                                (val) =>
-                              /([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(val) ||
-                                'Formato de tiempo incorrecto',
-                              (val) => (val && val.length > 0) || 'Por favor escriba algo',
-                            ]"></q-input>
-                        <q-btn class="form-submit-register" label="Registrar platillo" type="submit" color="primary">
-                        </q-btn>
-                    </q-form>
-                </q-scroll-area>
-            </div>
-        </div>
+  <div class="doc-container register">
+    <div class="row items-start">
+      <div class="col col-display">
+        <q-img class="img-background" src="../assets/registerDish.png"></q-img>
+      </div>
+      <div class="col">
+        <q-scroll-area class="scroll-register-dish">
+          <q-form
+            class="form-register-dish"
+            @submit.prevent="handleSubmit"
+            ref="form"
+          >
+            <q-img class="logo" src="../assets/registerDishTitle.png" />
+            <label class="form-label-dish">Título del platillo:</label>
+            <q-input
+              class="form-input"
+              dark
+              outlined
+              v-model="title"
+              type="text"
+              label="Ingrese el título del platillo"
+              :rules="[
+                (val) => (val && val.length > 0) || 'Por favor escriba algo',
+              ]"
+            ></q-input>
+            <label class="form-label-dish">Costo del platillo:</label>
+            <q-input
+              class="form-input"
+              dark
+              outlined
+              v-model="cost"
+              type="text"
+              label="Ingrese el costo del platillo"
+              :rules="[
+                (val) =>
+                  /^\d{0,8}(\.\d{1,4})?$/.test(val) ||
+                  'Ingrese un costo válido',
+                ,
+                (val) =>
+                  (val && val.length > 0) ||
+                  'Por favor, ingrese valores numéricos',
+              ]"
+            >
+            </q-input>
+            <label class="form-label-dish">Descripción del platillo:</label>
+            <q-input
+              class="form-input"
+              dark
+              outlined
+              v-model="description"
+              type="text"
+              label="Ingrese la descripción del platillo"
+              :rules="[
+                (val) => (val && val.length > 0) || 'Por favor escriba algo',
+              ]"
+            ></q-input>
+            <label class="form-label-dish"
+              >Tiempo de preparación aproximado:</label
+            >
+            <q-input
+              class="form-input"
+              dark
+              outlined
+              v-model="timeToCook"
+              type="text"
+              label="Ingrese el tiempo de preparación del platillo Horas:Minutos"
+              :rules="[
+                (val) =>
+                  /([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(val) ||
+                  'Formato de tiempo incorrecto',
+                (val) => (val && val.length > 0) || 'Por favor escriba algo',
+              ]"
+            ></q-input>
+            <q-file
+              outlined
+              class="input-image"
+              label-color="white"
+              accept=".jpg, image/*"
+              v-model="image"
+              label="Ingrese su foto de perfil"
+              @update:model-value="selectedImage()"
+            >
+              <template v-slot:prepend>
+                <q-icon name="cloud_upload" color="white" @click.stop.prevent />
+              </template>
+            </q-file>
+            <q-img class="image-from-input" :src="imageURL"></q-img>
+
+            <q-btn
+              class="form-submit-register"
+              label="Registrar platillo"
+              type="submit"
+              color="primary"
+            >
+            </q-btn>
+          </q-form>
+        </q-scroll-area>
+      </div>
     </div>
+  </div>
 </template>
-  
+
 <style>
 @import "../styles/registerDishStyle.css";
 </style>
@@ -58,38 +118,43 @@ const $q = useQuasar();
 const title = ref("");
 const cost = ref("");
 const description = ref("");
-const timeToCook = ref("")
+const timeToCook = ref("");
 const form = ref(null);
+const imageURL = ref("");
+const image = ref("");
+const selectedImage = () => {
+  imageURL.value = URL.createObjectURL(image.value);
+};
 const handleSubmit = async () => {
-    try {
-        if (await form.value.validate()) {
-            await dishStore.register(
-                title.value,
-                cost.value,
-                description.value,
-                timeToCook.value
-            );
-            title.value = ""
-            cost.value = ""
-            description.value = ""
-            timeToCook.value = ""
-            router.push("/");
-        }
-    } catch (error) {
-        console.log("desde loginComponents: ", error);
-        if (error.error) {
-            alertError(error.error);
-        }
-        if (error.errors) {
-            alertError(error.errors[0].msg);
-        }
+  try {
+    if (await form.value.validate()) {
+      await dishStore.register(
+        title.value,
+        cost.value,
+        description.value,
+        timeToCook.value,
+        image.value
+      );
+      title.value = "";
+      cost.value = "";
+      description.value = "";
+      timeToCook.value = "";
+      router.push("/");
     }
+  } catch (error) {
+    console.log("desde loginComponents: ", error);
+    if (error.error) {
+      alertError(error.error);
+    }
+    if (error.errors) {
+      alertError(error.errors[0].msg);
+    }
+  }
 };
 const alertError = (message = "Error de servidor") => {
-    $q.dialog({
-        title: "Error",
-        message: message,
-    });
+  $q.dialog({
+    title: "Error",
+    message: message,
+  });
 };
 </script>
-  

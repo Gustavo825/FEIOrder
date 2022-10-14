@@ -22,9 +22,7 @@
         </q-card-section>
 
         <q-card-section class="col no-wrap items-center" v-if="userStore.user">
-          <div class="col flex-justify-center text-subtitle2">
-            Correo: {{ userStore.user.email }}
-          </div>
+          <div class="col">Correo: {{ userStore.user.email }}</div>
 
           <q-form class="col" @submit.prevent="handleSubmit()">
             <label class="form-label">Username:</label>

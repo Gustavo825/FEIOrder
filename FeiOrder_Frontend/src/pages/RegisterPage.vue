@@ -106,7 +106,7 @@ const username = ref("");
 const repassword = ref("");
 const name = ref("");
 const imageURL = ref("");
-const image = ref(null);
+const image = ref("");
 const form = ref(null);
 const handleSubmit = async () => {
   try {
@@ -128,7 +128,6 @@ const handleSubmit = async () => {
       router.push("/");
     }
   } catch (error) {
-    console.log("desde loginComponents: ", error);
     if (error.error) {
       alertError(error.error);
     }

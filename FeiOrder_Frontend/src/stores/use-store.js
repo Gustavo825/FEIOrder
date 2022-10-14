@@ -130,18 +130,26 @@ export const useUserStore = defineStore("user", () => {
 export const useDishStore = defineStore("dish", () => {
   let dishes = ref(null);
 
-  const register = async (title, cost, description, timeToCook) => {
+  const register = async (title, cost, description, timeToCook, imageFile) => {
     try {
-      const res = await api.post("/dish/createDish",{
+      const res = await api.post("/dish/createDish", {
         title,
         cost,
         description,
         timeToCook,
       });
-      console.log(res);
+      if (imageFile) {
+        console.log(imageFile);
+        const storageRefVar = storageRef(
+          storage,
+          `dishes/${res.data.dish._id}/imgProfile`
+        ); //`${user.currentUser}`
+        await uploadBytes(storageRefVar, imageFile);
+      }
+      console.log(res.data.id);
       return res.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       if (error.response) {
         throw error.response.data;
       } else {
@@ -154,7 +162,15 @@ export const useDishStore = defineStore("dish", () => {
     try {
       const res = await api.get("/dish");
       dishes.value = res.data;
-      console.log(res.data);
+
+      for (let i = 0; i < res.data.dishes.length; i++) {
+        const storageRefVar = storageRef(
+          storage,
+          `dishes/${dishes.value.dishes[i]._id}/imgProfile`
+        ); //`${user.currentUser}`
+        console.log(storageRefVar);
+        dishes.value.dishes[i].image = await getDownloadURL(storageRefVar);
+      }
     } catch (error) {}
   };
 
