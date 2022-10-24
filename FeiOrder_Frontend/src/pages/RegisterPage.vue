@@ -10,6 +10,7 @@
       <div class="col">
         <q-scroll-area class="scroll-register">
           <q-form
+            id=" form"
             class="form-register"
             @submit.prevent="handleSubmit"
             ref="form"
@@ -95,7 +96,9 @@ import { ref } from "vue";
 import { useUserStore } from "../stores/use-store";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
-
+function onMounted() {
+  setBrand("negative", "black", document.getElementById("form"));
+}
 const router = useRouter();
 const userStore = useUserStore();
 const $q = useQuasar();
@@ -146,4 +149,11 @@ const alertError = (message = "Error de servidor") => {
 </script>
 <style scoped>
 @import "../styles/registerStyle.css";
+.text-negative {
+  color: green !important;
+}
+
+.q-input {
+  color: green !important;
+}
 </style>

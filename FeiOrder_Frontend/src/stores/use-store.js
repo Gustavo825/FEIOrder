@@ -173,10 +173,18 @@ export const useDishStore = defineStore("dish", () => {
       }
     } catch (error) {}
   };
-
+  const getDish = (id) => {
+    for (let i = 0; i < dishes.length(); i++) {
+      console.log(i);
+      if (id == dishes[i].id) {
+        return dishes[i];
+      }
+    }
+  };
   return {
     dishes,
     getDishes,
+    getDish,
     register,
   };
 });

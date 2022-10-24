@@ -10,7 +10,7 @@
     </q-img>
 
     <q-card-actions align="right">
-      <q-btn flat round color="red" icon="favorite" />
+      <q-btn disabled="false" flat round color="red" icon="favorite" />
       <q-btn flat round color="teal" icon="shopping_cart" />
       <q-btn @click="copy(id)" flat round color="primary" icon="content_copy" />
 

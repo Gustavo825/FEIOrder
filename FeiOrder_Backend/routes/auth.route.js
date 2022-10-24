@@ -25,5 +25,5 @@ router.get("/infoUser", tokenHeaderValidator, requireToken, infoUser);
 router.get("/refresh", tokenCookieValidator, requireRefreshToken, refreshToken);
 
 router.get("/logout", logout);
-
+//comentario
 export default router;
