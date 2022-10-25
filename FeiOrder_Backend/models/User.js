@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
-
+const roles = {
+  values: ["ADMIN", "USER"],
+  message: "{VALUE} no es un rol válido",
+};
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -28,6 +31,7 @@ const userSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  role: { type: String, default: "USER", enum: roles },
 });
 
 userSchema.pre("save", async function (next) {

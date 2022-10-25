@@ -1,4 +1,6 @@
 import { body, cookie, header, validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
+import { User } from "../models/User.js";
 
 const validationResultExpress = (req, res, next) => {
   const errors = validationResult(req);
@@ -45,3 +47,16 @@ export const tokenCookieValidator = [
   cookie("refreshToken", "No existe refresh Token").trim().notEmpty().escape(),
   validationResultExpress,
 ];
+
+export const verifyRol = async (req, res, next) => {
+  let token = req.headers?.authorization;
+  token = token.split(" ")[1];
+  const user = await User.findById(req.uid);
+  console.log(user);
+  if (user.role !== "ADMIN") {
+    return res.status(401).json({
+      message: "Rol no autorizado",
+    });
+  }
+  next();
+};

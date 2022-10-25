@@ -27,7 +27,6 @@ export const useUserStore = defineStore("user", () => {
         email,
         password,
       });
-      console.log(res + "aaa");
       token.value = res.data.token;
       expiresIn.value = res.data.expiresIn;
       sessionStorage.setItem("user", "true");
@@ -131,13 +130,20 @@ export const useDishStore = defineStore("dish", () => {
   let dishes = ref(null);
 
   const register = async (title, cost, description, timeToCook, imageFile) => {
+    const useStore = useUserStore();
+    useStore.refreshToken();
+    console.log(useStore.token);
     try {
-      const res = await api.post("/dish/createDish", {
-        title,
-        cost,
-        description,
-        timeToCook,
-      });
+      const res = await api.post(
+        "/dish/createDish",
+        {
+          title,
+          cost,
+          description,
+          timeToCook,
+        },
+        { headers: { Authorization: "Bearer " + useStore.token } }
+      );
       if (imageFile) {
         console.log(imageFile);
         const storageRefVar = storageRef(

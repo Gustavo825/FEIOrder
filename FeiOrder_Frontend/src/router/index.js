@@ -23,12 +23,18 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach(async (to, from, next) => {
     const userStore = useUserStore();
     const requiredAuth = to.meta.auth;
+    const verifyRol = to.meta.verifyRol;
     if (userStore.token) {
       return next();
     }
     if (requiredAuth || localStorage.getItem("user")) {
       await userStore.refreshToken();
       if (userStore.token) {
+        await userStore.getInfoUser();
+        console.log(userStore.user);
+        if (verifyRol && userStore.user.role != "ADMIN") {
+          return next("/Login");
+        }
         return next();
       }
       return next("/Login");

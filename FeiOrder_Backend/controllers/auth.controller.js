@@ -2,13 +2,13 @@ import { User } from "../models/User.js";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
 
 export const register = async (req, res) => {
-  const { email, password, username, name, image} = req.body;
-  console.log(name + " " + username)
+  const { email, password, username, name, role } = req.body;
+  console.log(name + " " + username);
   try {
     let user = await User.findOne({ email });
     if (user) throw { code: 11000 };
 
-    user = new User({ email, password, username, name, image});
+    user = new User({ email, password, username, name, role });
     await user.save();
 
     const { token, expiresIn } = generateToken(user.id);
@@ -23,7 +23,25 @@ export const register = async (req, res) => {
     return res.status(500).json({ error: "Error de servidor" });
   }
 };
+export const update = async (req, res) => {
+  const { email, username, name } = req.body;
+  console.log(name + " " + username);
+  try {
+    let user = new User({ username, name });
+    console.log(req);
+    //user = await User.findByIdAndUpdate(req.uid, user);
 
+    //await user.save();
+
+    return res.status(201).json({ user });
+  } catch (error) {
+    console.log(error);
+    if (error.code === 11000) {
+      return res.status(400).json({ error: "Ya existe este usuario" });
+    }
+    return res.status(500).json({ error: "Error de servidor" });
+  }
+};
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -54,6 +72,7 @@ export const infoUser = async (req, res) => {
       username: user.username,
       image: user.image,
       id: req.uid,
+      role: user.role,
     });
   } catch (error) {
     return res.status(500).json({ error: "error de server" });
