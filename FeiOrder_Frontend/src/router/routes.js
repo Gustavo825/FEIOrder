@@ -35,9 +35,21 @@ const routes = [
         },
       },
       {
+        path: "/ShoppingCart",
+        component: () => import("pages/ShoppingPage.vue"),
+        meta: {
+          auth: true,
+        },
+      },
+      {
         path: "/dish/:name",
         name: "dish",
         component: () => import("pages/DishPage.vue"),
+      },
+      {
+        path: "/dishMenu",
+        name: "dishMenu",
+        component: () => import("pages/DishMenu.vue"),
       },
     ],
   },

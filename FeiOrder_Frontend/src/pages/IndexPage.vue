@@ -2,17 +2,24 @@
   <q-layout class="index padding">
     <q-page v-if="dishStore.dishes != null">
       <q-scroll-area class="scroll-index">
-        <q-img class="title-popular" src="../assets/titlePopularDishes.png"></q-img>
+        <q-img
+          class="title-popular"
+          src="../assets/titlePopularDishes.png"
+        ></q-img>
         <div class="row no-wrap">
-          <cardIndex v-for="dish in dishStore.dishes.dishes" :key="dish._id" :id="dish._id" :image="dish.image"
-            :title="dish.title" :cost="dish.cost">
+          <cardIndex
+            v-for="dish in dishStore.dishes.dishes"
+            :key="dish._id"
+            :dish="dish"
+            :isAdmin="false"
+          >
           </cardIndex>
         </div>
         <q-img class="title-categories" src="../assets/categories.png"></q-img>
 
         <div class="row no-wrap options">
-            <q-img src="../assets/breakfast.png"> </q-img>
-            <q-img src="../assets/breakfast.png"> </q-img>
+          <q-img src="../assets/breakfast.png"> </q-img>
+          <q-img src="../assets/breakfast.png"> </q-img>
         </div>
       </q-scroll-area>
     </q-page>
