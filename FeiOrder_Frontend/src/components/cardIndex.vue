@@ -103,6 +103,7 @@ const copy = (id) => {
   width: 300px;
   height: 250px;
   margin-right: 2rem;
+  border-radius: 20px;
 }
 .image {
   height: 200px;

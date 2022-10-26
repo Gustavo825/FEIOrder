@@ -18,8 +18,11 @@
         <q-img class="title-categories" src="../assets/categories.png"></q-img>
 
         <div class="row no-wrap options">
-          <q-img src="../assets/breakfast.png"> </q-img>
-          <q-img src="../assets/breakfast.png"> </q-img>
+          <q-img class="option-specific" src="../assets/breakfast.png"> </q-img>
+          <q-img class="option-specific" src="../assets/generalMenu.png"> </q-img>
+          <q-img class="option-specific" src="../assets/drinks.png"> </q-img>
+          <q-img class="option-specific" src="../assets/sale.png"> </q-img>
+
         </div>
       </q-scroll-area>
     </q-page>
