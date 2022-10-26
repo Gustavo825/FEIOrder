@@ -21,6 +21,24 @@ export const useUserStore = defineStore("user", () => {
       return error.code;
     }
   };
+  const updateUser = async (id, name, username) => {
+    try {
+      const res = await api.patch(
+        `/auth/update/${id}`,
+        {
+          name,
+          username,
+        },
+        { headers: { Authorization: "Bearer " + token.value } }
+      );
+      user.value.name = res.data.user.name;
+      user.value.username = res.data.user.username;
+      console.log(res.data.user.name);
+    } catch (error) {
+      console.log(error);
+      return error.code;
+    }
+  };
   const access = async (email, password) => {
     try {
       const res = await api.post("/auth/login", {
@@ -41,14 +59,7 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-  const register = async (
-    email,
-    name,
-    username,
-    password,
-    repassword,
-    image
-  ) => {
+  const register = async (email, name, username, password, repassword) => {
     try {
       const res = await api.post("/auth/register", {
         email,
@@ -123,6 +134,7 @@ export const useUserStore = defineStore("user", () => {
     register,
     getInfoUser,
     updateImage,
+    updateUser,
   };
 });
 

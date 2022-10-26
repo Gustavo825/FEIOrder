@@ -5,7 +5,7 @@ const routes = [
     children: [
       { path: "", component: () => import("pages/IndexPage.vue") },
       {
-        path: "/Home",
+        path: "/Profile",
         component: () => import("pages/ProfilePage.vue"),
         meta: {
           auth: true,

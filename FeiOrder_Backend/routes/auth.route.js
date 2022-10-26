@@ -21,7 +21,7 @@ const router = Router();
 router.post("/register", registerValidator, register);
 
 router.post("/login", loginValidator, login);
-router.put("/update/${id}", update);
+router.patch("/update/:id", tokenHeaderValidator, update);
 
 router.get("/infoUser", tokenHeaderValidator, requireToken, infoUser);
 router.get("/refresh", tokenCookieValidator, requireRefreshToken, refreshToken);

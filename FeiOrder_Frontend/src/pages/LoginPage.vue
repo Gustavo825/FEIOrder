@@ -33,6 +33,7 @@
               v-model="password"
               type="password"
               outlined
+              dark
               label="Ingrese contraseña"
               :rules="[
                 (val) =>
@@ -60,10 +61,10 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "../stores/use-store";
-import { useRouter } from "vue-router";
 import { useNotify } from "../composables/notifyHook";
-const { showNotify } = useNotify();
+import { useRouter } from "vue-router";
 const router = useRouter();
+const { showNotify } = useNotify();
 const userStore = useUserStore();
 
 const email = ref("");
@@ -96,5 +97,4 @@ const clickRegisterButton = () => {
 </script>
 <style scoped>
 @import "../styles/loginStyle.css";
-
 </style>

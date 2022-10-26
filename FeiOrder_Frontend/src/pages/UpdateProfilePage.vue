@@ -32,7 +32,6 @@
               outlined
               v-model="username"
               type="text"
-              :label="userStore.user.username"
             >
             </q-input>
             <label class="form-label">Nombre:</label>
@@ -43,7 +42,6 @@
               outlined
               v-model="name"
               type="text"
-              :label="userStore.user.name"
             >
             </q-input>
             <q-file
@@ -67,6 +65,9 @@
               type="submit"
               color="primary"
             ></q-btn>
+            <v-btn color="orange" dark v-bind="attrs" v-on="on">
+              Open Inset
+            </v-btn>
           </q-form>
         </q-card-section>
       </q-card>
@@ -94,8 +95,11 @@ const getInfo = async () => {
         alertError(error.errors[0].msg);
       }
     }
+    name = userStore.user.name;
+    username = userStore.user.username;
   }
 };
+
 onMounted(() => {
   getInfo();
 });
@@ -103,9 +107,14 @@ const imageURL = ref("");
 const image = ref("");
 const form = ref(null);
 const handleSubmit = async () => {
-  if (image) {
-    userStore.updateImage(image);
-    getInfo();
+  try {
+    userStore.updateUser(userStore.user.id, name, username);
+    if (imageURL.value) {
+      userStore.updateImage(image);
+    }
+    router.push("/Profile");
+  } catch {
+    console.log(error.code);
   }
 };
 const selectedImage = () => {
@@ -113,5 +122,5 @@ const selectedImage = () => {
 };
 </script>
 <style scoped>
-@import "../styles/updateProfileStyle.css"
+@import "../styles/updateProfileStyle.css";
 </style>

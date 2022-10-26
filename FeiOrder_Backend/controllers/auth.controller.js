@@ -24,15 +24,14 @@ export const register = async (req, res) => {
   }
 };
 export const update = async (req, res) => {
-  const { email, username, name } = req.body;
-  console.log(name + " " + username);
+  const { username, name } = req.body;
+  console.log(name._value);
   try {
-    let user = new User({ username, name });
-    console.log(req);
-    //user = await User.findByIdAndUpdate(req.uid, user);
-
-    //await user.save();
-
+    console.log(req.params.id);
+    const user = await User.findById(req.params.id);
+    user.username = username._value;
+    user.name = name._value;
+    await user.save();
     return res.status(201).json({ user });
   } catch (error) {
     console.log(error);

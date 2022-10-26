@@ -20,12 +20,16 @@
           </q-avatar>
         </q-card-section>
 
-        <q-card-section align="center" v-if="userStore.user" class="q-pt-none user-information">
-          <div class="text-subtitle2">{{ userStore.user.username }}</div>
-          <div class="text-caption text-grey">
+        <q-card-section
+          align="center"
+          v-if="userStore.user"
+          class="q-pt-none user-information"
+        >
+          <div class="text-subtitle">{{ userStore.user.username }}</div>
+          <div class="text-subtitle1 text-grey">
             {{ userStore.user.email }}
           </div>
-          <div class="text-caption text-grey">
+          <div class="text-subtitle1 text-grey">
             {{ userStore.user.name }}
           </div>
         </q-card-section>

@@ -16,7 +16,7 @@
         <q-btn flat to="/">Inicio</q-btn>
         <q-btn flat to="/Login" v-if="!userStore.token">Login</q-btn>
         <q-btn flat to="/Register" v-if="!userStore.token">Register</q-btn>
-        <q-btn flat v-if="userStore.token" to="/Home">Perfil</q-btn>
+        <q-btn flat v-if="userStore.token" to="/Profile">Perfil</q-btn>
         <q-btn flat v-if="userStore.token" @click="logout">Logout</q-btn>
       </q-toolbar>
     </q-header>
