@@ -63,6 +63,7 @@ const card = ref(false);
 const $q = useQuasar();
 defineProps({
   dish: [],
+  isAdmin: Boolean,
 });
 const clickSeeMore = () => {
   card.value = !card.value;

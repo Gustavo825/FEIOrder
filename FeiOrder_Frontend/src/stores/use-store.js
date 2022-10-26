@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import {
+  connectStorageEmulator,
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
@@ -221,6 +222,7 @@ export const useShoppingStore = defineStore("shopping", () => {
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList.value));
   };
   const remove = (id) => {
+    console.log(id);
     shoppingList.value = shoppingList.value.filter((item) => item.id !== id);
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList.value));
   };
