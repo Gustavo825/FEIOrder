@@ -12,6 +12,7 @@
           <q-form class="form" @submit.prevent="handleSubmit" ref="form">
             <q-img class="login-logo" src="../assets/FEIOrder.png" />
             <label class="form-label">Correo:</label>
+
             <q-input
               outlined
               dark
@@ -20,6 +21,7 @@
               type="text"
               label="Ingrese correo electrónico"
               v-bind:error="emailError"
+              error-color="black"
               :rules="[
                 (val) => (val && val.length > 0) || 'Por favor escriba algo',
                 (val) =>

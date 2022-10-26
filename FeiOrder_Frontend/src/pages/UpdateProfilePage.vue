@@ -92,9 +92,9 @@ const getInfo = async () => {
         alertError(error.errors[0].msg);
       }
     }
-    name = userStore.user.name;
-    username = userStore.user.username;
   }
+  name.value = userStore.user.name;
+  username.value = userStore.user.username;
 };
 
 onMounted(() => {
