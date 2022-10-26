@@ -17,7 +17,7 @@
 
 .login {
   margin-top: -5rem;
-  background:  rgba(19, 35, 47, 0.9);
+  background: rgba(19, 35, 47, 0.9);
 }
 
 .title {
@@ -53,7 +53,7 @@
 
 .form-submit {
   scale: 0.9;
-  background: #1ab188;
+  background: #15a2be;
   border: none;
   color: white;
   margin-top: 3rem;
@@ -67,7 +67,7 @@
 
 .registerButton {
   scale: 0.8;
-  background: #1ab188;
+  background: #15a2be;
   border: none;
   color: white;
   margin-top: 2rem;
@@ -84,3 +84,7 @@
   height: 200px;
   margin-top: 5vh;
 }
+
+
+
+

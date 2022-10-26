@@ -1,18 +1,18 @@
 <template>
   <q-layout class="index padding">
     <q-page v-if="dishStore.dishes != null">
-      <h3 class="title">Populares:</h3>
-      <q-scroll-area style="height: 260px; min-width: 900px">
+      <q-scroll-area class="scroll-index">
+        <q-img class="title-popular" src="../assets/titlePopularDishes.png"></q-img>
         <div class="row no-wrap">
-          <cardIndex
-            v-for="dish in dishStore.dishes.dishes"
-            :key="dish._id"
-            :id="dish._id"
-            :image="dish.image"
-            :title="dish.title"
-            :cost="dish.cost"
-          >
+          <cardIndex v-for="dish in dishStore.dishes.dishes" :key="dish._id" :id="dish._id" :image="dish.image"
+            :title="dish.title" :cost="dish.cost">
           </cardIndex>
+        </div>
+        <q-img class="title-categories" src="../assets/categories.png"></q-img>
+
+        <div class="row no-wrap options">
+            <q-img src="../assets/breakfast.png"> </q-img>
+            <q-img src="../assets/breakfast.png"> </q-img>
         </div>
       </q-scroll-area>
     </q-page>
@@ -28,17 +28,6 @@ const dishStore = useDishStore();
 dishStore.getDishes();
 const slide = ref(1);
 </script>
-<style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
-
-.index {
-  display: flex;
-  justify-content: center;
-  background-color: cadetblue;
-}
-.title {
-  font-family: "Open Sans";
-  color: rgb(25, 24, 24);
-  margin-bottom: 1rem;
-}
+<style>
+@import "../styles/indexStyle.css";
 </style>

@@ -13,12 +13,13 @@
             <q-img class="login-logo" src="../assets/FEIOrder.png" />
             <label class="form-label">Correo:</label>
             <q-input
-              dark
               outlined
+              dark
               class="form-input"
               v-model="email"
               type="text"
               label="Ingrese correo electrónico"
+              v-bind:error="emailError"
               :rules="[
                 (val) => (val && val.length > 0) || 'Por favor escriba algo',
                 (val) =>
@@ -31,7 +32,6 @@
               class="form-input"
               v-model="password"
               type="password"
-              dark
               outlined
               label="Ingrese contraseña"
               :rules="[
@@ -41,16 +41,14 @@
             ></q-input>
             <q-btn
               class="form-submit"
-              label="Ingresar"
+              label="Iniciar sesión"
               type="submit"
-              color="primary"
             ></q-btn>
             <q-btn
               v-on:click="clickRegisterButton()"
               class="registerButton"
               label="Registrarse"
               type="submit"
-              color="primary"
             ></q-btn>
           </q-form>
         </q-scroll-area>
@@ -98,4 +96,5 @@ const clickRegisterButton = () => {
 </script>
 <style scoped>
 @import "../styles/loginStyle.css";
+
 </style>
