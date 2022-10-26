@@ -65,9 +65,6 @@
               type="submit"
               color="primary"
             ></q-btn>
-            <v-btn color="orange" dark v-bind="attrs" v-on="on">
-              Open Inset
-            </v-btn>
           </q-form>
         </q-card-section>
       </q-card>
