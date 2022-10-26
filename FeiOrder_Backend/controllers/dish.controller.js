@@ -12,12 +12,20 @@ export const getDishes = async (req, res) => {
 };
 
 export const createDish = async (req, res) => {
-  const { title, cost, description, timeToCook, state, date } = req.body;
+  const { title, cost, description, timeToCook, state, date, type } = req.body;
   try {
     let dish = await Dish.findOne({ title });
     if (dish) throw { code: 11000 };
 
-    dish = new Dish({ title, cost, description, timeToCook, state, date });
+    dish = new Dish({
+      title,
+      cost,
+      description,
+      timeToCook,
+      state,
+      date,
+      type,
+    });
     await dish.save();
 
     return res.status(201).json({ dish });

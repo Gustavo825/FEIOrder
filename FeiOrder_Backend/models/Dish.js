@@ -1,4 +1,8 @@
 import mongoose from "mongoose";
+const types = {
+  values: ["BREAKFAST", "GENERAL", "DRINK", "SALE"],
+  message: "{VALUE} no es un rol válido",
+};
 const dishSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -27,5 +31,6 @@ const dishSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  type: { type: String, default: "GENERAL", enum: types },
 });
 export const Dish = mongoose.model("Dish", dishSchema);

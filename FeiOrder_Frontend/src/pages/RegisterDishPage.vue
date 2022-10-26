@@ -72,6 +72,15 @@
                 (val) => (val && val.length > 0) || 'Por favor escriba algo',
               ]"
             ></q-input>
+            <label class="form-label-dish">Categoría:</label>
+            <q-select
+              class="form-input"
+              dark
+              outlined
+              v-model="category"
+              :options="options"
+              label="Categoría"
+            />
             <q-file
               outlined
               class="input-image"
@@ -110,7 +119,7 @@ import { ref } from "vue";
 import { useDishStore } from "../stores/use-store";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
-
+const options = ["Menú general", "Desayunos", "Bebidas", "Promoción"];
 const router = useRouter();
 const dishStore = useDishStore();
 const $q = useQuasar();
@@ -122,18 +131,37 @@ const timeToCook = ref("");
 const form = ref(null);
 const imageURL = ref("");
 const image = ref("");
+const category = ref("");
 const selectedImage = () => {
   imageURL.value = URL.createObjectURL(image.value);
 };
 const handleSubmit = async () => {
   try {
+    let categoryVal = "";
+    switch (category.value) {
+      case "Menú general":
+        categoryVal = "GENERAL";
+        break;
+      case "Desayunos":
+        categoryVal = "BREAKFAST";
+        break;
+      case "Bebidas":
+        categoryVal = "DRINK";
+
+        break;
+      case "Promoción":
+        categoryVal = "SALE";
+
+        break;
+    }
     if (await form.value.validate()) {
       await dishStore.register(
         title.value,
         cost.value,
         description.value,
         timeToCook.value,
-        image.value
+        image.value,
+        categoryVal
       );
       title.value = "";
       cost.value = "";

@@ -145,7 +145,14 @@ export const useUserStore = defineStore("user", () => {
 export const useDishStore = defineStore("dish", () => {
   let dishes = ref(null);
 
-  const register = async (title, cost, description, timeToCook, imageFile) => {
+  const register = async (
+    title,
+    cost,
+    description,
+    timeToCook,
+    imageFile,
+    type
+  ) => {
     const useStore = useUserStore();
     useStore.refreshToken();
     console.log(useStore.token);
@@ -157,6 +164,7 @@ export const useDishStore = defineStore("dish", () => {
           cost,
           description,
           timeToCook,
+          type,
         },
         { headers: { Authorization: "Bearer " + useStore.token } }
       );
@@ -223,8 +231,10 @@ export const useShoppingStore = defineStore("shopping", () => {
   };
   const remove = (id) => {
     console.log(id);
-    shoppingList.value = shoppingList.value.filter((item) => item.id !== id);
+    console.log(localStorage.getItem("shoppingList"));
+    shoppingList.value = shoppingList.value.filter((item) => item._id !== id);
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList.value));
+    console.log(localStorage.getItem("shoppingList"));
   };
   const find = (title) =>
     shoppingList.value.find((item) => item.titlte === title);
