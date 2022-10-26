@@ -21,7 +21,7 @@
               type="text"
               label="Ingrese correo electrónico"
               v-bind:error="emailError"
-              error-color="black"
+              error-message=""
               :rules="[
                 (val) => (val && val.length > 0) || 'Por favor escriba algo',
                 (val) =>
@@ -66,8 +66,8 @@ import { useUserStore } from "../stores/use-store";
 import { useNotify } from "../composables/notifyHook";
 import { useRouter } from "vue-router";
 const router = useRouter();
-const { showNotify } = useNotify();
 const userStore = useUserStore();
+const { showNotify } = useNotify();
 
 const email = ref("");
 const password = ref("");

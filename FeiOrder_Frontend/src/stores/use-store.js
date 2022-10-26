@@ -87,8 +87,9 @@ export const useUserStore = defineStore("user", () => {
       await api.get("/auth/logout");
     } catch (error) {
     } finally {
-      resetStore();
       localStorage.removeItem("user");
+      localStorage.removeItem("shoppingList");
+      resetStore();
     }
   };
   const setTime = () => {
@@ -120,6 +121,8 @@ export const useUserStore = defineStore("user", () => {
     } catch (error) {}
   };
   const resetStore = () => {
+    const shoppingStore = useShoppingStore();
+    shoppingStore.shoppingList = [];
     token.value = null;
     user.value = null;
     expiresIn.value = null;
@@ -204,5 +207,30 @@ export const useDishStore = defineStore("dish", () => {
     getDishes,
     getDish,
     register,
+  };
+});
+
+export const useShoppingStore = defineStore("shopping", () => {
+  const shoppingList = ref([]);
+  if (localStorage.getItem("shoppingList")) {
+    shoppingList.value = JSON.parse(localStorage.getItem("shoppingList"));
+  }
+
+  const add = (dish) => {
+    shoppingList.value.push(dish);
+    localStorage.setItem("shoppingList", JSON.stringify(shoppingList.value));
+  };
+  const remove = (id) => {
+    shoppingList.value = shoppingList.value.filter((item) => item.id !== id);
+    localStorage.setItem("shoppingList", JSON.stringify(shoppingList.value));
+  };
+  const find = (title) =>
+    shoppingList.value.find((item) => item.titlte === title);
+
+  return {
+    shoppingList,
+    add,
+    remove,
+    find,
   };
 });
