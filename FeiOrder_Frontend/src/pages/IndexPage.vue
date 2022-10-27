@@ -1,7 +1,7 @@
 <template>
   <q-layout class="index padding">
     <q-page v-if="dishStore.dishes != null">
-      <q-scroll-area class="scroll-index">
+      <q-scroll-area class="scroll-index" :visible="false">
         <q-img
           class="title-popular"
           src="../assets/titlePopularDishes.png"

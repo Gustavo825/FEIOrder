@@ -1,35 +1,26 @@
 <template>
-  <div class="q-pa-md">
-    <q-table
-      title="Orden"
-      :rows="shoppingStore.shoppingList"
-      :columns="columns"
-      row-key="name"
-      :separator="separator"
-    >
+  <div class="doc-container background">
+  <div class="q-pa-md table-cart">
+    <q-table class="table" title="Orden" :rows="shoppingStore.shoppingList" :columns="columns" row-key="name" :separator="separator">
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="title" :props="props">
             {{ props.row.title }}
           </q-td>
+          
           <q-td key="Costo" :props="props">
-            {{ props.row.cost }}
+            ${{ props.row.cost }}
           </q-td>
           <q-td key="Tiempo de preparación" :props="props">
             {{ props.row.timeToCook }}
           </q-td>
           <q-td key="Accion" :props="props">
-            <q-btn
-              @click="removeDish(props.row._id)"
-              name="delete"
-              flat
-              label="Quitar"
-              icon="delete"
-            />
+            <q-btn @click="removeDish(props.row._id)" name="delete" flat label="Quitar" icon="delete" />
           </q-td>
         </q-tr>
       </template>
     </q-table>
+  </div>
   </div>
 </template>
 <script setup>
@@ -71,3 +62,7 @@ const columns = [
   },
 ];
 </script>
+
+<style>
+@import "../styles/shoppingCartStyle.css";
+</style>

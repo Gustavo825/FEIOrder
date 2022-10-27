@@ -1,0 +1,23 @@
+.table-cart {
+    padding: 10vh;
+}
+
+.background {
+    background-color: #5B758F;
+    height: 1000px;
+}
+
+.table {
+    border-radius: 20px;
+}
+
+.logo {
+    width: 200px;
+    height: 200px;
+}
+
+.q-table__top,
+thead tr:first-child th {
+  /* bg color is important for th; just specify one */
+  background-color: #A3BFDB;
+}
