@@ -87,7 +87,7 @@
               label-color="white"
               accept=".jpg, image/*"
               v-model="image"
-              label="Ingrese su foto de perfil"
+              label="Ingrese imagen del platillo"
               @update:model-value="selectedImage()"
             >
               <template v-slot:prepend>

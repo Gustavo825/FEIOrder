@@ -44,7 +44,14 @@
         icon="arrow_forward_ios"
       >
       </q-btn>
-      <q-btn flat round color="primary" icon="edit" />
+      <q-btn
+        @click="clickEditDish" 
+        flat
+        round 
+        color="primary" 
+        icon="edit" />
+      <InfoDish :dish="dish" :card="card"></InfoDish>
+      <EditDish :dish="dish" :card="cardEdit" :copyDish="dish"></EditDish>
     </q-card-actions>
   </q-card>
 </template>
@@ -56,15 +63,21 @@ import { useShoppingStore } from "../stores/use-store";
 // @ts-ignore
 import InfoDish from "../dialogs/InfoDish.vue";
 import { useRouter } from "vue-router";
+import EditDish from "src/dialogs/EditDish.vue";
 const router = useRouter();
 const shoppingStore = useShoppingStore();
 const { showNotify } = useNotify();
 const card = ref(false);
+const cardEdit = ref(false);
 const $q = useQuasar();
 defineProps({
   dish: [],
   isAdmin: Boolean,
 });
+
+const clickEditDish = () => {
+  cardEdit.value = !cardEdit.value;
+}
 const clickSeeMore = () => {
   card.value = !card.value;
 };

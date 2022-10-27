@@ -37,7 +37,19 @@
   border-radius: 20px;
   font-family: 'Open Sans', sans-serif;
   min-height: max-content;
+}
 
+.register-button {
+  scale: 1;
+  background: #1ab188;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background 0.4s;
+  border-radius: 20px;
+  font-family: 'Open Sans', sans-serif;
+  min-height: max-content;
+  width: auto;
 }
 
 .title-dishes {

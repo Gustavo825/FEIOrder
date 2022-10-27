@@ -6,7 +6,7 @@
         src="../assets/titlePopularDishes.png"
       ></q-img>
       <q-btn
-        class="form-submit-register"
+        class="register-button"
         label="Registrar platillo"
         v-on:click="clickRegisterButton()"
         color="primary"
