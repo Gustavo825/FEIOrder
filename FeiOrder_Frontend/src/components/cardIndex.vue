@@ -44,14 +44,9 @@
         icon="arrow_forward_ios"
       >
       </q-btn>
-      <q-btn
-        @click="clickEditDish" 
-        flat
-        round 
-        color="primary" 
-        icon="edit" />
+      <q-btn @click="clickEditDish" flat round color="primary" icon="edit" />
+      <EditDish :dishEdit="dish" :card="cardEdit"></EditDish>
       <InfoDish :dish="dish" :card="card"></InfoDish>
-      <EditDish :dish="dish" :card="cardEdit" :copyDish="dish"></EditDish>
     </q-card-actions>
   </q-card>
 </template>
@@ -77,7 +72,7 @@ defineProps({
 
 const clickEditDish = () => {
   cardEdit.value = !cardEdit.value;
-}
+};
 const clickSeeMore = () => {
   card.value = !card.value;
 };
