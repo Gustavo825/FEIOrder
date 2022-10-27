@@ -1,28 +1,26 @@
 <template>
   <q-layout class="index padding">
     <q-page v-if="dishStore.dishes != null">
+      <q-img
+        class="title-popular"
+        src="../assets/titlePopularDishes.png"
+      ></q-img>
       <q-scroll-area class="scroll-index" :visible="false">
-        <q-img
-          class="title-popular"
-          src="../assets/titlePopularDishes.png"
-        ></q-img>
         <div class="row no-wrap">
-          <cardIndex
-            v-for="dish in dishStore.dishes.dishes"
-            :key="dish._id"
-            :dish="dish"
-            :isAdmin="false"
-          >
-          </cardIndex>
+          <template v-for="dish in dishStore.dishes.dishes" :key="dish._id">
+            <cardIndex :dish="dish" :isAdmin="false"> </cardIndex>
+          </template>
         </div>
-        <q-img class="title-categories" src="../assets/categories.png"></q-img>
+      </q-scroll-area>
 
+      <q-img class="title-categories" src="../assets/categories.png"></q-img>
+      <q-scroll-area class="scroll-index" :visible="false">
         <div class="row no-wrap options">
           <q-img class="option-specific" src="../assets/breakfast.png"> </q-img>
-          <q-img class="option-specific" src="../assets/generalMenu.png"> </q-img>
+          <q-img class="option-specific" src="../assets/generalMenu.png">
+          </q-img>
           <q-img class="option-specific" src="../assets/drinks.png"> </q-img>
           <q-img class="option-specific" src="../assets/sale.png"> </q-img>
-
         </div>
       </q-scroll-area>
     </q-page>

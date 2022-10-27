@@ -20,6 +20,10 @@ const routes = [
         component: () => import("pages/RegisterPage.vue"),
       },
       {
+        path: "/Menu",
+        component: () => import("pages/MenuPage.vue"),
+      },
+      {
         path: "/RegisterDish",
         component: () => import("pages/RegisterDishPage.vue"),
         meta: {
