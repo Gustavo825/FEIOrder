@@ -64,11 +64,11 @@
               outlined
               v-model="timeToCook"
               type="text"
-              label="Ingrese el tiempo de preparación del platillo Horas:Minutos"
+              label="Ingrese el tiempo de preparación del platillo en minutos"
               :rules="[
                 (val) =>
-                  /([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(val) ||
-                  'Formato de tiempo incorrecto',
+                  /^\d{0,8}(\.\d{1,4})?$/.test(val) ||
+                  'Ingrese un costo válido',
                 (val) => (val && val.length > 0) || 'Por favor escriba algo',
               ]"
             ></q-input>

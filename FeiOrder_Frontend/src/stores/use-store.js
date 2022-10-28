@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import {
-  connectStorageEmulator,
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
@@ -250,29 +249,76 @@ export const useDishStore = defineStore("dish", () => {
 });
 
 export const useShoppingStore = defineStore("shopping", () => {
+  const useStore = useUserStore();
+  const cost = ref(0);
+  const time = ref(0);
   const shoppingList = ref([]);
+  let idList = 0;
   if (localStorage.getItem("shoppingList")) {
     shoppingList.value = JSON.parse(localStorage.getItem("shoppingList"));
   }
-
+  const calculateCost = () => {
+    cost.value = 0;
+    for (let i = 0; i < shoppingList.value.length; i++) {
+      cost.value += parseFloat(shoppingList.value[i].cost);
+      time.value += parseFloat(shoppingList.value[i].timeToCook);
+    }
+  };
   const add = (dish) => {
+    dish.idList = idList;
+    idList++;
     shoppingList.value.push(dish);
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList.value));
   };
   const remove = (id) => {
     console.log(id);
     console.log(localStorage.getItem("shoppingList"));
-    shoppingList.value = shoppingList.value.filter((item) => item._id !== id);
+    shoppingList.value = shoppingList.value.filter(
+      (item) => item.idList !== id
+    );
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList.value));
     console.log(localStorage.getItem("shoppingList"));
   };
   const find = (title) =>
-    shoppingList.value.find((item) => item.titlte === title);
+    shoppingList.value.find((item) => item.title === title);
 
+  const makeOrder = async (comment) => {
+    useStore.refreshToken();
+    const dishes = shoppingList.value;
+    const totalCost = cost.value;
+    const stimatedTime = time.value;
+    try {
+      const res = await api.post(
+        "/order/createOrder",
+        {
+          totalCost,
+          comment,
+          stimatedTime,
+          dishes,
+        },
+        { headers: { Authorization: "Bearer " + useStore.token } }
+      );
+    } catch (error) {
+      if (error.response) {
+        throw error.response.data;
+      } else {
+        throw { error: "error de servidor" };
+      }
+    } finally {
+      localStorage.removeItem("shoppingList");
+      shoppingList.value = [];
+      cost.value = 0;
+      time.value = 0;
+    }
+  };
   return {
     shoppingList,
     add,
     remove,
     find,
+    makeOrder,
+    time,
+    cost,
+    calculateCost,
   };
 });

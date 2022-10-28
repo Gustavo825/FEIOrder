@@ -1,6 +1,7 @@
 import express from "express";
 import authRoutes from "./routes/auth.route.js";
 import dishRoutes from "./routes/dish.route.js";
+import orderRoutes from "./routes/order.route.js";
 import "./database/connectDB.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -22,4 +23,5 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/dish", dishRoutes);
+app.use("/api/v1/order", orderRoutes);
 app.listen(port, () => console.log("http://localhost:" + port));

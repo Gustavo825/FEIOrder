@@ -1,9 +1,9 @@
 import { Dish } from "../models/Dish.js";
 
 export const getDishes = async (req, res) => {
-  const { email, password, username, name } = req.body;
   try {
-    const dishes = await Dish.find({ uid: req.uid }).lean();
+    const dishes = await Dish.find();
+    console.log(dishes);
     return res.json({ dishes });
   } catch (error) {
     console.log(error);
