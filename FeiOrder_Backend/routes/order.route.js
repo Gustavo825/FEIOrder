@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getDishes, createDish } from "../controllers/dish.controller.js";
+import { createOrder } from "../controllers/order.controller.js";
 import { requireToken } from "../middlewares/requireToken.js";
 import {
   tokenHeaderValidator,
@@ -8,13 +8,6 @@ import {
 
 const router = Router();
 
-router.get("/", getDishes);
-router.post(
-  "/createDish",
-  requireToken,
-  tokenHeaderValidator,
-  verifyRol,
-  createDish
-);
+router.post("/createOrder", requireToken, tokenHeaderValidator, createOrder);
 
 export default router;

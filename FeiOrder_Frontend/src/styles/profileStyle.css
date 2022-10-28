@@ -12,3 +12,11 @@
 
 }
 
+.profile{
+  display: flex;
+  justify-content: center;
+  background-image: url("../assets/backgroundIndex.png");
+  background-size:cover;
+  min-width: 1000px;
+  margin-top: -3vh;
+}

@@ -1,23 +1,39 @@
-const mongoose = require('mongoose');
-const {Schema} = mongoose;
-const Order = new Schema ({
-    totalCost: Float32Array,
-    comment: String,
-    estimatedTime: String,
-    statusOrder: OrderStatus
-})
+import mongoose from "mongoose";
+import { Dish } from "../models/Dish.js";
 
-Order.methods.toJSON = function() {
-    var obj = this.toObject();
-    delete obj.pass;
-    return obj;
-   }
-
-const OrderStatus = {
-    Created: "Created",
-    Cooking : "Cooking",
-    Delivered: "Delivered",
-    Canceled: "Canceled",
-}
-
-module.exports = mongoose.model('Order',Order)
+const types = {
+  values: ["CREATED", "COOKING", "DELIVERED", "CANCELED"],
+  message: "{VALUE} no es un estado válido",
+};
+const orderSchema = new mongoose.Schema({
+  userID: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  totalCost: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+  },
+  comment: {
+    type: String,
+  },
+  stimatedTIme: {
+    type: String,
+  },
+  state: {
+    type: Boolean,
+    default: true,
+  },
+  dishes: {
+    type: [],
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  state: { type: String, default: "CREATED", enum: types },
+});
+export const Order = mongoose.model("Order", orderSchema);

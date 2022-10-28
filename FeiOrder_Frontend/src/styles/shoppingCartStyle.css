@@ -1,12 +1,31 @@
 .table-cart {
     padding: 10vh;
 }
+.confirm{
+ margin-top: 3vh;
 
-.background {
-    background-color: #5B758F;
-    height: 1000px;
 }
 
+.background {
+  display: flex;
+  justify-content: center;
+  background-image: url("../assets/backgroundIndex.png");
+  background-size: cover;
+  min-width: 1000px;
+  margin-top: -3vh;
+}
+.form-submit {
+  background: #15a2be;
+  scale: 1;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background 0.4s;
+  border-radius: 20px;
+  font-family: 'Open Sans', sans-serif;
+  min-height: max-content;
+  width: auto;
+}
 .table {
     border-radius: 20px;
 }

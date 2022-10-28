@@ -29,7 +29,7 @@
           <div class="text-subtitle1 text-grey">
             {{ userStore.user.email }}
           </div>
-          <div class="text-subtitle1 text-grey">
+          <div class="subtitle1 text-grey">
             {{ userStore.user.name }}
           </div>
         </q-card-section>
