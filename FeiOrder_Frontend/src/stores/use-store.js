@@ -118,7 +118,6 @@ export const useUserStore = defineStore("user", () => {
       user.value = res.data;
       const storageRefVar = storageRef(storage, `${user.value.id}/imgProfile`); //`${user.currentUser}`
       user.value.image = await getDownloadURL(storageRefVar);
-      console.log(user);
     } catch (error) {}
   };
   const resetStore = () => {
@@ -155,7 +154,6 @@ export const useDishStore = defineStore("dish", () => {
   ) => {
     const useStore = useUserStore();
     useStore.refreshToken();
-    console.log(useStore.token);
     try {
       const res = await api.post(
         "/dish/createDish",
@@ -169,14 +167,12 @@ export const useDishStore = defineStore("dish", () => {
         { headers: { Authorization: "Bearer " + useStore.token } }
       );
       if (imageFile) {
-        console.log(imageFile);
         const storageRefVar = storageRef(
           storage,
           `dishes/${res.data.dish._id}/imgProfile`
         ); //`${user.currentUser}`
         await uploadBytes(storageRefVar, imageFile);
       }
-      console.log(res.data.id);
       return res.data;
     } catch (error) {
       console.log(error);
@@ -185,6 +181,39 @@ export const useDishStore = defineStore("dish", () => {
       } else {
       }
       throw { error: "Error de servidor" };
+    }
+  };
+
+  const updateImage = async (imageFile, id) => {
+    try {
+      const storageRefVar = storageRef(storage, `dishes/${id}/imgProfile`); //`${user.currentUser}`
+      await uploadBytes(storageRefVar, imageFile.value);
+      dishes.value.dishes[getDish(id)].image = await getDownloadURL(storageRefVar);
+    } catch (error) {
+      console.log(error);
+      return error.code;
+    }
+  };
+
+  const updateDish = async (id, title, cost, description, timeToCook,categoryVal) => {
+    const useStore = useUserStore();
+    useStore.refreshToken();
+    try {
+      const res = await api.patch(
+        `/dish/update/${id}`,
+        {
+          title,
+          cost,
+          description,
+          timeToCook,
+          categoryVal,
+        },
+        { headers: { Authorization: "Bearer " + useStore.token } }
+      );
+      
+    } catch (error) {
+      console.log(error);
+      return error.code;
     }
   };
 
@@ -198,16 +227,15 @@ export const useDishStore = defineStore("dish", () => {
           storage,
           `dishes/${dishes.value.dishes[i]._id}/imgProfile`
         ); //`${user.currentUser}`
-        console.log(storageRefVar);
         dishes.value.dishes[i].image = await getDownloadURL(storageRefVar);
       }
     } catch (error) {}
   };
   const getDish = (id) => {
-    for (let i = 0; i < dishes.length(); i++) {
-      console.log(i);
-      if (id == dishes[i].id) {
-        return dishes[i];
+
+    for (let i = 0; i < dishes.value.dishes.length; i++) {
+      if (id == dishes.value.dishes[i]._id) {
+        return i;
       }
     }
   };
@@ -216,6 +244,8 @@ export const useDishStore = defineStore("dish", () => {
     getDishes,
     getDish,
     register,
+    updateDish,
+    updateImage,
   };
 });
 

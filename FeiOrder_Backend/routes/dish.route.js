@@ -4,7 +4,7 @@
 // PATCH    api/v1/links                update link
 // DELETE   api/v1/links/:nanoLink      remove link
 import { Router } from "express";
-import { getDishes, createDish } from "../controllers/dish.controller.js";
+import { getDishes, createDish, updateDish } from "../controllers/dish.controller.js";
 import { requireToken } from "../middlewares/requireToken.js";
 import {
   tokenHeaderValidator,
@@ -19,7 +19,8 @@ router.post(
   requireToken,
   tokenHeaderValidator,
   verifyRol,
-  createDish
+  createDish,
 );
+router.patch("/update/:id", tokenHeaderValidator, updateDish);
 
 export default router;

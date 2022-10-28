@@ -1,9 +1,10 @@
 <template>
   <q-layout class="index">
+  <q-layout class="index-padding">
     <q-page v-if="dishStore.dishes != null">
       <q-img
         class="title-dishes"
-        src="../assets/titlePopularDishes.png"
+        src="../assets/allDishes.png"
       ></q-img>
       <q-btn
         class="register-button"
@@ -13,7 +14,7 @@
         type="submit"
       >
       </q-btn>
-      <div class="q-pa-md">
+      <div class="q-pa-md cards-view">
         <q-table
           dark
           grid
@@ -45,6 +46,7 @@
         </q-table>
       </div>
     </q-page>
+    </q-layout>
   </q-layout>
 </template>
 

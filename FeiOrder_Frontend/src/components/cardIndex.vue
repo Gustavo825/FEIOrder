@@ -11,42 +11,18 @@
 
     <q-card-actions v-if="!isAdmin" align="right">
       <q-btn disabled="false" flat round color="red" icon="favorite" />
-      <q-btn
-        @click="addToCart(dish)"
-        flat
-        round
-        color="teal"
-        icon="shopping_cart"
-      />
-      <q-btn
-        @click="copy(dish._id)"
-        flat
-        round
-        color="primary"
-        icon="content_copy"
-      />
-      <q-btn
-        @click="clickSeeMore"
-        flat
-        round
-        color="black"
-        icon="arrow_forward_ios"
-      >
+      <q-btn @click="addToCart(dish)" flat round color="teal" icon="shopping_cart" />
+      <q-btn @click="clickSeeMore" flat round color="blue" icon="info">
       </q-btn>
-      <InfoDish :dish="dish" :card="card"></InfoDish>
+      <InfoDish v-on:close="close" :dish="dish" :card="card"></InfoDish>
     </q-card-actions>
     <q-card-actions v-else align="right">
-      <q-btn
-        @click="clickSeeMore"
-        flat
-        round
-        color="black"
-        icon="arrow_forward_ios"
-      >
-      </q-btn>
+
       <q-btn @click="clickEditDish" flat round color="primary" icon="edit" />
-      <EditDish :dishEdit="dish" :card="cardEdit"></EditDish>
-      <InfoDish :dish="dish" :card="card"></InfoDish>
+      <q-btn @click="clickSeeMore" flat round color="blue" icon="info">
+      </q-btn>
+      <EditDish v-on:close="closeEdit" :dishEdit="dish" :card="cardEdit"></EditDish>
+      <InfoDish v-on:close="close" :dish="dish" :card="card"></InfoDish>
     </q-card-actions>
   </q-card>
 </template>
@@ -70,6 +46,15 @@ defineProps({
   isAdmin: Boolean,
 });
 
+const close = () => {
+  card.value = false;
+}
+
+const closeEdit = () => {
+  cardEdit.value = false;
+
+}
+
 const clickEditDish = () => {
   cardEdit.value = !cardEdit.value;
 };
@@ -89,21 +74,7 @@ const addToCart = (dish) => {
     router.push("/ShoppingCart");
   });
 };
-const copy = (id) => {
-  if (!navigator.clipboard) {
-    showNotify("No se pudo copiar");
-    return;
-  }
-  const path = window.location.origin + "/dish/" + id;
-  navigator.clipboard
-    .writeText(path)
-    .then(() => {
-      showNotify("Texto copiado al portapaples", "green");
-    })
-    .catch((err) => {
-      showNotify("No se pudo copiar");
-    });
-};
+
 </script>
 
 <style scoped>
@@ -112,7 +83,9 @@ const copy = (id) => {
   height: 250px;
   margin-right: 2rem;
   border-radius: 20px;
+  margin-top: 5vh;
 }
+
 .image {
   height: 200px;
   min-width: 300px;
