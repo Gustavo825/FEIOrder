@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createOrder } from "../controllers/order.controller.js";
+import { createOrder, getOrders } from "../controllers/order.controller.js";
 import { requireToken } from "../middlewares/requireToken.js";
 import {
   tokenHeaderValidator,
@@ -9,5 +9,5 @@ import {
 const router = Router();
 
 router.post("/createOrder", requireToken, tokenHeaderValidator, createOrder);
-
+router.get("/", requireToken, tokenHeaderValidator, getOrders);
 export default router;

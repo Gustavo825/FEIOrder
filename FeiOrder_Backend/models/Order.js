@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { Dish } from "../models/Dish.js";
+import moment from "moment-timezone";
+const dateMexico = moment.tz(Date.now(), "America/Mexico_City");
 
 const types = {
   values: ["CREATED", "COOKING", "DELIVERED", "CANCELED"],
@@ -20,7 +22,7 @@ const orderSchema = new mongoose.Schema({
   comment: {
     type: String,
   },
-  stimatedTIme: {
+  stimatedTime: {
     type: String,
   },
   state: {
@@ -32,7 +34,7 @@ const orderSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    default: dateMexico,
   },
   state: { type: String, default: "CREATED", enum: types },
 });

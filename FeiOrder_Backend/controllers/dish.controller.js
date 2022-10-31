@@ -39,8 +39,8 @@ export const createDish = async (req, res) => {
 };
 
 export const updateDish = async (req, res) => {
-  const { title, cost, description, timeToCook,categoryVal } = req.body;
-  console.log(title)
+  const { title, cost, description, timeToCook, categoryVal } = req.body;
+  console.log(title);
   try {
     console.log(req.params.id);
     const dish = await Dish.findById(req.params.id);

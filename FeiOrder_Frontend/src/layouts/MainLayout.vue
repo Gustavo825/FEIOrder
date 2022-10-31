@@ -13,11 +13,23 @@
         <q-img class="navbar-logo" src="../assets/FEIOrder.png" />
         <q-toolbar-title> </q-toolbar-title>
 
-        <q-btn flat to="/">Inicio</q-btn>
+        <q-btn icon="home" stack flat to="/">Inicio</q-btn>
+        <q-btn
+          icon="shopping_cart"
+          stack
+          flat
+          v-if="userStore.token"
+          to="/ShoppingCart"
+          >Mi pedido</q-btn
+        >
         <q-btn flat to="/Login" v-if="!userStore.token">Login</q-btn>
         <q-btn flat to="/Register" v-if="!userStore.token">Register</q-btn>
-        <q-btn flat v-if="userStore.token" to="/Profile">Perfil</q-btn>
-        <q-btn flat v-if="userStore.token" @click="logout">Logout</q-btn>
+        <q-btn icon="person" stack flat v-if="userStore.token" to="/Profile"
+          >Perfil</q-btn
+        >
+        <q-btn icon="logout" stack flat v-if="userStore.token" @click="logout"
+          >Logout</q-btn
+        >
       </q-toolbar>
     </q-header>
 

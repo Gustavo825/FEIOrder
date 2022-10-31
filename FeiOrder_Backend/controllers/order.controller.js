@@ -19,3 +19,13 @@ export const createOrder = async (req, res) => {
     return res.status(500).json({ error: "Error de servidor" });
   }
 };
+
+export const getOrders = async (req, res) => {
+  try {
+    const orders = await Order.find();
+    return res.json({ orders });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Error de servidor" });
+  }
+};

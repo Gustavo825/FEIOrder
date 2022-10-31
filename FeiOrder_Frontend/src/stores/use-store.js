@@ -187,14 +187,23 @@ export const useDishStore = defineStore("dish", () => {
     try {
       const storageRefVar = storageRef(storage, `dishes/${id}/imgProfile`); //`${user.currentUser}`
       await uploadBytes(storageRefVar, imageFile.value);
-      dishes.value.dishes[getDish(id)].image = await getDownloadURL(storageRefVar);
+      dishes.value.dishes[getDish(id)].image = await getDownloadURL(
+        storageRefVar
+      );
     } catch (error) {
       console.log(error);
       return error.code;
     }
   };
 
-  const updateDish = async (id, title, cost, description, timeToCook,categoryVal) => {
+  const updateDish = async (
+    id,
+    title,
+    cost,
+    description,
+    timeToCook,
+    categoryVal
+  ) => {
     const useStore = useUserStore();
     useStore.refreshToken();
     try {
@@ -209,7 +218,6 @@ export const useDishStore = defineStore("dish", () => {
         },
         { headers: { Authorization: "Bearer " + useStore.token } }
       );
-      
     } catch (error) {
       console.log(error);
       return error.code;
@@ -231,7 +239,6 @@ export const useDishStore = defineStore("dish", () => {
     } catch (error) {}
   };
   const getDish = (id) => {
-
     for (let i = 0; i < dishes.value.dishes.length; i++) {
       if (id == dishes.value.dishes[i]._id) {
         return i;
@@ -253,6 +260,7 @@ export const useShoppingStore = defineStore("shopping", () => {
   const cost = ref(0);
   const time = ref(0);
   const shoppingList = ref([]);
+  let orders = ref(null);
   let idList = 0;
   if (localStorage.getItem("shoppingList")) {
     shoppingList.value = JSON.parse(localStorage.getItem("shoppingList"));
@@ -311,6 +319,19 @@ export const useShoppingStore = defineStore("shopping", () => {
       time.value = 0;
     }
   };
+
+  const getOrders = async () => {
+    const useStore = useUserStore();
+    useStore.refreshToken();
+    try {
+      const res = await api.get("/order", {
+        headers: { Authorization: "Bearer " + useStore.token },
+      });
+      orders.value = res.data.orders;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     shoppingList,
     add,
@@ -320,5 +341,7 @@ export const useShoppingStore = defineStore("shopping", () => {
     time,
     cost,
     calculateCost,
+    orders,
+    getOrders,
   };
 });
