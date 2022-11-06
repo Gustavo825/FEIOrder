@@ -105,7 +105,6 @@ export const useUserStore = defineStore("user", () => {
       token.value = res.data.token;
       expiresIn.value = res.data.expiresIn;
       localStorage.setItem("user", true);
-      console.log(res.data);
     } catch (error) {}
   };
   const getInfoUser = async () => {
@@ -280,7 +279,6 @@ export const useShoppingStore = defineStore("shopping", () => {
   };
   const remove = (id) => {
     console.log(id);
-    console.log(localStorage.getItem("shoppingList"));
     shoppingList.value = shoppingList.value.filter(
       (item) => item.idList !== id
     );

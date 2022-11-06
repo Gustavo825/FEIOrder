@@ -4,7 +4,7 @@ import moment from "moment-timezone";
 const dateMexico = moment.tz(Date.now(), "America/Mexico_City");
 
 const types = {
-  values: ["CREATED", "COOKING", "DELIVERED", "CANCELED"],
+  values: ["CREATED", "COOKING", "READY TO PICK UP", "DELIVERED", "CANCELED"],
   message: "{VALUE} no es un estado válido",
 };
 const orderSchema = new mongoose.Schema({
