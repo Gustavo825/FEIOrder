@@ -116,6 +116,8 @@
         </div>
         <div class="text-subtitle4">Costo total: ${{ order.totalCost }}</div>
         <div class="text-subtitle4">{{ order.comment }}</div>
+        <div class="text-subtitle4"> {{order.state}}</div>
+
       </q-card-section>
 
       <q-card-actions>

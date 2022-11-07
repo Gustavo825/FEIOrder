@@ -80,6 +80,7 @@ export const infoUserById = async (req, res) => {
 
 export const infoUser = async (req, res) => {
   try {
+    console.log(req.uid);
     const user = await User.findById(req.uid);
     return res.json({
       email: user.email,

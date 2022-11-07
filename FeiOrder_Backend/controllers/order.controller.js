@@ -34,7 +34,7 @@ export const userOrders = async (req, res) => {
   try {
     const id = req.uid;
     const userOrders = await Order.find( {userID: id})
-   return res.json({})
+   return res.json({ userOrders })
   } catch (error) {
     return res.status(500).json({ error: "error de server" });
   } 

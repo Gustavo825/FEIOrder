@@ -343,14 +343,12 @@ export const useShoppingStore = defineStore("shopping", () => {
       const res = await api.get("/order/userOrders",{
         headers: { Authorization: "Bearer " + useStore.token },
       });
-      myOrders.value = res.data.orders;
+      myOrders.value = res.data.userOrders;
       for (let i = 0 ; i < myOrders.value.length; i++) {
         if (myOrders.value[i].state != "DELIVERED" && myOrders.value[i].state != "CANCELED") {
           actualOrder.value.push(myOrders.value[i]);
-          console.log(myOrders.value[i].state)
         }
       }
-      console.log(actualOrder.value);
     } catch (error) {
       console.log(error);
     }
