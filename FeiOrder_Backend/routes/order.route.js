@@ -10,4 +10,6 @@ const router = Router();
 
 router.post("/createOrder", requireToken, tokenHeaderValidator, createOrder);
 router.get("/", requireToken, tokenHeaderValidator, getOrders);
+router.get("/userOrders", requireToken, tokenHeaderValidator, getOrders);
+
 export default router;

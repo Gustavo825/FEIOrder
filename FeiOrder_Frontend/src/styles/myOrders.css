@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+
+
+.background {
+  background-image: url("../assets/backgroundIndex.png");
+  background-size:cover;
+  min-width: 200vh;
+  margin-top: -3vh;
+}
+
+.padding {
+    width: 150vh;
+    padding: 5vh;
+}
+
+.title-actual-order {
+    justify-content: left;
+    height: 30vh;
+    width: 50vh;
+    border-radius: 20px;
+}
