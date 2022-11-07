@@ -49,13 +49,19 @@ const routes = [
         path: "/Orders",
         name: "orders",
         component: () => import("pages/OrdersPage.vue"),
+        meta: {
+          auth: true,
+          verifyRol: true,
+        },
       },
       {
         path: "/MyOrders",
         name: "myOrders",
         component: () => import("pages/MyOrders.vue"),
-      }
-      ,
+        meta: {
+          auth: true,
+        },
+      },
       {
         path: "/dishMenu",
         name: "dishMenu",
