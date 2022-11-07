@@ -276,7 +276,7 @@ export const useShoppingStore = defineStore("shopping", () => {
   const shoppingList = ref([]);
   let orders = ref(null);
   let actualOrder = ref(null);
-  let myOrders = ref(null)
+  let myOrders = ref(null);
   let idList = 0;
   if (localStorage.getItem("shoppingList")) {
     shoppingList.value = JSON.parse(localStorage.getItem("shoppingList"));
@@ -338,14 +338,17 @@ export const useShoppingStore = defineStore("shopping", () => {
   const getUserOrders = async () => {
     const useStore = useUserStore();
     useStore.refreshToken();
-    actualOrder.value = []
+    actualOrder.value = [];
     try {
-      const res = await api.get("/order/userOrders",{
+      const res = await api.get("/order/userOrders", {
         headers: { Authorization: "Bearer " + useStore.token },
       });
       myOrders.value = res.data.userOrders;
-      for (let i = 0 ; i < myOrders.value.length; i++) {
-        if (myOrders.value[i].state != "DELIVERED" && myOrders.value[i].state != "CANCELED") {
+      for (let i = 0; i < myOrders.value.length; i++) {
+        if (
+          myOrders.value[i].state != "DELIVERED" &&
+          myOrders.value[i].state != "CANCELED"
+        ) {
           actualOrder.value.push(myOrders.value[i]);
         }
       }

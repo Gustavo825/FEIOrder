@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-card v-if="client && isAdmin"  class="my-card" flat bordered>
+    <q-card v-if="client && isAdmin" class="my-card" flat bordered>
       <q-card-section>
         <q-item>
           <q-item-section avatar>
@@ -91,7 +91,7 @@
       </q-slide-transition>
     </q-card>
 
-    <q-card v-if="client && !isAdmin"  class="my-card" flat bordered>
+    <q-card v-if="client && !isAdmin" class="my-card" flat bordered>
       <q-card-section>
         <q-item>
           <q-item-section avatar>
@@ -116,12 +116,10 @@
         </div>
         <div class="text-subtitle4">Costo total: ${{ order.totalCost }}</div>
         <div class="text-subtitle4">{{ order.comment }}</div>
-        <div class="text-subtitle4"> {{order.state}}</div>
-
+        <div class="text-subtitle4">{{ order.state }}</div>
       </q-card-section>
 
       <q-card-actions>
-
         <q-space />
 
         <q-btn

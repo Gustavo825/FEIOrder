@@ -36,12 +36,11 @@
     </div>
   </div>
   <q-layout class="background">
-    <div class="q-pa-md">
+    <div v-if="shoppingStore.orders" class="q-pa-md">
       <q-table
         dark
-        v-if="shoppingStore.orders"
         grid
-        :rows="shoppingStore.orders"
+        :rows="orders"
         :columns="columns"
         row-key="name"
         :filter="filter"
@@ -62,23 +61,37 @@
           </q-input>
         </template>
         <template v-slot:item="props">
-          <orderOrders v-if="props.row.state == tab" :order="props.row" :is-admin="true">
-          </orderOrders>
+          <orderOrders :order="props.row" :is-admin="true"> </orderOrders>
         </template>
       </q-table>
     </div>
   </q-layout>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useShoppingStore } from "src/stores/use-store";
 
 import orderOrders from "../components/orderOrders.vue";
+
 const filter = ref("");
+const orders = ref([]);
 const shoppingStore = useShoppingStore();
 const tab = ref("CREATED");
+watch(tab, (newValue, oldValue) => {
+  getRows();
+});
+const getRows = () => {
+  orders.value = [];
+  for (let i = 0; i < shoppingStore.orders.length; i++) {
+    if (shoppingStore.orders[i].state == tab.value) {
+      orders.value.push(shoppingStore.orders[i]);
+    }
+  }
+  return orders;
+};
 const getInfo = async () => {
   await shoppingStore.getOrders();
+  getRows();
 };
 onMounted(() => {
   getInfo();
