@@ -354,20 +354,37 @@ export const useShoppingStore = defineStore("shopping", () => {
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
   const getOrders = async () => {
-  const getActiveOrders = async () => {
     const useStore = useUserStore();
     useStore.refreshToken();
     console.log(useStore.token);
     try {
-      const res = await api.get("/order/active", {
+      const res = await api.get("/order", {
         headers: { Authorization: "Bearer " + useStore.token },
       });
       orders.value = res.data.orders;
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const updateOrder = async (id, state) => {
+    const useStore = useUserStore();
+    useStore.refreshToken();
+    console.log(useStore.token);
+    try {
+      const res = await api.patch(
+        `/order/update/${id}`,
+        {
+          state,
+        },
+        { headers: { Authorization: "Bearer " + useStore.token } }
+      );
+      getOrders();
+    } catch (error) {
+      console.log(error);
+      return error.code;
     }
   };
   return {
@@ -385,5 +402,7 @@ export const useShoppingStore = defineStore("shopping", () => {
     getOrders,
     getUserOrders,
     getActiveOrders,
+    getOrders,
+    updateOrder,
   };
 });
