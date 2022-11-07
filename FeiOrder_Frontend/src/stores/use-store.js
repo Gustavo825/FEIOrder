@@ -118,6 +118,20 @@ export const useUserStore = defineStore("user", () => {
       user.value.image = await getDownloadURL(storageRefVar);
     } catch (error) {}
   };
+
+  const getInfoUserById = async (id) => {
+    refreshToken();
+    try {
+      const res = await api.get("/auth/infoUserById/" + id, {
+        headers: { Authorization: "Bearer " + token.value },
+      });
+      let retrivedUser = res.data;
+      const storageRefVar = storageRef(storage, `${id}/imgProfile`);
+      retrivedUser.image = await getDownloadURL(storageRefVar);
+      return retrivedUser;
+    } catch (error) {}
+  };
+
   const resetStore = () => {
     const shoppingStore = useShoppingStore();
     shoppingStore.shoppingList = [];
@@ -134,6 +148,7 @@ export const useUserStore = defineStore("user", () => {
     logout,
     register,
     getInfoUser,
+    getInfoUserById,
     updateImage,
     updateUser,
   };
@@ -342,10 +357,12 @@ export const useShoppingStore = defineStore("shopping", () => {
   }
 
   const getOrders = async () => {
+  const getActiveOrders = async () => {
     const useStore = useUserStore();
     useStore.refreshToken();
+    console.log(useStore.token);
     try {
-      const res = await api.get("/order", {
+      const res = await api.get("/order/active", {
         headers: { Authorization: "Bearer " + useStore.token },
       });
       orders.value = res.data.orders;
@@ -367,5 +384,6 @@ export const useShoppingStore = defineStore("shopping", () => {
     actualOrder,
     getOrders,
     getUserOrders,
+    getActiveOrders,
   };
 });

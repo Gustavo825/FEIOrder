@@ -37,5 +37,14 @@ export const userOrders = async (req, res) => {
    return res.json( {})
   } catch (error) {
     return res.status(500).json({ error: "error de server" });
+export const getActiveOrders = async (req, res) => {
+  try {
+    const orders = await Order.find(
+      { state: "CREATED" } || { state: "COOKING" }
+    );
+    return res.json({ orders });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Error de servidor" });
   }
 };
