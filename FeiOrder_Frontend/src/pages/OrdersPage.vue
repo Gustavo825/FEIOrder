@@ -18,19 +18,19 @@
           class="text-purple"
           name="READY TO PICK UP"
           icon="mdi-food"
-          label="Preparado"
+          label="Preparadas"
         />
         <q-tab
           class="text-teal"
           name="DELIVERED"
           icon="mdi-package"
-          label="Entregados"
+          label="Entregadas"
         />
         <q-tab
           class="text-orange"
           name="CANCELED"
           icon="mdi-cancel"
-          label="Cancelados"
+          label="Canceladas"
         />
       </q-tabs>
     </div>
@@ -78,7 +78,7 @@ const filter = ref("");
 const shoppingStore = useShoppingStore();
 const tab = ref("CREATED");
 const getInfo = async () => {
-  await shoppingStore.getActiveOrders();
+  await shoppingStore.getOrders();
 };
 onMounted(() => {
   getInfo();

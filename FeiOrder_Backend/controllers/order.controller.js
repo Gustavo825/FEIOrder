@@ -29,13 +29,13 @@ export const getOrders = async (req, res) => {
     return res.status(500).json({ error: "Error de servidor" });
   }
 };
-
-export const getActiveOrders = async (req, res) => {
+export const updateOrder = async (req, res) => {
+  const { state } = req.body;
   try {
-    const orders = await Order.find(
-      { state: "CREATED" } || { state: "COOKING" }
-    );
-    return res.json({ orders });
+    const order = await Order.findById(req.params.id);
+    order.state = state;
+    await order.save();
+    return res.status(201).json({ order });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Error de servidor" });

@@ -28,10 +28,30 @@
       </q-card-section>
 
       <q-card-actions>
-        <q-btn flat color="primary" icon="mdi-chef-hat" />
-        <q-btn flat color="purple" icon="mdi-food" />
-        <q-btn flat color="teal" icon="mdi-package" />
-        <q-btn flat color="orange" icon="mdi-cancel" />
+        <q-btn
+          @click="updateStateOrder('COOKING')"
+          flat
+          color="primary"
+          icon="mdi-chef-hat"
+        />
+        <q-btn
+          @click="updateStateOrder('READY TO PICK UP')"
+          flat
+          color="purple"
+          icon="mdi-food"
+        />
+        <q-btn
+          @click="updateStateOrder('DELIVERED')"
+          flat
+          color="teal"
+          icon="mdi-package"
+        />
+        <q-btn
+          @click="updateStateOrder('CANCELED')"
+          flat
+          color="orange"
+          icon="mdi-cancel"
+        />
 
         <q-space />
 
@@ -73,13 +93,26 @@
   </div>
 </template>
 <script setup>
+import { useQuasar } from "quasar";
 import { onMounted, ref } from "vue";
-import { useUserStore } from "src/stores/use-store";
+import { useUserStore, useShoppingStore } from "src/stores/use-store";
+const $q = useQuasar();
 const userStore = useUserStore();
+const shoppingStore = useShoppingStore();
 const client = ref();
 const props = defineProps({
   order: {},
 });
+const updateStateOrder = (state) => {
+  $q.dialog({
+    title: "Confirmación",
+    message: "¿Estas seguro que quieres actualizar la orden?",
+    cancel: true,
+    persistent: true,
+  }).onOk(() => {
+    shoppingStore.updateOrder(props.order._id, state);
+  });
+};
 const expanded = ref(false);
 const getInfo = async () => {
   const clientId = props.order.userID;
