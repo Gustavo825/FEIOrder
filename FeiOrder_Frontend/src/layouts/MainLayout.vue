@@ -22,7 +22,9 @@
           to="/ShoppingCart"
           >Mi pedido</q-btn
         >
-        <q-btn flat to="/Login" v-if="!userStore.token">Login</q-btn>
+        <q-btn flat stack icon="mdi-login" to="/Login" v-if="!userStore.token"
+          >Login</q-btn
+        >
         <q-btn flat to="/Register" v-if="!userStore.token">Register</q-btn>
         <q-btn icon="person" stack flat v-if="userStore.token" to="/Profile"
           >Perfil</q-btn
