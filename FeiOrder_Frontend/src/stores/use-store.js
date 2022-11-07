@@ -401,7 +401,6 @@ export const useShoppingStore = defineStore("shopping", () => {
     actualOrder,
     getOrders,
     getUserOrders,
-    getActiveOrders,
     getOrders,
     updateOrder,
   };
