@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-card v-if="client" class="my-card" flat bordered>
+    <q-card v-if="client && isAdmin"  class="my-card" flat bordered>
       <q-card-section>
         <q-item>
           <q-item-section avatar>
@@ -90,6 +90,73 @@
         </div>
       </q-slide-transition>
     </q-card>
+
+    <q-card v-if="client && !isAdmin"  class="my-card" flat bordered>
+      <q-card-section>
+        <q-item>
+          <q-item-section avatar>
+            <q-avatar color="primary" text-color="white">
+              <img :src="client.image" />
+            </q-avatar>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ client.username }}</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-separator inset />
+        <div class="text-h5">
+          {{ order.date.substring(11, 19) }} -
+          {{ order.date.substring(0, 10) }}
+        </div>
+
+        <div class="text-subtitle4">
+          {{}}
+          Tiempo estimado: {{ order.stimatedTime }}
+          minutos
+        </div>
+        <div class="text-subtitle4">Costo total: ${{ order.totalCost }}</div>
+        <div class="text-subtitle4">{{ order.comment }}</div>
+      </q-card-section>
+
+      <q-card-actions>
+
+        <q-space />
+
+        <q-btn
+          color="grey"
+          round
+          flat
+          dense
+          :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+          @click="expanded = !expanded"
+        />
+      </q-card-actions>
+
+      <q-slide-transition>
+        <div v-show="expanded">
+          <q-card-section class="text-subitle2">
+            <q-list bordered> </q-list>
+            <q-item
+              v-for="dish in order.dishes"
+              :key="dish.id"
+              class="q-my-sm"
+              clickable
+              v-ripple
+            >
+              <q-item-section avatar>
+                <q-avatar color="primary" text-color="white">
+                  <img :src="dish.image" />
+                </q-avatar>
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>{{ dish.title }}</q-item-label>
+                <q-item-label caption lines="1">${{ dish.cost }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-card-section>
+        </div>
+      </q-slide-transition>
+    </q-card>
   </div>
 </template>
 <script setup>
@@ -102,6 +169,7 @@ const shoppingStore = useShoppingStore();
 const client = ref();
 const props = defineProps({
   order: {},
+  isAdmin: Boolean,
 });
 const updateStateOrder = (state) => {
   $q.dialog({

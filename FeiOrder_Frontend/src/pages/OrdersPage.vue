@@ -62,7 +62,7 @@
           </q-input>
         </template>
         <template v-slot:item="props">
-          <orderOrders v-if="props.row.state == tab" :order="props.row">
+          <orderOrders v-if="props.row.state == tab" :order="props.row" :is-admin="true">
           </orderOrders>
         </template>
       </q-table>

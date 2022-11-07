@@ -275,6 +275,8 @@ export const useShoppingStore = defineStore("shopping", () => {
   const time = ref(0);
   const shoppingList = ref([]);
   let orders = ref(null);
+  let actualOrder = ref(null);
+  let myOrders = ref(null)
   let idList = 0;
   if (localStorage.getItem("shoppingList")) {
     shoppingList.value = JSON.parse(localStorage.getItem("shoppingList"));
@@ -333,6 +335,26 @@ export const useShoppingStore = defineStore("shopping", () => {
     }
   };
 
+  const getUserOrders = async () => {
+    const useStore = useUserStore();
+    useStore.refreshToken();
+    actualOrder.value = []
+    try {
+      const res = await api.get("/order/userOrders",{
+        headers: { Authorization: "Bearer " + useStore.token },
+      });
+      myOrders.value = res.data.orders;
+      for (let i = 0 ; i < myOrders.value.length; i++) {
+        if (myOrders.value[i].state != "DELIVERED" && myOrders.value[i].state != "CANCELED") {
+          actualOrder.value.push(myOrders.value[i]);
+          console.log(myOrders.value[i].state)
+        }
+      }
+      console.log(actualOrder.value);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const getOrders = async () => {
     const useStore = useUserStore();
     useStore.refreshToken();
@@ -375,6 +397,10 @@ export const useShoppingStore = defineStore("shopping", () => {
     cost,
     calculateCost,
     orders,
+    myOrders,
+    actualOrder,
+    getOrders,
+    getUserOrders,
     getOrders,
     updateOrder,
   };
