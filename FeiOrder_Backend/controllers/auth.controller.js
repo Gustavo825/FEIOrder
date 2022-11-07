@@ -62,6 +62,22 @@ export const login = async (req, res) => {
   }
 };
 
+export const infoUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    return res.json({
+      email: user.email,
+      name: user.name,
+      username: user.username,
+      image: user.image,
+      id: req.uid,
+      role: user.role,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "error de server" });
+  }
+};
+
 export const infoUser = async (req, res) => {
   try {
     const user = await User.findById(req.uid);

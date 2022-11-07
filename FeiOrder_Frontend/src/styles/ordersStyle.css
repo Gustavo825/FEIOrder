@@ -1,0 +1,20 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+.background {
+  display: flex;
+  justify-content: center;
+  background-image: url("../assets/backgroundIndex.png");
+  background-size:cover;
+  height: 100%;
+  margin-top: -2vh;
+}
+.tab{
+  background-color:rgb(37, 48, 58)
+}
+.q-table__bottom {
+  min-height: 50px;
+  padding: 4px 14px 4px 16px;
+  font-size: 12px;
+  color: white;
+}
