@@ -344,14 +344,7 @@ export const useShoppingStore = defineStore("shopping", () => {
         headers: { Authorization: "Bearer " + useStore.token },
       });
       myOrders.value = res.data.userOrders;
-      for (let i = 0; i < myOrders.value.length; i++) {
-        if (
-          myOrders.value[i].state != "DELIVERED" &&
-          myOrders.value[i].state != "CANCELED"
-        ) {
-          actualOrder.value.push(myOrders.value[i]);
-        }
-      }
+      console.log(myOrders.value)
     } catch (error) {
       console.log(error);
     }
