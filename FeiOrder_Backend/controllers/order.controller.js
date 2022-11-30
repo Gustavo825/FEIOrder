@@ -33,11 +33,11 @@ export const getOrders = async (req, res) => {
 export const userOrders = async (req, res) => {
   try {
     const id = req.uid;
-    const userOrders = await Order.find( {userID: id})
-   return res.json({ userOrders })
+    const userOrders = await Order.find({ userID: id });
+    return res.json({ userOrders });
   } catch (error) {
     return res.status(500).json({ error: "error de server" });
-  } 
+  }
 };
 export const updateOrder = async (req, res) => {
   const { state } = req.body;

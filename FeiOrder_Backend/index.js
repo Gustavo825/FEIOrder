@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 const whiteList = [process.env.ORIGIN1];
 const app = express();
-const port = process.env.PORT || 5006;
+const port = process.env.PORT || 5007;
 app.use(
   cors({
     origin: function (origin, callback) {

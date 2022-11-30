@@ -20,7 +20,7 @@ const routes = [
         component: () => import("pages/RegisterPage.vue"),
       },
       {
-        path: "/Menu",
+        path: "/Menu/:type",
         component: () => import("pages/MenuPage.vue"),
       },
       {

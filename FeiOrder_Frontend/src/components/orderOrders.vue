@@ -1,15 +1,15 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-card v-if="client && isAdmin" class="my-card" flat bordered>
+    <q-card v-if="isAdmin" class="my-card" flat bordered>
       <q-card-section>
         <q-item>
           <q-item-section avatar>
             <q-avatar color="primary" text-color="white">
-              <img :src="client.image" />
+              <img :src="order.client.image" />
             </q-avatar>
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ client.username }}</q-item-label>
+            <q-item-label>{{ order.client.username }}</q-item-label>
           </q-item-section>
         </q-item>
         <q-separator inset />
@@ -164,6 +164,7 @@ import { useQuasar } from "quasar";
 import { onMounted, ref } from "vue";
 import { useUserStore, useShoppingStore } from "src/stores/use-store";
 const $q = useQuasar();
+const emit = defineEmits("update");
 const userStore = useUserStore();
 const shoppingStore = useShoppingStore();
 const client = ref();
@@ -177,16 +178,16 @@ const updateStateOrder = (state) => {
     message: "¿Estas seguro que quieres actualizar la orden?",
     cancel: true,
     persistent: true,
-  }).onOk(() => {
-    shoppingStore.updateOrder(props.order._id, state);
+  }).onOk(async () => {
+    await shoppingStore.updateOrder(props.order._id, state);
+    emit("update");
   });
 };
+
 const expanded = ref(false);
 const getInfo = async () => {
   const clientId = props.order.userID;
+  console.log(clientId);
   client.value = await userStore.getInfoUserById(clientId);
 };
-onMounted(() => {
-  getInfo();
-});
 </script>

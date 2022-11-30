@@ -2,14 +2,17 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar class="bg-grey-10">
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <div v-if="userStore.user">
+          <q-btn
+            flat
+            dense
+            round
+            icon="menu"
+            aria-label="Menu"
+            v-if="userStore.user.role == 'ADMIN'"
+            @click="toggleLeftDrawer"
+          />
+        </div>
         <q-img class="navbar-logo" src="../assets/FEIOrder.png" />
         <q-toolbar-title> </q-toolbar-title>
 
@@ -46,7 +49,6 @@
         />
       </q-list>
     </q-drawer>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -61,34 +63,25 @@ import { useRouter } from "vue-router";
 const userStore = useUserStore();
 const leftDrawerOpen = ref(false);
 const router = useRouter();
+
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 const essentialLinks = [
   {
-    title: "Menú",
-    icon: "school",
-    link: "https://quasar.dev",
+    title: "Administración de platillos",
+    icon: "restaurant_menu",
+    link: "/dishMenu",
   },
   {
-    title: "Favoritos",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
-  },
-  {
-    title: "Foro",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
-  },
-  {
-    title: "Twitter",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
+    title: "Ordenes",
+    icon: "receipt_long",
+    link: "/orders",
   },
   {
     title: "Facebook",
     icon: "public",
-    link: "https://facebook.quasar.dev",
+    link: "https://facebook/feiOrder",
   },
 ];
 const logout = () => {

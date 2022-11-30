@@ -61,7 +61,12 @@
           </q-input>
         </template>
         <template v-slot:item="props">
-          <orderOrders :order="props.row" :is-admin="true"> </orderOrders>
+          <OrderOrders
+            v-on:update="onChange"
+            :order="props.row"
+            :is-admin="true"
+          >
+          </OrderOrders>
         </template>
       </q-table>
     </div>
@@ -69,21 +74,31 @@
 </template>
 <script setup>
 import { onMounted, ref, watch } from "vue";
-import { useShoppingStore } from "src/stores/use-store";
+import { useUserStore, useShoppingStore } from "src/stores/use-store";
 
-import orderOrders from "../components/orderOrders.vue";
+import OrderOrders from "../components/orderOrders.vue";
 
 const filter = ref("");
 const orders = ref([]);
 const shoppingStore = useShoppingStore();
+const userStore = useUserStore();
 const tab = ref("CREATED");
 watch(tab, (newValue, oldValue) => {
   getRows();
 });
-const getRows = () => {
+const onChange = async () => {
+  getRows();
+  console.log("k");
+};
+const getRows = async () => {
   orders.value = [];
   for (let i = 0; i < shoppingStore.orders.length; i++) {
     if (shoppingStore.orders[i].state == tab.value) {
+      const clientId = shoppingStore.orders[i].userID;
+      shoppingStore.orders[i].client = await userStore.getInfoUserById(
+        clientId
+      );
+      console.log(shoppingStore.orders[i]);
       orders.value.push(shoppingStore.orders[i]);
     }
   }
@@ -91,6 +106,7 @@ const getRows = () => {
 };
 const getInfo = async () => {
   await shoppingStore.getOrders();
+  console.log(shoppingStore.orders);
   getRows();
 };
 onMounted(() => {

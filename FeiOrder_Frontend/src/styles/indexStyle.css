@@ -46,3 +46,7 @@
   margin-bottom: 20vh;
   border-radius: 20px;
 }
+
+.messageNoData{
+  color: aliceblue;
+}

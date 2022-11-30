@@ -359,7 +359,6 @@ export const useShoppingStore = defineStore("shopping", () => {
   const getOrders = async () => {
     const useStore = useUserStore();
     useStore.refreshToken();
-    console.log(useStore.token);
     try {
       const res = await api.get("/order", {
         headers: { Authorization: "Bearer " + useStore.token },
@@ -373,7 +372,7 @@ export const useShoppingStore = defineStore("shopping", () => {
   const updateOrder = async (id, state) => {
     const useStore = useUserStore();
     useStore.refreshToken();
-    console.log(useStore.token);
+    console.log("editando");
     try {
       const res = await api.patch(
         `/order/update/${id}`,
@@ -382,7 +381,8 @@ export const useShoppingStore = defineStore("shopping", () => {
         },
         { headers: { Authorization: "Bearer " + useStore.token } }
       );
-      getOrders();
+      await getOrders();
+      console.log("editado");
     } catch (error) {
       console.log(error);
       return error.code;

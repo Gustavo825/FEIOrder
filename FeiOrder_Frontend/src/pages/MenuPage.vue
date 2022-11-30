@@ -1,35 +1,47 @@
 <template>
   <q-layout class="index padding">
     <q-page v-if="dishStore.dishes != null">
-      <q-img class="title-popular" src="../assets/generalTitle.png"></q-img>
-      <q-scroll-area class="scroll-index">
-        <div class="row no-wrap">
-          <template v-for="dish in generalDishes" :key="dish._id">
-            <cardIndex :dish="dish" :isAdmin="false"> </cardIndex>
-          </template>
+      <!-- <q-img class="title-popular" src="../assets/generalTitle.png"></q-img> -->
+      <div class="q-pa-md tab">
+        <div class="q-gutter-y-md">
+          <q-tabs class="" v-model="tab" narrow-indicator dense align="center">
+            <q-tab
+              class="text-green"
+              name="GENERAL"
+              icon="mdi-food"
+              label="A la carta"
+            />
+            <q-tab
+              class="text-primary"
+              name="BREAKFAST"
+              icon="mdi-food-croissant"
+              label="Paquete de desayuno"
+            />
+            <q-tab
+              class="text-purple"
+              name="DRINK"
+              icon="mdi-beer"
+              label="Bebidas"
+            />
+            <q-tab
+              class="text-teal"
+              name="SALE"
+              icon="mdi-percent"
+              label="Promociones"
+            />
+          </q-tabs>
         </div>
-      </q-scroll-area>
-      <q-img class="title-popular" src="../assets/breakfastTitle.png"></q-img>
-      <q-scroll-area class="scroll-index">
+      </div>
+      <q-scroll-area class="scroll-index" :visible="false">
         <div class="row no-wrap">
-          <template v-for="dish in breakfastDishes" :key="dish._id">
-            <cardIndex :dish="dish" :isAdmin="false"> </cardIndex>
-          </template>
-        </div>
-      </q-scroll-area>
-      <q-img class="title-popular" src="../assets/drinkTitle.png"></q-img>
-      <q-scroll-area class="scroll-index">
-        <div class="row no-wrap">
-          <template v-for="dish in drinkDishes" :key="dish._id">
-            <cardIndex :dish="dish" :isAdmin="false"> </cardIndex>
-          </template>
-        </div>
-      </q-scroll-area>
-      <q-img class="title-popular" src="../assets/saleTitle.png"></q-img>
-      <q-scroll-area class="scroll-index">
-        <div class="row no-wrap">
-          <template v-for="dish in saleDishes" :key="dish._id">
-            <cardIndex :dish="dish" :isAdmin="false"> </cardIndex>
+          <div v-if="loading != 'true'">
+            <template v-for="dish in dishes" :key="dish._id">
+              <cardIndex :dish="dish" :isAdmin="false"> </cardIndex>
+            </template>
+          </div>
+
+          <template v-if="dishes.length == 0 && loading != 'true'">
+            <h5 class="messageNoData">No hay platillos en esta categoria</h5>
           </template>
         </div>
       </q-scroll-area>
@@ -40,30 +52,35 @@
 <script setup>
 import { api } from "../boot/axios.js";
 import { ref } from "vue";
-import { onMounted } from "vue";
+import { onMounted, watch } from "vue";
 import cardIndex from "../components/cardIndex.vue";
 import { useDishStore } from "../stores/use-store.js";
+import { useRoute, useRouter } from "vue-router";
+
 const dishStore = useDishStore();
-const slide = ref(1);
-const breakfastDishes = ref([]);
-const generalDishes = ref([]);
-const drinkDishes = ref([]);
-const saleDishes = ref([]);
+const dishes = ref([]);
+const tab = ref("GENERAL");
+const loading = ref("true");
+const route = useRoute();
+const router = useRouter();
+watch(tab, (newValue, oldValue) => {
+  getInfo();
+});
 const getInfo = async () => {
+  loading.value = "true";
   await dishStore.getDishes();
+  dishes.value = [];
   for (let i = 0; i < dishStore.dishes.dishes.length; i++) {
-    if (dishStore.dishes.dishes[i].type == "GENERAL") {
-      generalDishes.value.push(dishStore.dishes.dishes[i]);
-    } else if (dishStore.dishes.dishes[i].type == "BREAKFAST") {
-      breakfastDishes.value.push(dishStore.dishes.dishes[i]);
-    } else if (dishStore.dishes.dishes[i].type == "DRINK") {
-      drinkDishes.value.push(dishStore.dishes.dishes[i]);
-    } else if (dishStore.dishes.dishes[i].type == "SALE") {
-      saleDishes.value.push(dishStore.dishes.dishes[i]);
+    console.log(dishStore.dishes.dishes[i].type, tab.value);
+    if (dishStore.dishes.dishes[i].type == tab.value) {
+      dishes.value.push(dishStore.dishes.dishes[i]);
     }
   }
+  loading.value = "false";
 };
+
 onMounted(() => {
+  tab.value = route.params.type;
   getInfo();
 });
 </script>
