@@ -15,24 +15,32 @@ import {
   registerValidator,
   tokenCookieValidator,
   tokenHeaderValidator,
+  updateValidator,
+  verifyRol,
 } from "../middlewares/validatorManager.js";
 
 const router = Router();
 
 router.post("/register", registerValidator, register);
-
 router.post("/login", loginValidator, login);
-router.patch("/update/:id", tokenHeaderValidator, update);
+
+router.patch(
+  "/update/:id",
+  tokenHeaderValidator,
+  requireToken,
+  updateValidator,
+  update
+);
+
 router.get(
   "/infoUserById/:id",
   tokenHeaderValidator,
   requireToken,
+  verifyRol,
   infoUserById
 );
-
 router.get("/infoUser", tokenHeaderValidator, requireToken, infoUser);
 router.get("/refresh", tokenCookieValidator, requireRefreshToken, refreshToken);
-
 router.get("/logout", logout);
-//comentario
+
 export default router;

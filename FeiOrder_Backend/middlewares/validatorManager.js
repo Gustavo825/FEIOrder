@@ -1,4 +1,11 @@
-import { body, cookie, header, validationResult } from "express-validator";
+import { request } from "express";
+import {
+  body,
+  param,
+  cookie,
+  header,
+  validationResult,
+} from "express-validator";
 import jwt from "jsonwebtoken";
 import { User } from "../models/User.js";
 
@@ -17,7 +24,14 @@ export const registerValidator = [
     .trim()
     .isEmail()
     .normalizeEmail(),
-  body("password", "Mínimo 6 carácteres").trim().isLength({ min: 6 }),
+  body("password", "Formato de contraseña incorrecto").isStrongPassword({
+    minLength: 6,
+    minLowercase: 1,
+    minUppercase: 1,
+    minNumbers: 1,
+    minSymbols: 1,
+    returnScore: false,
+  }),
   body("password", "Formato de password incorrecta").custom(
     (value, { req }) => {
       if (value !== req.body.repassword) {
@@ -43,8 +57,27 @@ export const tokenHeaderValidator = [
   validationResultExpress,
 ];
 
+export const orderValidator = [
+  body("dishes", "La lista de platillos no debe estar vacia").notEmpty(),
+  body("totalCost", "El costo debe ser un número").isNumeric(),
+  body("stimatedTime", "El tiempo de cocción debe ser un número").isNumeric(),
+  validationResultExpress,
+];
+
+export const updateValidator = [
+  param("id", "Formato de id incorrecto").trim().isLength({ min: 24 }),
+  validationResultExpress,
+];
+
 export const tokenCookieValidator = [
   cookie("refreshToken", "No existe refresh Token").trim().notEmpty().escape(),
+  validationResultExpress,
+];
+
+export const dishValidator = [
+  body("title", "El título no debe estar vacio").notEmpty(),
+  body("cost", "El costo debe ser un número").isNumeric(),
+  body("timeToCook", "El tiempo de cocción debe ser un número").isNumeric(),
   validationResultExpress,
 ];
 

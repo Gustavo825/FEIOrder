@@ -1,21 +1,37 @@
 import { Router } from "express";
-import { getDishes, createDish, updateDish } from "../controllers/dish.controller.js";
+import {
+  getDishes,
+  createDish,
+  updateDish,
+} from "../controllers/dish.controller.js";
 import { requireToken } from "../middlewares/requireToken.js";
 import {
   tokenHeaderValidator,
   verifyRol,
+  dishValidator,
+  updateValidator,
 } from "../middlewares/validatorManager.js";
 
 const router = Router();
 
-router.get("/", getDishes);
 router.post(
   "/createDish",
-  requireToken,
   tokenHeaderValidator,
+  requireToken,
   verifyRol,
-  createDish,
+  dishValidator,
+  createDish
 );
-router.patch("/update/:id", tokenHeaderValidator, updateDish);
+
+router.patch(
+  "/update/:id",
+  tokenHeaderValidator,
+  requireToken,
+  verifyRol,
+  dishValidator,
+  updateValidator,
+  updateDish
+);
+router.get("/", getDishes);
 
 export default router;
