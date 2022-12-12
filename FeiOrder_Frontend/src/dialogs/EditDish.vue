@@ -47,7 +47,7 @@
         </q-card-section>
         <q-card-actions align="right">
           <q-btn v-close-popup flat color="primary" icon="cancel" label="Cancelar" @click="clickCancelEdit" />
-          <q-btn v-close-popup flat color="primary" icon="save" label="Guardar cambios" type="submit" />
+          <q-btn flat color="primary" icon="save" label="Guardar cambios" type="submit" />
         </q-card-actions>
       </q-form>
 
@@ -61,7 +61,10 @@
 <script setup>
 import { ref, watch } from "vue";
 import { useDishStore } from "../stores/use-store";
+import { useNotify } from "../composables/notifyHook";
 import { useRouter } from "vue-router";
+const { showNotify } = useNotify();
+
 const router = useRouter();
 const dishStore = useDishStore();
 const dishCopy = ref([]);
@@ -122,6 +125,7 @@ const clickSaveEdit = async () => {
       imageURL.value = ""
       await dishStore.updateDish(props.dishEdit._id, dishCopy.value.title, dishCopy.value.cost, dishCopy.value.description, dishCopy.value.timeToCook, categoryVal);
       dishStore.getDishes();
+      showNotify("Platillo actualizado", "green");
       emit("close");
     } catch (error) {
       console.log(error);

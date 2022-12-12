@@ -119,6 +119,8 @@ import { ref } from "vue";
 import { useDishStore } from "../stores/use-store";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
+import { useNotify } from "../composables/notifyHook";
+const { showNotify } = useNotify();
 const options = ["Menú general", "Desayunos", "Bebidas", "Promoción"];
 const router = useRouter();
 const dishStore = useDishStore();
@@ -154,7 +156,7 @@ const handleSubmit = async () => {
 
         break;
     }
-    if (await form.value.validate()) {
+    if (await form.value.validate() && imageURL.value) {
       await dishStore.register(
         title.value,
         cost.value,
@@ -167,7 +169,10 @@ const handleSubmit = async () => {
       cost.value = "";
       description.value = "";
       timeToCook.value = "";
+      showNotify("Platillo registrado", "green");
       router.push("/");
+    } else {
+      alertError("Existen campos vacíos");
     }
   } catch (error) {
     console.log("desde loginComponents: ", error);

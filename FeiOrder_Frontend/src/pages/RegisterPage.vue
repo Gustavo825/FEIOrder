@@ -2,88 +2,46 @@
   <div class="doc-container register">
     <div class="row items-start">
       <div class="col col-display">
-        <q-img
-          class="img-background"
-          src="../assets/registerUserBackground.png"
-        ></q-img>
+        <q-img class="img-background" src="../assets/registerUserBackground.png"></q-img>
       </div>
       <div class="col">
         <q-scroll-area class="scroll-register">
-          <q-form
-            id=" form"
-            class="form-register"
-            @submit.prevent="handleSubmit"
-            ref="form"
-          >
+          <q-form id=" form" class="form-register" @submit.prevent="handleSubmit" ref="form">
             <q-img class="logo" src="../assets/registerUserTitle.png" />
             <label class="form-label">Correo:</label>
-            <q-input
-              class="form-input"
-              dark
-              outlined
-              v-model="email"
-              type="text"
-              label="Ingrese correo electrónico"
+            <q-input class="form-input" dark outlined v-model="email" type="text" label="Ingrese correo electrónico"
               :rules="[
                 (val) => (val && val.length > 0) || 'Por favor escriba algo',
                 (val) =>
                   /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val) ||
                   'Formato Email incorrecto',
+              ]"></q-input>
+            <label class="form-label">Username:</label>
+            <q-input class="form-input" dark outlined v-model="username" type="text" label="Ingrese un username"
+            :rules="[
+                (val) => (val && val.length > 0) || 'Por favor escriba algo',
               ]"
             ></q-input>
-            <label class="form-label">Username:</label>
-            <q-input
-              class="form-input"
-              dark
-              outlined
-              v-model="username"
-              type="text"
-              label="Ingrese un username"
-            >
-            </q-input>
             <label class="form-label">Nombre:</label>
-            <q-input
-              class="form-input"
-              dark
-              outlined
-              v-model="name"
-              type="text"
-              label="Ingrese un nombre"
-            ></q-input>
+            <q-input class="form-input" dark outlined v-model="name" type="text" label="Ingrese un nombre"
+            :rules="[
+                (val) => (val && val.length > 0) || 'Por favor escriba algo',
+              ]"></q-input>
             <label class="form-label">Contraseña:</label>
-            <q-input
-              class="form-input"
-              dark
-              outlined
-              v-model="password"
-              type="password"
-              label="Ingrese contraseña"
+            <q-input class="form-input" dark outlined v-model="password" type="password" label="Ingrese contraseña"
               :rules="[
                 (val) =>
                   (val && val.length > 5) || 'Contraseña mayor a 6 carácteres',
-              ]"
-            ></q-input>
+              ]"></q-input>
             <label class="form-label">Confirma tu contraseña:</label>
 
-            <q-input
-              class="form-input"
-              dark
-              outlined
-              v-model="repassword"
-              type="password"
-              label="Ingrese contraseña"
+            <q-input class="form-input" dark outlined v-model="repassword" type="password" label="Ingrese contraseña"
               :rules="[
                 (val) =>
                   (val && val === password) || 'No coinciden las contraseñas',
-              ]"
-            ></q-input>
+              ]"></q-input>
 
-            <q-btn
-              class="form-submit-register"
-              label="Registrarse"
-              type="submit"
-              color="primary"
-            ></q-btn>
+            <q-btn class="form-submit-register" label="Registrarse" type="submit" color="primary"></q-btn>
           </q-form>
         </q-scroll-area>
       </div>
@@ -149,6 +107,7 @@ const alertError = (message = "Error de servidor") => {
 </script>
 <style scoped>
 @import "../styles/registerStyle.css";
+
 .text-negative {
   color: green !important;
 }

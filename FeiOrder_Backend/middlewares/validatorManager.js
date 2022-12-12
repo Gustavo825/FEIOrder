@@ -24,7 +24,7 @@ export const registerValidator = [
     .trim()
     .isEmail()
     .normalizeEmail(),
-  body("password", "Formato de contraseña incorrecto").isStrongPassword({
+  body("password", "La contraseña debe tener al menos 6 caracteres, 1 caracter en minúscula, 1 caracter en mayúscula, 1 número y 1 símbolo").isStrongPassword({
     minLength: 6,
     minLowercase: 1,
     minUppercase: 1,
@@ -32,7 +32,7 @@ export const registerValidator = [
     minSymbols: 1,
     returnScore: false,
   }),
-  body("password", "Formato de password incorrecta").custom(
+  body("password", "Contraseñas no coinciden").custom(
     (value, { req }) => {
       if (value !== req.body.repassword) {
         throw new Error("No coinciden las contraseñas");
