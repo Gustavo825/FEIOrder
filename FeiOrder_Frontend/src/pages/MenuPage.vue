@@ -1,51 +1,58 @@
 <template>
   <q-layout class="index padding">
-    <q-page v-if="dishStore.dishes != null">
-      <!-- <q-img class="title-popular" src="../assets/generalTitle.png"></q-img> -->
-      <div class="q-pa-md tab">
-        <div class="q-gutter-y-md">
-          <q-tabs class="" v-model="tab" narrow-indicator dense align="center">
-            <q-tab
-              class="text-green"
-              name="GENERAL"
-              icon="mdi-food"
-              label="A la carta"
-            />
-            <q-tab
-              class="text-primary"
-              name="BREAKFAST"
-              icon="mdi-food-croissant"
-              label="Paquete de desayuno"
-            />
-            <q-tab
-              class="text-purple"
-              name="DRINK"
-              icon="mdi-beer"
-              label="Bebidas"
-            />
-            <q-tab
-              class="text-teal"
-              name="SALE"
-              icon="mdi-percent"
-              label="Promociones"
-            />
+    <q-page-container>
+      <q-page v-if="dishStore.dishes != null">
+        <h2 class="offscreen">Menu navegation</h2>
+        <div class="q-pa-md tab">
+          <q-tabs v-model="tab" narrow-indicator dense align="center">
+            <h3 class="figure">
+              <q-tab
+                class="text-green"
+                name="GENERAL"
+                icon="mdi-food"
+                label="A la carta"
+              />
+            </h3>
+            <h3 class="figure">
+              <q-tab
+                class="text-primary"
+                name="BREAKFAST"
+                icon="mdi-food-croissant"
+                label="Paquete de desayuno"
+              />
+            </h3>
+            <h3 class="figure">
+              <q-tab
+                class="text-purple"
+                name="DRINK"
+                icon="mdi-beer"
+                label="Bebidas"
+              />
+            </h3>
+            <h3 class="figure">
+              <q-tab
+                class="text-teal"
+                name="SALE"
+                icon="mdi-percent"
+                label="Promociones"
+              />
+            </h3>
           </q-tabs>
         </div>
-      </div>
-      <q-scroll-area class="scroll-index" :visible="false">
-        <div class="row no-wrap">
+        <q-scroll-area class="scroll-index" :visible="false">
           <div v-if="loading != 'true'">
-            <template v-for="dish in dishes" :key="dish._id">
-              <cardIndex :dish="dish" :isAdmin="false"> </cardIndex>
-            </template>
+            <div class="row no-wrap">
+              <template v-for="dish in dishes" :key="dish._id">
+                <cardIndex :dish="dish" :isAdmin="false"> </cardIndex>
+              </template>
+            </div>
           </div>
-
           <template v-if="dishes.length == 0 && loading != 'true'">
-            <h5 class="messageNoData">No hay platillos en esta categoria</h5>
+            <h5 class="messageNoData">No hay platillos en esta categoría</h5>
           </template>
-        </div>
-      </q-scroll-area>
-    </q-page>
+        </q-scroll-area>
+      </q-page>
+    </q-page-container>
   </q-layout>
 </template>
 
@@ -71,7 +78,6 @@ const getInfo = async () => {
   await dishStore.getDishes();
   dishes.value = [];
   for (let i = 0; i < dishStore.dishes.dishes.length; i++) {
-    console.log(dishStore.dishes.dishes[i].type, tab.value);
     if (dishStore.dishes.dishes[i].type == tab.value) {
       dishes.value.push(dishStore.dishes.dishes[i]);
     }

@@ -2,16 +2,16 @@
 
 
 .scroll-index {
+  margin-left: 10vh;
     height: 40vh;
     width: 150vh;
 }
 .index {
-  display: flex;
   justify-content: center;
   background-image: url("../assets/backgroundIndex.png");
   background-size:cover;
   min-width: 1000px;
-  margin-top: -3vh;
+  margin-top: -1vh;
 }
 .title {
   font-family: "Open Sans";
@@ -20,6 +20,7 @@
 }
 
 .title-popular {
+  margin-left: 10vh;
   margin-bottom: 5vh;
   justify-content: left;
   height: 30vh;
@@ -28,6 +29,7 @@
 }
 
 .title-categories {
+  margin-left: 10vh;
   margin-top: 10vh;
   margin-bottom: -5vh;
   justify-content: left;
@@ -50,3 +52,18 @@
 .messageNoData{
   color: aliceblue;
 }
+
+.alt-img {
+  opacity: 0;
+}
+
+.figure{
+  line-height: 0;
+  margin: 0;
+}
+
+.offscreen{
+  position: absolute;
+  left:-1000em;
+}
+

@@ -1,11 +1,23 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-card v-if="isAdmin" class="my-card" flat bordered>
+    <q-card
+      @keyup.enter="expandCard"
+      tabindex="4"
+      v-if="isAdmin"
+      class="my-card"
+      flat
+      bordered
+    >
       <q-card-section>
         <q-item>
           <q-item-section avatar>
             <q-avatar color="primary" text-color="white">
-              <img :src="order.client.image" />
+              <img
+                v-if="order.client && order.client.image"
+                :src="order.client.image"
+                alt="Avatar imagen"
+              />
+              <q-icon v-else name="person" />
             </q-avatar>
           </q-item-section>
           <q-item-section>
@@ -78,7 +90,7 @@
             >
               <q-item-section avatar>
                 <q-avatar color="primary" text-color="white">
-                  <img :src="dish.image" />
+                  <img :src="dish.image" alt="Imagen platillo" />
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -91,17 +103,27 @@
       </q-slide-transition>
     </q-card>
 
-    <q-card v-if="client && !isAdmin" class="my-card" flat bordered>
+    <q-card
+      tabindex="4"
+      @keyup.enter="expandCard"
+      v-if="!isAdmin"
+      class="my-card"
+      flat
+      bordered
+    >
       <q-card-section>
         <q-item>
           <q-item-section avatar>
             <q-avatar color="primary" text-color="white">
-              <img :src="client.image" />
+              <img
+                v-if="order.client && order.client.image"
+                :src="order.client.image"
+                alt="Avatar imagen"
+              />
+              <q-icon v-else name="person" />
             </q-avatar>
           </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ client.username }}</q-item-label>
-          </q-item-section>
+          <q-item-section> </q-item-section>
         </q-item>
         <q-separator inset />
         <div class="text-h5">
@@ -145,7 +167,7 @@
             >
               <q-item-section avatar>
                 <q-avatar color="primary" text-color="white">
-                  <img :src="dish.image" />
+                  <img :src="dish.image" alt="Imagen platillo" />
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -163,6 +185,8 @@
 import { useQuasar } from "quasar";
 import { onMounted, ref } from "vue";
 import { useUserStore, useShoppingStore } from "src/stores/use-store";
+import { useNotify } from "../composables/notifyHook";
+const { showNotify } = useNotify();
 const $q = useQuasar();
 const emit = defineEmits("update");
 const userStore = useUserStore();
@@ -172,6 +196,9 @@ const props = defineProps({
   order: {},
   isAdmin: Boolean,
 });
+const expandCard = () => {
+  expanded.value = !expanded.value;
+};
 const updateStateOrder = (state) => {
   $q.dialog({
     title: "Confirmación",
@@ -180,6 +207,7 @@ const updateStateOrder = (state) => {
     persistent: true,
   }).onOk(async () => {
     await shoppingStore.updateOrder(props.order._id, state);
+    showNotify("Orden actualizada", "green");
     emit("update");
   });
 };

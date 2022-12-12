@@ -2,11 +2,20 @@
   <div class="doc-container register">
     <div class="row items-start">
       <div class="col col-display">
-        <q-img class="img-background" src="../assets/registerUserBackground.png"></q-img>
+        <q-img
+          role="presentation"
+          class="img-background"
+          src="../assets/registerUserBackground.png"
+        ></q-img>
       </div>
       <div class="col">
         <q-scroll-area class="scroll-register">
-          <q-form id=" form" class="form-register" @submit.prevent="handleSubmit" ref="form">
+          <q-form
+            id=" form"
+            class="form-register"
+            @submit.prevent="handleSubmit"
+            ref="form"
+          >
             <q-img class="logo" src="../assets/registerUserTitle.png" />
             <label class="form-label">Correo:</label>
             <q-input class="form-input" dark outlined v-model="email" type="text" label="Ingrese correo electrónico"
@@ -107,7 +116,6 @@ const alertError = (message = "Error de servidor") => {
 </script>
 <style scoped>
 @import "../styles/registerStyle.css";
-
 .text-negative {
   color: green !important;
 }

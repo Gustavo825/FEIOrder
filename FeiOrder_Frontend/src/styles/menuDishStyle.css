@@ -15,7 +15,7 @@
 }
 
 .cards-view {
-  margin-top: -5vh;
+  margin-top: 5vh;
 }
 
 .q-table__bottom {
@@ -38,6 +38,19 @@
   border-radius: 20px;
   font-family: 'Open Sans', sans-serif;
   min-height: max-content;
+}
+.alt-img {
+  opacity: 0;
+}
+
+.figure{
+  line-height: 0;
+  margin: 0;
+}
+
+.offscreen{
+  position: absolute;
+  left:-1000em;
 }
 
 .register-button {

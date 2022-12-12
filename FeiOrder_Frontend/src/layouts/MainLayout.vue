@@ -13,28 +13,43 @@
             @click="toggleLeftDrawer"
           />
         </div>
-        <q-img class="navbar-logo" src="../assets/FEIOrder.png" />
+        <h1 class="figure">
+          <a tabindex="1" href="/">
+            <img
+              class="navbar-logo"
+              alt="FeiOrder"
+              src="../assets/FEIOrder.png"
+            />
+          </a>
+          <span class="alt-img">Fei Order</span>
+        </h1>
         <q-toolbar-title> </q-toolbar-title>
-
-        <q-btn icon="home" stack flat to="/">Inicio</q-btn>
-        <q-btn
-          icon="shopping_cart"
-          stack
-          flat
-          v-if="userStore.token"
-          to="/ShoppingCart"
-          >Mi pedido</q-btn
-        >
-        <q-btn flat stack icon="mdi-login" to="/Login" v-if="!userStore.token"
-          >Login</q-btn
-        >
-        <q-btn flat to="/Register" v-if="!userStore.token">Register</q-btn>
-        <q-btn icon="person" stack flat v-if="userStore.token" to="/Profile"
-          >Perfil</q-btn
-        >
-        <q-btn icon="logout" stack flat v-if="userStore.token" @click="logout"
-          >Logout</q-btn
-        >
+        <h2 class="offscreen">Site navegation</h2>
+        <h3 class="figure">
+          <q-btn icon="home" stack flat to="/">Inicio</q-btn>
+        </h3>
+        <h3 class="figure" v-if="userStore.token">
+          <q-btn icon="shopping_cart" stack flat to="/ShoppingCart"
+            >Mi pedido</q-btn
+          >
+        </h3>
+        <h3 class="figure" v-if="userStore.token">
+          <q-btn icon="mdi-basket" stack flat to="/MyOrders"
+            >Historial pedidos</q-btn
+          >
+        </h3>
+        <h3 class="figure" v-if="!userStore.token">
+          <q-btn flat stack icon="mdi-login" to="/Login">Login</q-btn>
+        </h3>
+        <h3 class="figure" v-if="!userStore.token">
+          <q-btn flat to="/Register">Register</q-btn>
+        </h3>
+        <h3 class="figure" v-if="userStore.token">
+          <q-btn icon="person" stack flat to="/Profile">Perfil</q-btn>
+        </h3>
+        <h3 class="figure" v-if="userStore.token">
+          <q-btn icon="logout" stack flat @click="logout">Logout</q-btn>
+        </h3>
       </q-toolbar>
     </q-header>
 

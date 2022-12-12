@@ -1,75 +1,96 @@
 <template>
-  <div class="q-pa-md tab">
-    <div class="q-gutter-y-md">
-      <q-tabs class="" v-model="tab" narrow-indicator dense align="center">
-        <q-tab
-          class="text-green"
-          name="CREATED"
-          icon="mdi-bookmark"
-          label="Recientes"
-        />
-        <q-tab
-          class="text-primary"
-          name="COOKING"
-          icon="mdi-chef-hat"
-          label="Cocinando"
-        />
-        <q-tab
-          class="text-purple"
-          name="READY TO PICK UP"
-          icon="mdi-food"
-          label="Preparadas"
-        />
-        <q-tab
-          class="text-teal"
-          name="DELIVERED"
-          icon="mdi-package"
-          label="Entregadas"
-        />
-        <q-tab
-          class="text-orange"
-          name="CANCELED"
-          icon="mdi-cancel"
-          label="Canceladas"
-        />
-      </q-tabs>
-    </div>
-  </div>
   <q-layout class="background">
-    <div v-if="shoppingStore.orders" class="q-pa-md">
-      <q-table
-        dark
-        grid
-        :rows="orders"
-        :columns="columns"
-        row-key="name"
-        :filter="filter"
-        hide-header
-      >
-        <template v-slot:top-right>
-          <q-input
-            borderless
-            dense
+    <q-page-container>
+      <q-page>
+        <div class="q-pa-md tab">
+          <h2 class="offscreen">My orders navegation</h2>
+          <div class="q-gutter-y-md">
+            <q-tabs v-model="tab" narrow-indicator dense align="center">
+              <h3 class="figure">
+                <q-tab
+                  accesskey="r"
+                  class="text-green"
+                  name="CREATED"
+                  icon="mdi-bookmark"
+                  label="Recientes"
+                />
+              </h3>
+              <h3 class="figure">
+                <q-tab
+                  accesskey="c"
+                  class="text-primary"
+                  name="COOKING"
+                  icon="mdi-chef-hat"
+                  label="Cocinando"
+                />
+              </h3>
+              <h3 class="figure">
+                <q-tab
+                  accesskey="p"
+                  class="text-purple"
+                  name="READY TO PICK UP"
+                  icon="mdi-food"
+                  label="Preparadas"
+                />
+              </h3>
+              <h3 class="figure">
+                <q-tab
+                  accesskey="e"
+                  class="text-teal"
+                  name="DELIVERED"
+                  icon="mdi-package"
+                  label="Entregadas"
+                />
+              </h3>
+              <h3 class="figure">
+                <q-tab
+                  accesskey="c"
+                  class="text-orange"
+                  name="CANCELED"
+                  icon="mdi-cancel"
+                  label="Canceladas"
+                />
+              </h3>
+            </q-tabs>
+          </div>
+        </div>
+
+        <div v-if="shoppingStore.orders" class="q-pa-md">
+          <q-table
             dark
-            debounce="300"
-            v-model="filter"
-            placeholder="Search"
+            grid
+            :rows="orders"
+            :columns="columns"
+            row-key="name"
+            :filter="filter"
+            hide-header
           >
-            <template v-slot:append>
-              <q-icon name="search" />
+            <template v-slot:top-right>
+              <q-input
+                borderless
+                dense
+                dark
+                debounce="300"
+                v-model="filter"
+                placeholder="Search"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
             </template>
-          </q-input>
-        </template>
-        <template v-slot:item="props">
-          <OrderOrders
-            v-on:update="onChange"
-            :order="props.row"
-            :is-admin="true"
-          >
-          </OrderOrders>
-        </template>
-      </q-table>
-    </div>
+            <template v-slot:item="props">
+              <OrderOrders
+                v-on:update="onChange"
+                :order="props.row"
+                :is-admin="true"
+              >
+              </OrderOrders>
+            </template>
+          </q-table>
+        </div>
+      </q-page>
+    </q-page-container>
   </q-layout>
 </template>
 <script setup>
@@ -98,7 +119,6 @@ const getRows = async () => {
       shoppingStore.orders[i].client = await userStore.getInfoUserById(
         clientId
       );
-      console.log(shoppingStore.orders[i]);
       orders.value.push(shoppingStore.orders[i]);
     }
   }

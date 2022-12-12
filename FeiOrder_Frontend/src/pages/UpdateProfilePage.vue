@@ -32,12 +32,18 @@
               outlined
               v-model="username"
               type="text"
+              :rules="[
+                (val) => (val && val.length > 0) || 'Por favor escriba algo',
+              ]"
             >
             </q-input>
             <label class="form-label">Nombre:</label>
 
             <q-input
               class="form-input input-update"
+              :rules="[
+                (val) => (val && val.length > 0) || 'Por favor escriba algo',
+              ]"
               dark
               outlined
               v-model="name"
@@ -76,6 +82,8 @@
 import { onMounted, ref } from "vue";
 import { useUserStore } from "../stores/use-store";
 import { useRouter } from "vue-router";
+import { useNotify } from "../composables/notifyHook";
+const { showNotify } = useNotify();
 const router = useRouter();
 const userStore = useUserStore();
 const username = ref("");
@@ -86,10 +94,10 @@ const getInfo = async () => {
       await userStore.getInfoUser();
     } catch (error) {
       if (error.error) {
-        alertError(error.error);
+        showNotify(error.error);
       }
       if (error.errors) {
-        alertError(error.errors[0].msg);
+        showNotify(error.errors[0].msg);
       }
     }
   }
@@ -109,8 +117,10 @@ const handleSubmit = async () => {
     if (imageURL.value) {
       userStore.updateImage(image);
     }
+    showNotify("Usuario actualizado", "green");
     router.push("/Profile");
   } catch {
+    showNotify("Error de servidor", "red");
     console.log(error.code);
   }
 };
