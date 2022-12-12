@@ -12,7 +12,12 @@
         <q-item>
           <q-item-section avatar>
             <q-avatar color="primary" text-color="white">
-              <img :src="order.client.image" alt="Avatar imagen" />
+              <img
+                v-if="order.client && order.client.image"
+                :src="order.client.image"
+                alt="Avatar imagen"
+              />
+              <q-icon v-else name="person" />
             </q-avatar>
           </q-item-section>
           <q-item-section>
@@ -67,7 +72,6 @@
           round
           flat
           dense
-          id="expand"
           :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           @click="expanded = !expanded"
         />
@@ -111,7 +115,12 @@
         <q-item>
           <q-item-section avatar>
             <q-avatar color="primary" text-color="white">
-              <img :src="order.client.image" alt="Imagen avatar" />
+              <img
+                v-if="order.client && order.client.image"
+                :src="order.client.image"
+                alt="Avatar imagen"
+              />
+              <q-icon v-else name="person" />
             </q-avatar>
           </q-item-section>
           <q-item-section> </q-item-section>
@@ -140,7 +149,6 @@
           round
           flat
           dense
-          id="expand"
           :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           @click="expanded = !expanded"
         />
@@ -177,6 +185,8 @@
 import { useQuasar } from "quasar";
 import { onMounted, ref } from "vue";
 import { useUserStore, useShoppingStore } from "src/stores/use-store";
+import { useNotify } from "../composables/notifyHook";
+const { showNotify } = useNotify();
 const $q = useQuasar();
 const emit = defineEmits("update");
 const userStore = useUserStore();
@@ -187,7 +197,7 @@ const props = defineProps({
   isAdmin: Boolean,
 });
 const expandCard = () => {
-  document.getElementById("expand").click();
+  expanded.value = !expanded.value;
 };
 const updateStateOrder = (state) => {
   $q.dialog({
@@ -197,6 +207,7 @@ const updateStateOrder = (state) => {
     persistent: true,
   }).onOk(async () => {
     await shoppingStore.updateOrder(props.order._id, state);
+    showNotify("Orden actualizada", "green");
     emit("update");
   });
 };

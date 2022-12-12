@@ -53,6 +53,8 @@
 import { onMounted } from "vue";
 import { useUserStore } from "../stores/use-store";
 import { useRouter } from "vue-router";
+import { useNotify } from "../composables/notifyHook";
+const { showNotify } = useNotify();
 const router = useRouter();
 const userStore = useUserStore();
 const getInfo = async () => {
@@ -61,10 +63,10 @@ const getInfo = async () => {
       await userStore.getInfoUser();
     } catch (error) {
       if (error.error) {
-        alertError(error.error);
+        showNotify(error.error);
       }
       if (error.errors) {
-        alertError(error.errors[0].msg);
+        showNotify(error.errors[0].msg);
       }
     }
   }

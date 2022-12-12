@@ -34,7 +34,7 @@ export default route(function (/* { store, ssrContext } */) {
         await userStore.getInfoUser();
         console.log(userStore.user);
         if (verifyRol && userStore.user.role != "ADMIN") {
-          return next("/Login");
+          return next("/");
         }
         return next();
       }
