@@ -20,11 +20,22 @@ const validationResultExpress = (req, res, next) => {
 };
 
 export const registerValidator = [
+  body("email", "El correo no debe estar vacío").notEmpty(),
+  body("username", "El username no debe estar vacío").notEmpty(),
+  body("name", "El nombre no debe estar vacío").notEmpty(),
+  body("password", "La contraseña no debe estar vacía").notEmpty(),
+  body(
+    "repassword",
+    "La confirmación de contraseña no debe estar vacía"
+  ).notEmpty(),
   body("email", "Formato de email incorrecto")
     .trim()
     .isEmail()
     .normalizeEmail(),
-  body("password", "La contraseña debe tener al menos 6 caracteres, 1 caracter en minúscula, 1 caracter en mayúscula, 1 número y 1 símbolo").isStrongPassword({
+  body(
+    "password",
+    "La contraseña debe tener al menos 6 caracteres, 1 caracter en minúscula, 1 caracter en mayúscula, 1 número y 1 símbolo"
+  ).isStrongPassword({
     minLength: 6,
     minLowercase: 1,
     minUppercase: 1,
@@ -32,14 +43,12 @@ export const registerValidator = [
     minSymbols: 1,
     returnScore: false,
   }),
-  body("password", "Contraseñas no coinciden").custom(
-    (value, { req }) => {
-      if (value !== req.body.repassword) {
-        throw new Error("No coinciden las contraseñas");
-      }
-      return value;
+  body("password", "Contraseñas no coinciden").custom((value, { req }) => {
+    if (value !== req.body.repassword) {
+      throw new Error("No coinciden las contraseñas");
     }
-  ),
+    return value;
+  }),
   validationResultExpress,
 ];
 
@@ -58,7 +67,7 @@ export const tokenHeaderValidator = [
 ];
 
 export const orderValidator = [
-  body("dishes", "La lista de platillos no debe estar vacia").notEmpty(),
+  body("dishes", "La lista de platillos no debe estar vacía").notEmpty(),
   body("totalCost", "El costo debe ser un número").isNumeric(),
   body("stimatedTime", "El tiempo de cocción debe ser un número").isNumeric(),
   validationResultExpress,
@@ -69,13 +78,26 @@ export const updateValidator = [
   validationResultExpress,
 ];
 
+export const updateOrderValidator = [
+  param("id", "Formato de id incorrecto").trim().isLength({ min: 24 }),
+  body("state", "El estado no debe estar vacío").notEmpty(),
+  validationResultExpress,
+];
+
+export const updateUserValidator = [
+  body("username", "El username no debe estar vacío").notEmpty(),
+  body("name", "El nombre no debe estar vacío").notEmpty(),
+  param("id", "Formato de id incorrecto").trim().isLength({ min: 24 }),
+  validationResultExpress,
+];
+
 export const tokenCookieValidator = [
   cookie("refreshToken", "No existe refresh Token").trim().notEmpty().escape(),
   validationResultExpress,
 ];
 
 export const dishValidator = [
-  body("title", "El título no debe estar vacio").notEmpty(),
+  body("title", "El título no debe estar vacío").notEmpty(),
   body("cost", "El costo debe ser un número").isNumeric(),
   body("timeToCook", "El tiempo de cocción debe ser un número").isNumeric(),
   validationResultExpress,

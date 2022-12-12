@@ -11,6 +11,7 @@ import {
   verifyRol,
   updateValidator,
   orderValidator,
+  updateOrderValidator,
 } from "../middlewares/validatorManager.js";
 
 const router = Router();
@@ -29,7 +30,7 @@ router.patch(
   requireToken,
   tokenHeaderValidator,
   verifyRol,
-  updateValidator,
+  updateOrderValidator,
   updateOrder
 );
 
