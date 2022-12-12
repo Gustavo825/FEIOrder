@@ -1,11 +1,18 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-card v-if="isAdmin" class="my-card" flat bordered>
+    <q-card
+      @keyup.enter="expandCard"
+      tabindex="4"
+      v-if="isAdmin"
+      class="my-card"
+      flat
+      bordered
+    >
       <q-card-section>
         <q-item>
           <q-item-section avatar>
             <q-avatar color="primary" text-color="white">
-              <img :src="order.client.image" />
+              <img :src="order.client.image" alt="Avatar imagen" />
             </q-avatar>
           </q-item-section>
           <q-item-section>
@@ -60,6 +67,7 @@
           round
           flat
           dense
+          id="expand"
           :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           @click="expanded = !expanded"
         />
@@ -78,7 +86,7 @@
             >
               <q-item-section avatar>
                 <q-avatar color="primary" text-color="white">
-                  <img :src="dish.image" />
+                  <img :src="dish.image" alt="Imagen platillo" />
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -91,17 +99,22 @@
       </q-slide-transition>
     </q-card>
 
-    <q-card v-if="client && !isAdmin" class="my-card" flat bordered>
+    <q-card
+      tabindex="4"
+      @keyup.enter="expandCard"
+      v-if="!isAdmin"
+      class="my-card"
+      flat
+      bordered
+    >
       <q-card-section>
         <q-item>
           <q-item-section avatar>
             <q-avatar color="primary" text-color="white">
-              <img :src="client.image" />
+              <img :src="order.client.image" alt="Imagen avatar" />
             </q-avatar>
           </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ client.username }}</q-item-label>
-          </q-item-section>
+          <q-item-section> </q-item-section>
         </q-item>
         <q-separator inset />
         <div class="text-h5">
@@ -127,6 +140,7 @@
           round
           flat
           dense
+          id="expand"
           :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           @click="expanded = !expanded"
         />
@@ -145,7 +159,7 @@
             >
               <q-item-section avatar>
                 <q-avatar color="primary" text-color="white">
-                  <img :src="dish.image" />
+                  <img :src="dish.image" alt="Imagen platillo" />
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -172,6 +186,9 @@ const props = defineProps({
   order: {},
   isAdmin: Boolean,
 });
+const expandCard = () => {
+  document.getElementById("expand").click();
+};
 const updateStateOrder = (state) => {
   $q.dialog({
     title: "Confirmación",

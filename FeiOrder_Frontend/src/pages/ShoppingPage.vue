@@ -3,6 +3,7 @@
     <q-page>
       <div class="q-pa-md table-cart">
         <q-table
+          tabindex="1"
           class="table"
           title="Orden"
           :rows="shoppingStore.shoppingList"
@@ -23,6 +24,7 @@
               </q-td>
               <q-td key="Accion" :props="props">
                 <q-btn
+                  tabindex="1"
                   @click="removeDish(props.row.idList)"
                   name="delete"
                   flat

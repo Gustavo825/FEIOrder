@@ -3,6 +3,7 @@
     <div class="row items-start">
       <div class="col col-display">
         <q-img
+          role="presentation"
           class="img-background"
           src="../assets/registerUserBackground.png"
         ></q-img>
@@ -15,7 +16,11 @@
             @submit.prevent="handleSubmit"
             ref="form"
           >
-            <q-img class="logo" src="../assets/registerUserTitle.png" />
+            <q-img
+              alt="Registrar usuario"
+              class="logo"
+              src="../assets/registerUserTitle.png"
+            />
             <label class="form-label">Correo:</label>
             <q-input
               class="form-input"
@@ -149,11 +154,4 @@ const alertError = (message = "Error de servidor") => {
 </script>
 <style scoped>
 @import "../styles/registerStyle.css";
-.text-negative {
-  color: green !important;
-}
-
-.q-input {
-  color: green !important;
-}
 </style>

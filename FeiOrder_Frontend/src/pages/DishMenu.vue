@@ -1,20 +1,26 @@
 <template>
   <q-layout class="index">
-  <q-layout class="index-padding">
-    <q-page v-if="dishStore.dishes != null">
-      <q-img
-        class="title-dishes"
-        src="../assets/allDishes.png"
-      ></q-img>
-      <q-btn
-        class="register-button"
-        label="Registrar platillo"
-        v-on:click="clickRegisterButton()"
-        color="primary"
-        type="submit"
-      >
-      </q-btn>
-      <div class="q-pa-md cards-view">
+    <q-page>
+      <div>
+        <h2 class="figure">
+          <q-img
+            class="title-dishes"
+            src="../assets/allDishes.png"
+            alt="Todos los plaltillos"
+          ></q-img>
+          <span class="alt-img">Todos los platillos</span>
+        </h2>
+        <q-btn
+          tabindex="2"
+          class="register-button"
+          label="Registrar platillo"
+          v-on:click="clickRegisterButton()"
+          color="primary"
+          type="submit"
+        >
+        </q-btn>
+      </div>
+      <div v-if="dishStore.dishes != null" class="cards-view">
         <q-table
           dark
           grid
@@ -46,7 +52,6 @@
         </q-table>
       </div>
     </q-page>
-    </q-layout>
   </q-layout>
 </template>
 

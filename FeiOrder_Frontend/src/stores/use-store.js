@@ -116,6 +116,7 @@ export const useUserStore = defineStore("user", () => {
       user.value = res.data;
       const storageRefVar = storageRef(storage, `${user.value.id}/imgProfile`); //`${user.currentUser}`
       user.value.image = await getDownloadURL(storageRefVar);
+      return user.value;
     } catch (error) {}
   };
 
@@ -344,7 +345,7 @@ export const useShoppingStore = defineStore("shopping", () => {
         headers: { Authorization: "Bearer " + useStore.token },
       });
       myOrders.value = res.data.userOrders;
-      console.log(myOrders.value)
+      console.log(myOrders.value);
     } catch (error) {
       console.log(error);
     }

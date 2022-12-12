@@ -1,13 +1,20 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
 
-.background {
-  display: flex;
+.background{
   justify-content: center;
   background-image: url("../assets/backgroundIndex.png");
   background-size:cover;
   height: 100%;
-  margin-top: -2vh;
+  margin-top: -1vh;
+}
+.figure{
+  line-height: 0;
+  margin: 0;
+}
+.offscreen{
+  position: absolute;
+  left:-1000em;
 }
 .tab{
   background-color:rgb(37, 48, 58)

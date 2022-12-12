@@ -27,3 +27,16 @@
 .user-information {
   margin-top: 10vh;
 }
+.alt-img {
+  opacity: 0;
+}
+
+.figure{
+  line-height: 0;
+  margin: 0;
+}
+
+.offscreen{
+  position: absolute;
+  left:-1000em;
+}

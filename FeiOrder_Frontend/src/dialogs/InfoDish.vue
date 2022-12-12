@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="card" persistent>
+  <q-dialog tabindex="2" v-model="card" persistent>
     <q-card class="my-card">
       <q-img :src="dish.image" />
 
@@ -27,13 +27,7 @@
       <q-separator />
 
       <q-card-actions align="right">
-        <q-btn
-          v-close-popup
-          flat
-          color="primary"
-          icon="close"
-          label="Cerrar"
-        />
+        <q-btn v-close-popup flat color="primary" icon="close" label="Cerrar" />
       </q-card-actions>
     </q-card>
   </q-dialog>

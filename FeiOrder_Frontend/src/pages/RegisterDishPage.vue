@@ -2,7 +2,11 @@
   <div class="doc-container register">
     <div class="row items-start">
       <div class="col col-display">
-        <q-img class="img-background" src="../assets/registerDish.png"></q-img>
+        <q-img
+          class="img-background"
+          alt="Registrar platillo"
+          src="../assets/registerDish.png"
+        ></q-img>
       </div>
       <div class="col">
         <q-scroll-area class="scroll-register-dish">
