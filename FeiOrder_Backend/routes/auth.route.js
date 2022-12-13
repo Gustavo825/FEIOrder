@@ -16,6 +16,7 @@ import {
   tokenCookieValidator,
   tokenHeaderValidator,
   updateValidator,
+  updateUserValidator,
   verifyRol,
 } from "../middlewares/validatorManager.js";
 
@@ -28,7 +29,7 @@ router.patch(
   "/update/:id",
   tokenHeaderValidator,
   requireToken,
-  updateValidator,
+  updateUserValidator,
   update
 );
 
@@ -37,6 +38,7 @@ router.get(
   tokenHeaderValidator,
   requireToken,
   verifyRol,
+  updateValidator,
   infoUserById
 );
 router.get("/infoUser", tokenHeaderValidator, requireToken, infoUser);
