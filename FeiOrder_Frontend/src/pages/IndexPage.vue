@@ -3,11 +3,7 @@
     <q-page-container>
       <q-page v-if="dishStore.dishes != null">
         <h2 class="figure">
-          <q-img
-            class="title-popular"
-            src="../assets/titlePopularDishes.png"
-            alt="Platillos"
-          ></q-img>
+          <q-img class="title-popular" src="../assets/titlePopularDishes.png" alt="Platillos"></q-img>
           <span class="alt-img">Platillos populares</span>
         </h2>
 
@@ -20,52 +16,24 @@
         </q-scroll-area>
 
         <h2 class="figure">
-          <q-img
-            class="title-categories"
-            src="../assets/categories.png"
-            alt="Categorías"
-          ></q-img>
+          <q-img class="title-categories" src="../assets/categories.png" alt="Categorías"></q-img>
           <span class="alt-img">Categorias</span>
         </h2>
 
         <q-scroll-area class="scroll-index" :visible="false">
           <div class="row no-wrap options">
-            <q-img
-              tabindex="4"
-              accesskey="d"
-              alt="Paquete de desayuno"
-              @click="goToMenu('BREAKFAST')"
-              class="option-specific"
-              src="../assets/breakfast.png"
-            >
+            <q-img tabindex="4" accesskey="d" alt="Paquete de desayuno" @click="goToMenu('BREAKFAST')"
+              class="option-specific" src="../assets/breakfast.png">
             </q-img>
 
-            <q-img
-              tabindex="4"
-              accesskey="c"
-              alt="A la carta"
-              @click="goToMenu('GENERAL')"
-              class="option-specific"
-              src="../assets/generalMenu.png"
-            >
+            <q-img tabindex="4" accesskey="c" alt="A la carta" @click="goToMenu('GENERAL')" class="option-specific"
+              src="../assets/generalMenu.png">
             </q-img>
-            <q-img
-              tabindex="4"
-              accesskey="b"
-              alt="Bebidas"
-              @click="goToMenu('DRINK')"
-              class="option-specific"
-              src="../assets/drinks.png"
-            >
+            <q-img tabindex="4" accesskey="b" alt="Bebidas" @click="goToMenu('DRINK')" class="option-specific"
+              src="../assets/drinks.png">
             </q-img>
-            <q-img
-              tabindex="4"
-              accesskey="p"
-              alt="Promociones"
-              @click="goToMenu('SALE')"
-              class="option-specific"
-              src="../assets/sale.png"
-            >
+            <q-img tabindex="4" accesskey="p" alt="Promociones" @click="goToMenu('SALE')" class="option-specific"
+              src="../assets/sale.png">
             </q-img>
           </div>
         </q-scroll-area>

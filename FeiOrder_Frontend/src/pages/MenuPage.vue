@@ -6,36 +6,16 @@
         <div class="q-pa-md tab">
           <q-tabs v-model="tab" narrow-indicator dense align="center">
             <h3 class="figure">
-              <q-tab
-                class="text-green"
-                name="GENERAL"
-                icon="mdi-food"
-                label="A la carta"
-              />
+              <q-tab class="text-green" name="GENERAL" icon="mdi-food" label="A la carta" />
             </h3>
             <h3 class="figure">
-              <q-tab
-                class="text-primary"
-                name="BREAKFAST"
-                icon="mdi-food-croissant"
-                label="Paquete de desayuno"
-              />
+              <q-tab class="text-primary" name="BREAKFAST" icon="mdi-food-croissant" label="Paquete de desayuno" />
             </h3>
             <h3 class="figure">
-              <q-tab
-                class="text-purple"
-                name="DRINK"
-                icon="mdi-beer"
-                label="Bebidas"
-              />
+              <q-tab class="text-purple" name="DRINK" icon="mdi-beer" label="Bebidas" />
             </h3>
             <h3 class="figure">
-              <q-tab
-                class="text-teal"
-                name="SALE"
-                icon="mdi-percent"
-                label="Promociones"
-              />
+              <q-tab class="text-teal" name="SALE" icon="mdi-percent" label="Promociones" />
             </h3>
           </q-tabs>
         </div>

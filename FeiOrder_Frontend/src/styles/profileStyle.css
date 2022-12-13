@@ -5,18 +5,19 @@
   border-radius: 20px;
   min-height: max-content;
 }
+
 .image-from-input {
-  object-fit:scale-down;
+  object-fit: scale-down;
   max-width: 100px;
   min-height: 100px;
 
 }
 
-.profile{
+.profile {
   display: flex;
   justify-content: center;
   background-image: url("../assets/backgroundIndex.png");
-  background-size:cover;
+  background-size: cover;
   min-width: 1000px;
   margin-top: -3vh;
 }

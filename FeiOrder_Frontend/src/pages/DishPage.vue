@@ -18,4 +18,6 @@ const back = () => {
   <button class="mt-5 btn btn-outline-secondary" @click="back">Regresar</button>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

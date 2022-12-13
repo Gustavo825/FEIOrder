@@ -3,16 +3,18 @@
 
 .scroll-index {
   margin-left: 10vh;
-    height: 40vh;
-    width: 150vh;
+  height: 40vh;
+  width: 150vh;
 }
+
 .index {
   justify-content: center;
   background-image: url("../assets/backgroundIndex.png");
-  background-size:cover;
+  background-size: cover;
   min-width: 1000px;
   margin-top: -1vh;
 }
+
 .title {
   font-family: "Open Sans";
   color: rgb(255, 255, 255);
@@ -39,7 +41,7 @@
 }
 
 .options {
-    margin-top: 10vh;
+  margin-top: 10vh;
 }
 
 .option-specific {
@@ -49,7 +51,7 @@
   border-radius: 20px;
 }
 
-.messageNoData{
+.messageNoData {
   color: aliceblue;
 }
 
@@ -57,13 +59,12 @@
   opacity: 0;
 }
 
-.figure{
+.figure {
   line-height: 0;
   margin: 0;
 }
 
-.offscreen{
+.offscreen {
   position: absolute;
-  left:-1000em;
+  left: -1000em;
 }
-

@@ -1,8 +1,9 @@
 .table-cart {
-    padding: 10vh;
+  padding: 10vh;
 }
-.confirm{
- margin-top: 3vh;
+
+.confirm {
+  margin-top: 3vh;
 
 }
 
@@ -14,6 +15,7 @@
   min-width: 1000px;
   margin-top: -3vh;
 }
+
 .form-submit {
   background: #15a2be;
   scale: 1;
@@ -26,13 +28,14 @@
   min-height: max-content;
   width: auto;
 }
+
 .table {
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 .logo {
-    width: 200px;
-    height: 200px;
+  width: 200px;
+  height: 200px;
 }
 
 .q-table__top,

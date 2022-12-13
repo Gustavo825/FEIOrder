@@ -5,18 +5,9 @@
         <q-img src="../assets/defaultBanner.jpg" />
 
         <q-card-section>
-          <q-avatar
-            size="120px"
-            font-size="52px"
-            fab
-            color="primary"
-            class="absolute"
-            style="top: 0; right: 12px; transform: translate(-170%, -50%)"
-          >
-            <img
-              v-if="userStore.user && userStore.user.image"
-              :src="userStore.user.image"
-            />
+          <q-avatar size="120px" font-size="52px" fab color="primary" class="absolute"
+            style="top: 0; right: 12px; transform: translate(-170%, -50%)">
+            <img v-if="userStore.user && userStore.user.image" :src="userStore.user.image" />
             <q-icon v-else name="person" />
           </q-avatar>
         </q-card-section>
@@ -26,51 +17,25 @@
 
           <q-form class="col" @submit.prevent="handleSubmit()">
             <label class="form-label">Username:</label>
-            <q-input
-              class="form-input input-update"
-              dark
-              outlined
-              v-model="username"
-              type="text"
-              :rules="[
-                (val) => (val && val.length > 0) || 'Por favor escriba algo',
-              ]"
-            >
+            <q-input class="form-input input-update" dark outlined v-model="username" type="text" :rules="[
+              (val) => (val && val.length > 0) || 'Por favor escriba algo',
+            ]">
             </q-input>
             <label class="form-label">Nombre:</label>
 
-            <q-input
-              class="form-input input-update"
-              :rules="[
-                (val) => (val && val.length > 0) || 'Por favor escriba algo',
-              ]"
-              dark
-              outlined
-              v-model="name"
-              type="text"
-            >
+            <q-input class="form-input input-update" :rules="[
+              (val) => (val && val.length > 0) || 'Por favor escriba algo',
+            ]" dark outlined v-model="name" type="text">
             </q-input>
-            <q-file
-              outlined
-              class="input-image"
-              label-color="white"
-              accept=".jpg, image/*"
-              v-model="image"
-              label="Ingrese su foto de perfil"
-              @update:model-value="selectedImage()"
-            >
+            <q-file outlined class="input-image" label-color="white" accept=".jpg, image/*" v-model="image"
+              label="Ingrese su foto de perfil" @update:model-value="selectedImage()">
               <template v-slot:prepend>
                 <q-icon name="cloud_upload" color="white" @click.stop.prevent />
               </template>
             </q-file>
             <q-img class="image-from-input" :src="imageURL"></q-img>
 
-            <q-btn
-              class="form-submit-update"
-              label="Editar"
-              type="submit"
-              color="primary"
-            ></q-btn>
+            <q-btn class="form-submit-update" label="Editar" type="submit" color="primary"></q-btn>
           </q-form>
         </q-card-section>
       </q-card>
@@ -88,6 +53,9 @@ const router = useRouter();
 const userStore = useUserStore();
 const username = ref("");
 const name = ref("");
+const imageURL = ref("");
+const image = ref("");
+const form = ref(null);
 const getInfo = async () => {
   if (userStore.user == null) {
     try {
@@ -108,9 +76,7 @@ const getInfo = async () => {
 onMounted(() => {
   getInfo();
 });
-const imageURL = ref("");
-const image = ref("");
-const form = ref(null);
+
 const handleSubmit = async () => {
   try {
     userStore.updateUser(userStore.user.id, name, username);

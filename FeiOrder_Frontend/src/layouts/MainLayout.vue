@@ -3,23 +3,12 @@
     <q-header elevated>
       <q-toolbar class="bg-grey-10">
         <div v-if="userStore.user">
-          <q-btn
-            flat
-            dense
-            round
-            icon="menu"
-            aria-label="Menu"
-            v-if="userStore.user.role == 'ADMIN'"
-            @click="toggleLeftDrawer"
-          />
+          <q-btn flat dense round icon="menu" aria-label="Menu" v-if="userStore.user.role == 'ADMIN'"
+            @click="toggleLeftDrawer" />
         </div>
         <h1 class="figure">
           <a tabindex="1" href="/">
-            <img
-              class="navbar-logo"
-              alt="FeiOrder"
-              src="../assets/FEIOrder.png"
-            />
+            <img class="navbar-logo" alt="FeiOrder" src="../assets/FEIOrder.png" />
           </a>
           <span class="alt-img">Fei Order</span>
         </h1>
@@ -29,20 +18,16 @@
           <q-btn icon="home" stack flat to="/">Inicio</q-btn>
         </h3>
         <h3 class="figure" v-if="userStore.token">
-          <q-btn icon="shopping_cart" stack flat to="/ShoppingCart"
-            >Mi pedido</q-btn
-          >
+          <q-btn icon="shopping_cart" stack flat to="/ShoppingCart">Mi pedido</q-btn>
         </h3>
         <h3 class="figure" v-if="userStore.token">
-          <q-btn icon="mdi-basket" stack flat to="/MyOrders"
-            >Historial pedidos</q-btn
-          >
+          <q-btn icon="mdi-basket" stack flat to="/MyOrders">Historial pedidos</q-btn>
         </h3>
         <h3 class="figure" v-if="!userStore.token">
           <q-btn flat stack icon="mdi-login" to="/Login">Login</q-btn>
         </h3>
         <h3 class="figure" v-if="!userStore.token">
-          <q-btn flat to="/Register">Register</q-btn>
+          <q-btn flat stack icon="how_to_reg" to="/Register">Register</q-btn>
         </h3>
         <h3 class="figure" v-if="userStore.token">
           <q-btn icon="person" stack flat to="/Profile">Perfil</q-btn>
@@ -57,11 +42,7 @@
       <q-list>
         <q-item-label header> FeiOrder</q-item-label>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
     <q-page-container>

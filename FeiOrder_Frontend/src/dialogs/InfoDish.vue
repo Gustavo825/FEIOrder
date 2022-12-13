@@ -6,9 +6,7 @@
       <q-card-section>
         <div class="row no-wrap items-center">
           <div class="col text-h6 ellipsis">{{ dish.title }}</div>
-          <div
-            class="col-auto text-grey text-caption q-pt-md row no-wrap items-center"
-          >
+          <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
             {{ dish.timeToCook }} minutos
             <q-icon name="alarm" />
           </div>
@@ -32,6 +30,7 @@
     </q-card>
   </q-dialog>
 </template>
+
 <script setup>
 const emit = defineEmits("close");
 defineProps({

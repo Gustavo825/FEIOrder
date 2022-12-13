@@ -2,40 +2,19 @@
   <div class="doc-container register">
     <div class="row items-start">
       <div class="col col-display">
-        <q-img
-          class="img-background"
-          alt="Registrar platillo"
-          src="../assets/registerDish.png"
-        ></q-img>
+        <q-img class="img-background" alt="Registrar platillo" src="../assets/registerDish.png"></q-img>
       </div>
       <div class="col">
         <q-scroll-area class="scroll-register-dish">
-          <q-form
-            class="form-register-dish"
-            @submit.prevent="handleSubmit"
-            ref="form"
-          >
+          <q-form class="form-register-dish" @submit.prevent="handleSubmit" ref="form">
             <q-img class="logo" src="../assets/registerDishTitle.png" />
             <label class="form-label-dish">Título del platillo:</label>
-            <q-input
-              class="form-input"
-              dark
-              outlined
-              v-model="title"
-              type="text"
-              label="Ingrese el título del platillo"
+            <q-input class="form-input" dark outlined v-model="title" type="text" label="Ingrese el título del platillo"
               :rules="[
                 (val) => (val && val.length > 0) || 'Por favor escriba algo',
-              ]"
-            ></q-input>
+              ]"></q-input>
             <label class="form-label-dish">Costo del platillo:</label>
-            <q-input
-              class="form-input"
-              dark
-              outlined
-              v-model="cost"
-              type="text"
-              label="Ingrese el costo del platillo"
+            <q-input class="form-input" dark outlined v-model="cost" type="text" label="Ingrese el costo del platillo"
               :rules="[
                 (val) =>
                   /^\d{0,8}(\.\d{1,4})?$/.test(val) ||
@@ -44,68 +23,32 @@
                 (val) =>
                   (val && val.length > 0) ||
                   'Por favor, ingrese valores numéricos',
-              ]"
-            >
+              ]">
             </q-input>
             <label class="form-label-dish">Descripción del platillo:</label>
-            <q-input
-              class="form-input"
-              dark
-              outlined
-              v-model="description"
-              type="text"
-              label="Ingrese la descripción del platillo"
-              :rules="[
+            <q-input class="form-input" dark outlined v-model="description" type="text"
+              label="Ingrese la descripción del platillo" :rules="[
                 (val) => (val && val.length > 0) || 'Por favor escriba algo',
-              ]"
-            ></q-input>
-            <label class="form-label-dish"
-              >Tiempo de preparación aproximado:</label
-            >
-            <q-input
-              class="form-input"
-              dark
-              outlined
-              v-model="timeToCook"
-              type="text"
-              label="Ingrese el tiempo de preparación del platillo en minutos"
-              :rules="[
+              ]"></q-input>
+            <label class="form-label-dish">Tiempo de preparación aproximado:</label>
+            <q-input class="form-input" dark outlined v-model="timeToCook" type="text"
+              label="Ingrese el tiempo de preparación del platillo en minutos" :rules="[
                 (val) =>
                   /^\d{0,8}(\.\d{1,4})?$/.test(val) ||
                   'Ingrese un costo válido',
                 (val) => (val && val.length > 0) || 'Por favor escriba algo',
-              ]"
-            ></q-input>
+              ]"></q-input>
             <label class="form-label-dish">Categoría:</label>
-            <q-select
-              class="form-input"
-              dark
-              outlined
-              v-model="category"
-              :options="options"
-              label="Categoría"
-            />
-            <q-file
-              outlined
-              class="input-image"
-              label-color="white"
-              accept=".jpg, image/*"
-              v-model="image"
-              label="Ingrese imagen del platillo"
-              @update:model-value="selectedImage()"
-            >
+            <q-select class="form-input" dark outlined v-model="category" :options="options" label="Categoría" />
+            <q-file outlined class="input-image" label-color="white" accept=".jpg, image/*" v-model="image"
+              label="Ingrese imagen del platillo" @update:model-value="selectedImage()">
               <template v-slot:prepend>
                 <q-icon name="cloud_upload" color="white" @click.stop.prevent />
               </template>
             </q-file>
             <q-img class="image-from-input" :src="imageURL"></q-img>
 
-            <q-btn
-              class="form-submit-register"
-              label="Registrar platillo"
-              type="submit"
-              color="primary"
-            >
+            <q-btn class="form-submit-register" label="Registrar platillo" type="submit" color="primary">
             </q-btn>
           </q-form>
         </q-scroll-area>

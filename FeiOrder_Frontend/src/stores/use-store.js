@@ -33,7 +33,6 @@ export const useUserStore = defineStore("user", () => {
       );
       user.value.name = res.data.user.name;
       user.value.username = res.data.user.username;
-      console.log(res.data.user.name);
     } catch (error) {
       console.log(error);
       return error.code;
@@ -68,7 +67,6 @@ export const useUserStore = defineStore("user", () => {
         repassword,
         name,
       });
-      console.log(res);
       token.value = res.data.token;
       expiresIn.value = res.data.expiresIn;
       sessionStorage.setItem("user", "true");
@@ -94,8 +92,6 @@ export const useUserStore = defineStore("user", () => {
   };
   const setTime = () => {
     setTimeout(() => {
-      console.log("refrescante");
-
       refreshToken();
     }, expiresIn.value * 1000 - 60000);
   };
@@ -105,7 +101,7 @@ export const useUserStore = defineStore("user", () => {
       token.value = res.data.token;
       expiresIn.value = res.data.expiresIn;
       localStorage.setItem("user", true);
-    } catch (error) {}
+    } catch (error) { }
   };
   const getInfoUser = async () => {
     refreshToken();
@@ -117,7 +113,7 @@ export const useUserStore = defineStore("user", () => {
       const storageRefVar = storageRef(storage, `${user.value.id}/imgProfile`); //`${user.currentUser}`
       user.value.image = await getDownloadURL(storageRefVar);
       return user.value;
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const getInfoUserById = async (id) => {
@@ -130,7 +126,7 @@ export const useUserStore = defineStore("user", () => {
       const storageRefVar = storageRef(storage, `${id}/imgProfile`);
       retrivedUser.image = await getDownloadURL(storageRefVar);
       return retrivedUser;
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const resetStore = () => {
@@ -184,7 +180,7 @@ export const useDishStore = defineStore("dish", () => {
         const storageRefVar = storageRef(
           storage,
           `dishes/${res.data.dish._id}/imgProfile`
-        ); //`${user.currentUser}`
+        ); 
         await uploadBytes(storageRefVar, imageFile);
       }
       return res.data;
@@ -248,10 +244,10 @@ export const useDishStore = defineStore("dish", () => {
         const storageRefVar = storageRef(
           storage,
           `dishes/${dishes.value.dishes[i]._id}/imgProfile`
-        ); //`${user.currentUser}`
+        ); 
         dishes.value.dishes[i].image = await getDownloadURL(storageRefVar);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   const getDish = (id) => {
     for (let i = 0; i < dishes.value.dishes.length; i++) {
@@ -345,7 +341,6 @@ export const useShoppingStore = defineStore("shopping", () => {
         headers: { Authorization: "Bearer " + useStore.token },
       });
       myOrders.value = res.data.userOrders;
-      console.log(myOrders.value);
     } catch (error) {
       console.log(error);
     }
@@ -366,7 +361,6 @@ export const useShoppingStore = defineStore("shopping", () => {
   const updateOrder = async (id, state) => {
     const useStore = useUserStore();
     useStore.refreshToken();
-    console.log("editando");
     try {
       const res = await api.patch(
         `/order/update/${id}`,
@@ -376,7 +370,6 @@ export const useShoppingStore = defineStore("shopping", () => {
         { headers: { Authorization: "Bearer " + useStore.token } }
       );
       await getOrders();
-      console.log("editado");
     } catch (error) {
       console.log(error);
       return error.code;

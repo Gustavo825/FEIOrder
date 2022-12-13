@@ -6,56 +6,22 @@
           <h2 class="offscreen">My orders navegation</h2>
           <q-tabs v-model="tab" narrow-indicator dense align="center">
             <h3 class="figure">
-              <q-tab
-                accesskey="a"
-                class="text-green"
-                name="CREATED"
-                icon="mdi-bookmark"
-                label="Pedidos actuales"
-              />
+              <q-tab accesskey="a" class="text-green" name="CREATED" icon="mdi-bookmark" label="Pedidos actuales" />
             </h3>
             <h3 class="figure">
-              <q-tab
-                accesskey="d"
-                class="text-teal"
-                name="DELIVERED"
-                icon="mdi-package"
-                label="Pedidos anteriores"
-              />
+              <q-tab accesskey="d" class="text-teal" name="DELIVERED" icon="mdi-package" label="Pedidos anteriores" />
             </h3>
             <h3 class="figure">
-              <q-tab
-                accesskey="c"
-                class="text-orange"
-                name="CANCELED"
-                icon="mdi-cancel"
-                label="Pedidos cancelados"
-              />
+              <q-tab accesskey="c" class="text-orange" name="CANCELED" icon="mdi-cancel" label="Pedidos cancelados" />
             </h3>
           </q-tabs>
         </div>
 
         <div class="q-pa-md">
-          <q-table
-            dark
-            v-if="shoppingStore.myOrders"
-            grid
-            :rows="orders"
-            :columns="columns"
-            row-key="name"
-            :filter="filter"
-            hide-header
-            no-data-label="No hay datos"
-          >
+          <q-table dark v-if="shoppingStore.myOrders" grid :rows="orders" :columns="columns" row-key="name"
+            :filter="filter" hide-header no-data-label="No hay datos">
             <template v-slot:top-right>
-              <q-input
-                borderless
-                dense
-                dark
-                debounce="300"
-                v-model="filter"
-                placeholder="Search"
-              >
+              <q-input borderless dense dark debounce="300" v-model="filter" placeholder="Search">
                 <template v-slot:append>
                   <q-icon name="search" />
                 </template>
@@ -87,7 +53,6 @@ watch(tab, (newValue, oldValue) => {
 });
 const getRows = async () => {
   orders.value = [];
-  console.log(tab.value);
   if (tab.value == "CANCELED") {
     for (let i = 0; i < shoppingStore.myOrders.length; i++) {
       if (shoppingStore.myOrders[i].state == "CANCELED") {
@@ -121,7 +86,6 @@ const getRows = async () => {
       }
     }
   }
-  console.log(orders.value);
   return orders;
 };
 

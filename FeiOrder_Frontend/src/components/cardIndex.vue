@@ -9,51 +9,26 @@
       </div>
     </q-img>
     <q-card-actions v-if="!isAdmin" align="right">
-      <q-btn
-        @click="addToCart(dish)"
-        flat
-        round
-        alt="Shopping"
-        color="teal"
-        icon="shopping_cart"
-      />
+      <q-btn @click="addToCart(dish)" flat round alt="Shopping" color="teal" icon="shopping_cart" />
       <q-btn @click="clickSeeMore" flat round color="blue" icon="info"> </q-btn>
       <InfoDish v-on:close="close" :dish="dish" :card="card"></InfoDish>
     </q-card-actions>
 
     <q-card-actions v-else align="right">
-      <q-btn
-        @click="clickEditDish"
-        alt="Edit Dish"
-        flat
-        round
-        color="primary"
-        icon="edit"
-      />
-      <q-btn
-        @click="clickSeeMore"
-        alt="Information Dish"
-        flat
-        round
-        color="blue"
-        icon="info"
-      >
+      <q-btn @click="clickEditDish" alt="Edit Dish" flat round color="primary" icon="edit" />
+      <q-btn @click="clickSeeMore" alt="Information Dish" flat round color="blue" icon="info">
       </q-btn>
-      <EditDish
-        v-on:close="closeEdit"
-        :dishEdit="dish"
-        :card="cardEdit"
-      ></EditDish>
+      <EditDish v-on:close="closeEdit" :dishEdit="dish" :card="cardEdit"></EditDish>
       <InfoDish v-on:close="close" :dish="dish" :card="card"></InfoDish>
     </q-card-actions>
   </q-card>
 </template>
+
 <script setup>
 import { useQuasar } from "quasar";
 import { onMounted, ref } from "vue";
 import { useNotify } from "../composables/notifyHook";
 import { useShoppingStore } from "../stores/use-store";
-// @ts-ignore
 import InfoDish from "../dialogs/InfoDish.vue";
 import { useRouter } from "vue-router";
 import EditDish from "src/dialogs/EditDish.vue";

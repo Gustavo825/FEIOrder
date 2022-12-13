@@ -7,84 +7,35 @@
           <div class="q-gutter-y-md">
             <q-tabs v-model="tab" narrow-indicator dense align="center">
               <h3 class="figure">
-                <q-tab
-                  accesskey="r"
-                  class="text-green"
-                  name="CREATED"
-                  icon="mdi-bookmark"
-                  label="Recientes"
-                />
+                <q-tab accesskey="r" class="text-green" name="CREATED" icon="mdi-bookmark" label="Recientes" />
               </h3>
               <h3 class="figure">
-                <q-tab
-                  accesskey="c"
-                  class="text-primary"
-                  name="COOKING"
-                  icon="mdi-chef-hat"
-                  label="Cocinando"
-                />
+                <q-tab accesskey="c" class="text-primary" name="COOKING" icon="mdi-chef-hat" label="Cocinando" />
               </h3>
               <h3 class="figure">
-                <q-tab
-                  accesskey="p"
-                  class="text-purple"
-                  name="READY TO PICK UP"
-                  icon="mdi-food"
-                  label="Preparadas"
-                />
+                <q-tab accesskey="p" class="text-purple" name="READY TO PICK UP" icon="mdi-food" label="Preparadas" />
               </h3>
               <h3 class="figure">
-                <q-tab
-                  accesskey="e"
-                  class="text-teal"
-                  name="DELIVERED"
-                  icon="mdi-package"
-                  label="Entregadas"
-                />
+                <q-tab accesskey="e" class="text-teal" name="DELIVERED" icon="mdi-package" label="Entregadas" />
               </h3>
               <h3 class="figure">
-                <q-tab
-                  accesskey="c"
-                  class="text-orange"
-                  name="CANCELED"
-                  icon="mdi-cancel"
-                  label="Canceladas"
-                />
+                <q-tab accesskey="c" class="text-orange" name="CANCELED" icon="mdi-cancel" label="Canceladas" />
               </h3>
             </q-tabs>
           </div>
         </div>
 
         <div v-if="shoppingStore.orders" class="q-pa-md">
-          <q-table
-            dark
-            grid
-            :rows="orders"
-            :columns="columns"
-            row-key="name"
-            :filter="filter"
-            hide-header
-          >
+          <q-table dark grid :rows="orders" :columns="columns" row-key="name" :filter="filter" hide-header>
             <template v-slot:top-right>
-              <q-input
-                borderless
-                dense
-                dark
-                debounce="300"
-                v-model="filter"
-                placeholder="Search"
-              >
+              <q-input borderless dense dark debounce="300" v-model="filter" placeholder="Search">
                 <template v-slot:append>
                   <q-icon name="search" />
                 </template>
               </q-input>
             </template>
             <template v-slot:item="props">
-              <OrderOrders
-                v-on:update="onChange"
-                :order="props.row"
-                :is-admin="true"
-              >
+              <OrderOrders v-on:update="onChange" :order="props.row" :is-admin="true">
               </OrderOrders>
             </template>
           </q-table>

@@ -4,27 +4,14 @@
       <q-card dark bordered class="card">
         <q-img src="../assets/defaultBanner.jpg" />
         <q-card-section>
-          <q-avatar
-            size="120px"
-            font-size="52px"
-            fab
-            color="primary"
-            class="absolute"
-            style="top: 0; right: 12px; transform: translate(-170%, -50%)"
-          >
-            <img
-              v-if="userStore.user && userStore.user.image"
-              :src="userStore.user.image"
-            />
+          <q-avatar size="120px" font-size="52px" fab color="primary" class="absolute"
+            style="top: 0; right: 12px; transform: translate(-170%, -50%)">
+            <img v-if="userStore.user && userStore.user.image" :src="userStore.user.image" />
             <q-icon v-else name="person" />
           </q-avatar>
         </q-card-section>
 
-        <q-card-section
-          align="center"
-          v-if="userStore.user"
-          class="q-pt-none user-information"
-        >
+        <q-card-section align="center" v-if="userStore.user" class="q-pt-none user-information">
           <div class="text-subtitle">{{ userStore.user.username }}</div>
           <div class="text-subtitle1 text-grey">
             {{ userStore.user.email }}

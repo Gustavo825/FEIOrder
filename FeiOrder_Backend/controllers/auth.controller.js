@@ -5,7 +5,9 @@ export const register = async (req, res) => {
   const { email, password, username, name, role } = req.body;
   try {
     let user = await User.findOne({ email });
-    if (user) return res.status(400).json({ error: "Ya existe este usuario" });
+    if (user) {
+      return res.status(400).json({ error: "Ya existe este usuario" });
+    }
 
     user = new User({ email, password, username, name, role });
     await user.save();
@@ -25,13 +27,13 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
 
     let user = await User.findOne({ email });
-    if (!user)
+    if (!user) {
       return res.status(403).json({ error: "Contraseña o usuario incorrecto" });
-
+    }
     const respuestaPassword = await user.comparePassword(password);
-    if (!respuestaPassword)
+    if (!respuestaPassword) {
       return res.status(403).json({ error: "Contraseña o usuario incorrecto" });
-
+    }
     const { token, expiresIn } = generateToken(user.id);
     generateRefreshToken(user.id, res);
     return res.json({ token, expiresIn });
@@ -45,7 +47,9 @@ export const update = async (req, res) => {
   const { username, name } = req.body;
   try {
     const user = await User.findById(req.params.id);
-    if (!user) return res.status(400).json({ error: "No existe este usuario" });
+    if (!user) {
+      return res.status(400).json({ error: "No existe este usuario" });
+    }
     user.username = username;
     user.name = name;
     await user.save();

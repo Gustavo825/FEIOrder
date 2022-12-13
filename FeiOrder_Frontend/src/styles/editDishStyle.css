@@ -6,7 +6,8 @@
 .dialog {
     border-radius: 20px;
 }
-.dialogCard{
+
+.dialogCard {
     max-width: 1500px;
-    width:1000px;
+    width: 1000px;
 }

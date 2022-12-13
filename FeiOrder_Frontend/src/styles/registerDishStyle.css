@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
 @media only screen and (max-width: 1080px) {
-    .col-display {
-        display: none;
-    }
-
+  .col-display {
+    display: none;
   }
+
+}
 
 .scroll-register-dish {
   height: 120vh;
 }
 
 .register {
-  background:  rgba(19, 35, 47, 0.9);
+  background: rgba(19, 35, 47, 0.9);
   margin-top: -4rem;
   overflow: hidden;
 }
@@ -46,7 +46,7 @@
 }
 
 .image-from-input {
-  object-fit:scale-down;
+  object-fit: scale-down;
   max-width: 100px;
   min-height: 100px;
 
@@ -79,7 +79,7 @@
   border-radius: 20px;
   font-family: 'Open Sans', sans-serif;
   min-height: max-content;
-  
+
 }
 
 
@@ -96,13 +96,13 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-.img-background{
+.img-background {
   max-width: 800px;
   height: 120vh;
 }
 
 .logo {
-    width: auto;
-    height: 100px;
-    
+  width: auto;
+  height: 100px;
+
 }

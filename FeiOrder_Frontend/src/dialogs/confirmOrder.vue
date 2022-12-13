@@ -18,16 +18,12 @@
 
       <q-card-actions align="right" class="text-primary">
         <q-btn @click="cancel" label="Cancel" v-close-popup />
-        <q-btn
-          @click="confirmOrder"
-          flat
-          label="Confirmar pedido"
-          v-close-popup
-        />
+        <q-btn @click="confirmOrder" flat label="Confirmar pedido" v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
+
 <script setup>
 import { useShoppingStore } from "src/stores/use-store";
 import { onMounted, ref } from "vue";
