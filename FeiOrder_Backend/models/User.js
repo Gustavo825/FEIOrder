@@ -4,6 +4,11 @@ const roles = {
   values: ["ADMIN", "USER"],
   message: "{VALUE} no es un rol válido",
 };
+const status = {
+  values: ["ACTIVE", "PENDING"],
+  message: "{VALUE} no es un estatus válido",
+};
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -31,7 +36,15 @@ const userSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  role: { type: String, default: "USER", enum: roles },
+  role: {
+    type: String, default: "USER", enum: roles
+  },
+  state: {
+    type: String, default: "PENDING", enum: status
+  },
+  confirmationCode: {
+    type: String, unique: true
+  },
 });
 
 userSchema.pre("save", async function (next) {

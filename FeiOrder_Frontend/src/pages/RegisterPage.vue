@@ -83,7 +83,7 @@ const handleSubmit = async () => {
       name.value = "";
       username.value = "";
       repassword.value = "";
-      router.push("/");
+      router.push("/login");
     }
   } catch (error) {
     if (error.error) {

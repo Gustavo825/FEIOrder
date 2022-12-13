@@ -71,6 +71,12 @@ const routes = [
           verifyRol: true,
         },
       },
+      {
+        path: "/Confirm/:confirmationCode",
+        name: "Confirm",
+        component: () => import("pages/ConfirmationPage.vue"),
+        params: {},
+      },
     ],
   },
   {

@@ -67,10 +67,6 @@ export const useUserStore = defineStore("user", () => {
         repassword,
         name,
       });
-      token.value = res.data.token;
-      expiresIn.value = res.data.expiresIn;
-      sessionStorage.setItem("user", "true");
-      setTime();
       return res.data;
     } catch (error) {
       if (error.response) {
@@ -129,6 +125,13 @@ export const useUserStore = defineStore("user", () => {
     } catch (error) { }
   };
 
+  const confirmUser = async (confirmationCode) => {
+    try {
+      const res = await api.get("/auth/confirm/" + confirmationCode)
+      return res.status;
+    } catch (error) { }
+  };
+
   const resetStore = () => {
     const shoppingStore = useShoppingStore();
     shoppingStore.shoppingList = [];
@@ -148,6 +151,7 @@ export const useUserStore = defineStore("user", () => {
     getInfoUserById,
     updateImage,
     updateUser,
+    confirmUser,
   };
 });
 

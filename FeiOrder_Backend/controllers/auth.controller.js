@@ -1,5 +1,9 @@
 import { User } from "../models/User.js";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
+import nodemailer from "nodemailer"
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+
 
 export const register = async (req, res) => {
   const { email, password, username, name, role } = req.body;
@@ -9,13 +13,29 @@ export const register = async (req, res) => {
       return res.status(400).json({ error: "Ya existe este usuario" });
     }
 
-    user = new User({ email, password, username, name, role });
+    let confirmationCode = jwt.sign({ email }, process.env.JWT_SECRET);
+    confirmationCode = confirmationCode.substring(1,10);
+    const transport = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.GMAILEMAIL,
+        pass: process.env.GMAILPASSWORD,
+      },
+    });
+
+    transport.sendMail({
+      from : process.env.GMAILEMAIL,
+      to: email,
+      subject: "Por favor, confirme su cuenta",
+      html: `<h1>Correo de confirmación</h1>
+            <h2> Hola, ${name}</h2>
+            <p>Gracias por registrarte. Por favor, da clic en el link para confirmar tu registro</p>
+            <a href=http://localhost:9000/confirm/${confirmationCode}>Clic aquí</a>
+            `,
+    }).catch(err => console.log(err));
+    user = new User({ email, password, username, name, role, confirmationCode });
     await user.save();
-
-    const { token, expiresIn } = generateToken(user.id);
-    generateRefreshToken(user.id, res);
-
-    return res.status(201).json({ token, expiresIn });
+    return res.status(201).json("Por favor, verifica tu cuenta desde el correo de confirmación");
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Error de servidor" });
@@ -33,6 +53,9 @@ export const login = async (req, res) => {
     const respuestaPassword = await user.comparePassword(password);
     if (!respuestaPassword) {
       return res.status(403).json({ error: "Contraseña o usuario incorrecto" });
+    }
+    if (user.state != "ACTIVE") {
+      return res.status(401).json({ error: "No se ha confirmado el usuario, por favor verifique en correo" });
     }
     const { token, expiresIn } = generateToken(user.id);
     generateRefreshToken(user.id, res);
@@ -105,3 +128,17 @@ export const logout = (req, res) => {
   res.clearCookie("refreshToken");
   res.json({ ok: true });
 };
+
+export const verifyUser = async (req, res) => {
+  try {
+  const user = await User.findOne({confirmationCode: req.params.confirmationCode,});
+  if (!user) {
+    return res.status(404).send({ message: "Usuario no encontrado"});
+  }
+  user.state = "ACTIVE";
+  await user.save();
+  return res.status(200).json("Usuario validado");
+  } catch (error) {
+    return res.status(500).json({ error: "Error de servidorr" });
+  }
+}

@@ -7,6 +7,7 @@ import {
   register,
   update,
   infoUserById,
+  verifyUser,
 } from "../controllers/auth.controller.js";
 import { requireRefreshToken } from "../middlewares/requireRefreshToken.js";
 import { requireToken } from "../middlewares/requireToken.js";
@@ -44,5 +45,6 @@ router.get(
 router.get("/infoUser", tokenHeaderValidator, requireToken, infoUser);
 router.get("/refresh", tokenCookieValidator, requireRefreshToken, refreshToken);
 router.get("/logout", logout);
+router.get("/confirm/:confirmationCode", verifyUser);
 
 export default router;
