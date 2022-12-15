@@ -27,8 +27,9 @@ export const updateDish = async (req, res) => {
   const { title, cost, description, timeToCook, type } = req.body;
   try {
     const dish = await Dish.findById(req.params.id);
-    console.log(title);
+    console.log(typeof title);
     if (typeof title === "string") {
+      console.log("a");
       dish.title = title;
     } else {
       dish.title = title._value;
