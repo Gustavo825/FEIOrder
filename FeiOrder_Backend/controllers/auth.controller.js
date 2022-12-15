@@ -30,7 +30,7 @@ export const register = async (req, res) => {
         html: `<h1>Correo de confirmación</h1>
             <h2> Hola, ${name}</h2>
             <p>Gracias por registrarte. Por favor, da clic en el link para confirmar tu registro</p>
-            <a href=http://localhost:9000/confirm/${confirmationCode}>Clic aquí</a>
+            <a href=https://feiorder.netlify.app/confirm/${confirmationCode}>Clic aquí</a>
             `,
       })
       .catch((err) => console.log(err));

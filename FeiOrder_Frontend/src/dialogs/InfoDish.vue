@@ -6,7 +6,9 @@
       <q-card-section>
         <div class="row no-wrap items-center">
           <div class="col text-h6 ellipsis">{{ dish.title }}</div>
-          <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
+          <div
+            class="col-auto text-grey text-caption q-pt-md row no-wrap items-center"
+          >
             {{ dish.timeToCook }} minutos
             <q-icon name="alarm" />
           </div>
@@ -25,7 +27,14 @@
       <q-separator />
 
       <q-card-actions align="right">
-        <q-btn v-close-popup flat color="primary" icon="close" label="Cerrar" />
+        <q-btn
+          v-close-popup
+          @click="clickClose"
+          flat
+          color="primary"
+          icon="close"
+          label="Cerrar"
+        />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -37,4 +46,7 @@ defineProps({
   card: Boolean,
   dish: [],
 });
+const clickClose = () => {
+  emit("close");
+};
 </script>
