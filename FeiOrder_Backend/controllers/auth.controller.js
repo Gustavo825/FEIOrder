@@ -85,9 +85,8 @@ export const update = async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: "No existe este usuario" });
     }
-    console.log(username);
-    user.username = new String(username);
-    user.name = new String(name);
+    user.username = username._value;
+    user.name = name._value;
     await user.save();
     return res.status(201).json({ user });
   } catch (error) {
