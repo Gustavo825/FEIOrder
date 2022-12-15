@@ -1,9 +1,8 @@
 import { User } from "../models/User.js";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
-import nodemailer from "nodemailer"
+import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-
 
 export const register = async (req, res) => {
   const { email, password, username, name, role } = req.body;
@@ -14,7 +13,7 @@ export const register = async (req, res) => {
     }
 
     let confirmationCode = jwt.sign({ email }, process.env.JWT_SECRET);
-    confirmationCode = confirmationCode.substring(1,10);
+    confirmationCode = confirmationCode.substring(1, 10);
     const transport = nodemailer.createTransport({
       service: "Gmail",
       auth: {
@@ -23,19 +22,30 @@ export const register = async (req, res) => {
       },
     });
 
-    transport.sendMail({
-      from : process.env.GMAILEMAIL,
-      to: email,
-      subject: "Por favor, confirme su cuenta",
-      html: `<h1>Correo de confirmación</h1>
+    transport
+      .sendMail({
+        from: process.env.GMAILEMAIL,
+        to: email,
+        subject: "Por favor, confirme su cuenta",
+        html: `<h1>Correo de confirmación</h1>
             <h2> Hola, ${name}</h2>
             <p>Gracias por registrarte. Por favor, da clic en el link para confirmar tu registro</p>
             <a href=http://localhost:9000/confirm/${confirmationCode}>Clic aquí</a>
             `,
-    }).catch(err => console.log(err));
-    user = new User({ email, password, username, name, role, confirmationCode });
+      })
+      .catch((err) => console.log(err));
+    user = new User({
+      email,
+      password,
+      username,
+      name,
+      role,
+      confirmationCode,
+    });
     await user.save();
-    return res.status(201).json("Por favor, verifica tu cuenta desde el correo de confirmación");
+    return res
+      .status(201)
+      .json("Por favor, verifica tu cuenta desde el correo de confirmación");
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Error de servidor" });
@@ -55,7 +65,9 @@ export const login = async (req, res) => {
       return res.status(403).json({ error: "Contraseña o usuario incorrecto" });
     }
     if (user.state != "ACTIVE") {
-      return res.status(401).json({ error: "No se ha confirmado el usuario, por favor verifique en correo" });
+      return res.status(401).json({
+        error: "No se ha confirmado el usuario, por favor verifique en correo",
+      });
     }
     const { token, expiresIn } = generateToken(user.id);
     generateRefreshToken(user.id, res);
@@ -73,8 +85,9 @@ export const update = async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: "No existe este usuario" });
     }
-    user.username = username;
-    user.name = name;
+    console.log(username);
+    user.username = new String(username);
+    user.name = new String(name);
     await user.save();
     return res.status(201).json({ user });
   } catch (error) {
@@ -131,14 +144,16 @@ export const logout = (req, res) => {
 
 export const verifyUser = async (req, res) => {
   try {
-  const user = await User.findOne({confirmationCode: req.params.confirmationCode,});
-  if (!user) {
-    return res.status(404).send({ message: "Usuario no encontrado"});
-  }
-  user.state = "ACTIVE";
-  await user.save();
-  return res.status(200).json("Usuario validado");
+    const user = await User.findOne({
+      confirmationCode: req.params.confirmationCode,
+    });
+    if (!user) {
+      return res.status(404).send({ message: "Usuario no encontrado" });
+    }
+    user.state = "ACTIVE";
+    await user.save();
+    return res.status(200).json("Usuario validado");
   } catch (error) {
     return res.status(500).json({ error: "Error de servidorr" });
   }
-}
+};
