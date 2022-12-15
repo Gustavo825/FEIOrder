@@ -12,8 +12,13 @@ export const register = async (req, res) => {
       return res.status(400).json({ error: "Ya existe este usuario" });
     }
 
-    let confirmationCode = jwt.sign({ email }, process.env.JWT_SECRET);
-    confirmationCode = confirmationCode.substring(1, 10);
+    const characters =
+      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let confirmationCode = "";
+    for (let i = 0; i < 15; i++) {
+      confirmationCode +=
+        characters[Math.floor(Math.random() * characters.length)];
+    }
     const transport = nodemailer.createTransport({
       service: "Gmail",
       auth: {
@@ -28,10 +33,10 @@ export const register = async (req, res) => {
         to: email,
         subject: "Por favor, confirme su cuenta",
         html: `<h1>Correo de confirmación</h1>
-            <h2> Hola, ${name}</h2>
-            <p>Gracias por registrarte. Por favor, da clic en el link para confirmar tu registro</p>
-            <a href=https://feiorder.netlify.app/confirm/${confirmationCode}>Clic aquí</a>
-            `,
+              <h2> Hola, ${name}</h2>
+              <p>Gracias por registrarte. Por favor, da clic en el link para confirmar tu registro</p>
+              <a href=http://localhost:9000/confirm/${confirmationCode}>Clic aquí</a>
+              `,
       })
       .catch((err) => console.log(err));
     user = new User({
