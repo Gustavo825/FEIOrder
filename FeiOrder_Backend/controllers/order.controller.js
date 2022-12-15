@@ -43,7 +43,12 @@ export const updateOrder = async (req, res) => {
   const { state } = req.body;
   try {
     const order = await Order.findById(req.params.id);
-    order.state = state;
+    if (typeof state === "string") {
+      order.state = state;
+    } else {
+      order.state = state._value;
+    }
+
     await order.save();
     return res.status(201).json({ order });
   } catch (error) {
