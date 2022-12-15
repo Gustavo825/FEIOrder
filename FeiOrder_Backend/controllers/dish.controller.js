@@ -58,6 +58,7 @@ export const updateDish = async (req, res) => {
     await dish.save();
     return res.status(201).json({ dish });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error: "Error de servidor" });
   }
 };
